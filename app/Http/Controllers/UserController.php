@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Room;
+use App\Models\City;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class RoomController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +15,9 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $room = Room::get();
+        $user = User::with('city')->get();
 
-        return view('room.index', ['data' => $room]);
+        return view('user.index', compact('user'));
     }
 
     /**
@@ -26,7 +27,8 @@ class RoomController extends Controller
      */
     public function create()
     {
-        return view('room.create_form');
+        $city = City::all();
+        return view('user.create-form', compact('city'));
     }
 
     /**
@@ -38,13 +40,18 @@ class RoomController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'room_code' => 'required',
-            'room_name' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'role' => 'required',
+            'city_id' => 'required'
         ]);
 
-        Room::create($data);
+        $data['password'] = bcrypt($data['password']);
 
-        return redirect()->route('room.index')->with('success', 'New room has been added!');
+        User::create($data);
+
+        return redirect()->route('user.index');
     }
 
     /**
@@ -66,8 +73,9 @@ class RoomController extends Controller
      */
     public function edit($id)
     {
-        $room = Room::find($id)->first();
-        return view('room.edit_form', ['room' => $room]);
+        $user = User::with('city')->findOrFail($id);
+        $city = City::all();
+        return view('user.edit-form', compact('user', 'city'));
     }
 
     /**
@@ -80,15 +88,18 @@ class RoomController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'room_code' => 'required',
-            'room_name' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'role' => 'required',
+            'city_id' => 'required'
         ];
 
         $data = $request->validate($rules);
 
-        Room::find($id)->update($data);
+        User::find($id)->update($data);
 
-        return redirect()->route('room.index')->with('success', 'New room has been updated!');
+        return redirect()->route('user.index');
     }
 
     /**
@@ -97,9 +108,9 @@ class RoomController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Room $room)
+    public function destroy(User $user)
     {
-        Room::destroy($room->id);
-        return redirect()->route('room.index')->with('success', 'Room has been deleted!');
+        User::destroy($user->id);
+        return redirect()->route('user.index');
     }
 }

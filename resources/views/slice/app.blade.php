@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Inventaris | @yield('title')</title>
+    <title>SIANAS | @yield('title')</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -33,6 +33,7 @@
     <link rel="stylesheet"
         href="{{ asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -40,7 +41,11 @@
 
         @include('slice.navbar')
 
-        @include('slice.sidebar')
+        @if (auth()->user()->role == 'admin')
+            @include('admin.sidebar')
+        @else
+            @include('slice.sidebar')
+        @endif
 
         @yield('content')
 
@@ -94,6 +99,7 @@
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+
     <!-- Page specific script -->
     <script>
         $(function() {
@@ -111,6 +117,13 @@
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
+            });
+        });
+
+        // Show Password
+        $(document).ready(function() {
+            $('#checkbox').on('change', function() {
+                $('#password').attr('type', $('#checkbox').prop('checked') == true ? "text" : "password");
             });
         });
     </script>

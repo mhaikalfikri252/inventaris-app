@@ -1,7 +1,7 @@
 @extends('slice.app')
 
 @section('title')
-    Kategori
+    Kota
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Kategori</h1>
+                        <h1 class="m-0">Kota</h1>
                     </div>
                     <!-- /.col -->
                 </div><!-- /.row -->
@@ -25,14 +25,12 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
                     <div class="col-md-2">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-create">
-                            Tambah
-                        </button>
+                        <a href="{{ route('city.create') }}" class="btn btn-success">Tambah Kota</a>
                     </div>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Data Kategori</h3>
+                                <h3 class="card-title">Data Kota</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -40,34 +38,41 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Kode Kategori</th>
-                                            <th>Nama Kategori</th>
+                                            <th>Nama Kota</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @php($no = 1)
-                                        @foreach ($data as $row)
+                                        @foreach ($city as $data)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                <td>{{ $row->category_code }}</td>
-                                                <td>{{ $row->category_name }}</td>
+                                                <td>{{ $data->city_name }}</td>
                                                 <td>
-                                                    <a href="{{ route('category.edit', $row->id) }}"
-                                                        class="btn btn-warning">Ubah</a>
-                                                    <form action="{{ route('category.destroy', $row->id) }}" method="post"
+                                                    <a href="{{ route('city.show', $data->id) }}"
+                                                        class="btn btn-primary">Show</a>
+                                                    <a href="{{ route('city.edit', $data->id) }}"
+                                                        class="btn btn-warning">Edit</a>
+                                                    <form action="{{ route('city.destroy', $data->id) }}" method="post"
                                                         class="d-inline">
                                                         @method('delete')
                                                         @csrf
                                                         <button class="btn btn-danger"
                                                             onclick="return confirm('Are you sure?')">
-                                                            Hapus
+                                                            Delete
                                                         </button>
                                                     </form>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th>No</th>
+                                            <th>Nama Kota</th>
+                                            <th>Aksi</th>
+                                        </tr>
+                                    </tfoot>
                                 </table>
                             </div>
                             <!-- /.card-body -->
@@ -78,9 +83,6 @@
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
-
-            @include('category.create_modal')
-            {{-- @include('category.edit_modal') --}}
         </section>
     </div>
 @endsection

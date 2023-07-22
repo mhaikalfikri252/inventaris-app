@@ -21,7 +21,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'city_id',
     ];
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
 
     /**
      * The attributes that should be hidden for serialization.

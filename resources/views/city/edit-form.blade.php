@@ -1,5 +1,9 @@
 @extends('slice.app')
 
+@section('title')
+    Kota
+@endsection
+
 @section('content')
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
@@ -7,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Kategori</h1>
+                        <h1 class="m-0">Kota</h1>
                     </div>
                     <!-- /.col -->
                 </div><!-- /.row -->
@@ -18,32 +22,25 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('room.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ isset($city) ? route('city.update', $city->id) : route('city.store') }}" method="post"
+                    enctype="multipart/form-data">
+                    @method('put')
                     @csrf
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Tambah Data Ruangan</h3>
+                            <h3 class="card-title">Form Update Data Kota</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form>
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="room_code">Kode Ruangan</label>
-                                    <input type="text" class="form-control @error('room_code') is-invalid @enderror"
-                                        id="room_code" name="room_code" required autofocus value="{{ old('room_code') }}">
-                                    @error('room_code')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="form-group">
-                                    <label for="room_name">Nama Ruangan</label>
+                                    <label for="city_name">Nama Kota</label>
                                     <input type="text" class="form-control @error('slug') is-invalid @enderror"
-                                        id="room_name" name="room_name" value="{{ old('room_name') }}" required>
-                                    @error('room_name')
+                                        id="city_name" name="city_name" value="{{ old('city_name', $city->city_name) }}"
+                                        required>
+                                    @error('city_name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
@@ -53,7 +50,8 @@
                             <!-- /.card-body -->
 
                             <div class="card-footer">
-                                <button type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" class="btn btn-success">Update</button>
+                                <a href="{{ url()->previous() }}" class="btn btn-danger">Cancel</a>
                             </div>
                         </form>
                     </div>

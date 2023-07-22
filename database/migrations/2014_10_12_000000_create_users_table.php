@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['admin', 'user'])->default('user');
+            $table->bigInteger('city_id')->unsigned();
+            $table->foreign('city_id')->references('id')
+                ->on('city');
             $table->rememberToken();
             $table->timestamps();
         });

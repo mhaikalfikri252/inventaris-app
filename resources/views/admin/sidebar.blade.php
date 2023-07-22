@@ -38,66 +38,30 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-file-alt"></i>
+                    <a href="{{ route('user.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
                         <p>
-                            Daftar Aset
+                            User
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-tasks"></i>
+                    <a href="{{ route('city.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-map-marker-alt"></i>
                         <p>
-                            Aset Write Off
+                            Kota
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-clipboard-list"></i>
+                    <a href="{{ route('facility.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-book"></i>
                         <p>
-                            Daftar Inventaris
+                            Fasilitas
                         </p>
                     </a>
                 </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-handshake"></i>
-                        <p>
-                            Peminjaman Aset
-                        </p>
-                    </a>
-                </li>
-                {{-- <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-folder-open"></i>
-                        <p>
-                            Data Master
-                            <i class="right fas fa-angle-left"></i>
-                        </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="{{ route('item.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Barang</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('category.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Kategori</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('room.index') }}" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Ruangan</p>
-                            </a>
-                        </li>
-                    </ul>
-                </li> --}}
+
                 <li class="nav-header">PENGATURAN</li>
                 <li class="nav-item">
                     <a href="{{ route('profile.edit') }}" class="nav-link">

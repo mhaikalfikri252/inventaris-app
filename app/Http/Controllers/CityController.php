@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\City;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class CityController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,10 +14,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // $category = Category::get();
-        $category = Category::all();
+        // $city = City::get();
+        $city = City::all();
 
-        return view('category.index', ['data' => $category]);
+        return view('city.index', compact('city'));
     }
 
     /**
@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('category.create_modal');
+        return view('city.create-form');
     }
 
     /**
@@ -39,13 +39,12 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'category_code' => 'required',
-            'category_name' => 'required',
+            'city_name' => 'required'
         ]);
 
-        Category::create($data);
+        City::create($data);
 
-        return redirect()->route('category.index')->with('success', 'New category has been added!');
+        return redirect()->route('city.index');
     }
 
     /**
@@ -56,6 +55,8 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
+        $city = City::findOrFail($id);
+        return view('city.read-city', compact('city'));
     }
 
     /**
@@ -66,8 +67,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::find($id);
-        return view('category.edit_form', ['category' => $category]);
+        $city = City::find($id);
+        return view('city.edit-form', compact('city'));
     }
 
     /**
@@ -80,15 +81,14 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         $rules = [
-            'category_code' => 'required',
-            'category_name' => 'required',
+            'city_name' => 'required'
         ];
 
         $data = $request->validate($rules);
 
-        Category::find($id)->update($data);
+        City::find($id)->update($data);
 
-        return redirect()->route('category.index')->with('success', 'New category has been updated!');
+        return redirect()->route('city.index');
     }
 
     /**
@@ -97,9 +97,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(City $city)
     {
-        Category::destroy($category->id);
-        return redirect()->route('category.index')->with('success', 'Category has been deleted!');
+        City::destroy($city->id);
+        return redirect()->route('city.index');
     }
 }

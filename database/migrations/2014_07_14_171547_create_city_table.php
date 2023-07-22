@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('city', function (Blueprint $table) {
             $table->id();
-            $table->string('item_code');
-            $table->string('item_name');
-            $table->string('location');
-            $table->string('note');
-            $table->string('photo');
-            $table->string('qrcode');
+            $table->string('city_name')->unique();
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('city');
     }
 };

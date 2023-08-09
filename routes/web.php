@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AsetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\FacilityController;
@@ -24,9 +25,9 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('layouts.main-dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified', 'prevent.back.history'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -40,11 +41,17 @@ Route::middleware('auth')->group(function () {
     //     Route::get('destroy/{id}', 'destroy')->name('facility.destroy');
     // });
 
+    Route::middleware(['role:admin'])->group(function () {
+        Route::resource('user', UserController::class);
+        Route::resource('city', CityController::class);
+        Route::resource('facility', FacilityController::class);
+    });
 
-    Route::resource('user', UserController::class);
-    Route::resource('city', CityController::class);
-    Route::resource('facility', FacilityController::class);
+    Route::middleware(['role:user'])->group(function () {
+        Route::resource('aset', AsetController::class);
+    });
 });
+
 
 //log-viewers
 Route::get('log-viewers', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);

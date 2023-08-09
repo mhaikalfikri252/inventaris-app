@@ -27,6 +27,7 @@
                     {{-- <div class="col-md-2">
                         <a href="{{ route('city.create') }}" class="btn btn-primary">Tambah</a>
                     </div> --}}
+                    <a href="{{ url()->previous() }}" class="btn btn-danger">Back</a>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">

@@ -183,6 +183,9 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         Rap2hpoutre\LaravelLogViewer\LaravelLogViewerServiceProvider::class,
+        RealRashid\SweetAlert\SweetAlertServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
+
         /*
          * Package Service Providers...
          */
@@ -211,6 +214,8 @@ return [
 
     'aliases' => Facade::defaultAliases()->merge([
         // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Alert' => RealRashid\SweetAlert\Facades\Alert::class,
+
     ])->toArray(),
 
 ];

@@ -29,7 +29,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Form Update Data Fasilitas</h3>
+                            <h3 class="card-title">Update Data Fasilitas</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -51,7 +51,7 @@
                                 <label for="facility_name">Nama Fasilitas</label>
                                 <input type="text" style="text-transform:uppercase"
                                     oninput="this.value = this.value.toUpperCase()"
-                                    class="form-control @error('slug') is-invalid @enderror" id="facility_name"
+                                    class="form-control @error('facility_name') is-invalid @enderror" id="facility_name"
                                     name="facility_name" value="{{ old('facility_name', $facility->facility_name) }}"
                                     required>
                                 @error('facility_name')

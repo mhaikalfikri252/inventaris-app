@@ -14,7 +14,6 @@ class CityController extends Controller
      */
     public function index()
     {
-        // $city = City::get();
         $city = City::all();
 
         return view('city.index', compact('city'));
@@ -39,10 +38,12 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'city_name' => 'required'
+            'city_name' => 'required|unique:city'
         ]);
 
         City::create($data);
+
+        toast('Berhasil menambahkan kota!', 'success');
 
         return redirect()->route('city.index');
     }
@@ -56,7 +57,7 @@ class CityController extends Controller
     public function show($id)
     {
         $city = City::findOrFail($id);
-        return view('city.read-city', compact('city'));
+        return view('city.show-city', compact('city'));
     }
 
     /**
@@ -67,7 +68,7 @@ class CityController extends Controller
      */
     public function edit($id)
     {
-        $city = City::find($id);
+        $city = City::findOrFail($id);
         return view('city.edit-form', compact('city'));
     }
 
@@ -87,6 +88,8 @@ class CityController extends Controller
         $data = $request->validate($rules);
 
         City::find($id)->update($data);
+
+        toast('Berhasil mengedit kota!', 'success');
 
         return redirect()->route('city.index');
     }

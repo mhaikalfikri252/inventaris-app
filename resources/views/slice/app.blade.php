@@ -39,12 +39,14 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
 
+        @include('sweetalert::alert')
+
         @include('slice.navbar')
 
-        @if (auth()->user()->role == 'admin')
-            @include('admin.sidebar')
+        @if (auth()->user()->role_id == '1')
+            @include('slice.admin-sidebar')
         @else
-            @include('slice.sidebar')
+            @include('slice.user-sidebar')
         @endif
 
         @yield('content')
@@ -53,6 +55,8 @@
 
     </div>
     <!-- ./wrapper -->
+
+    <script src="sweetalert2.all.min.js"></script>
 
     <!-- jQuery -->
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
@@ -126,7 +130,16 @@
                 $('#password').attr('type', $('#checkbox').prop('checked') == true ? "text" : "password");
             });
         });
+
+        function logout(event) {
+            event.preventDefault();
+            var check = confirm("Apakah anda yakin ingin keluar?");
+            if (check) {
+                document.getElementById('logout-form').submit();
+            }
+        }
     </script>
+
 </body>
 
 </html>

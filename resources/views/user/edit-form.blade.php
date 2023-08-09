@@ -22,52 +22,88 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ isset($facility) ? route('facility.update', $facility->id) : route('facility.store') }}"
-                    method="post" enctype="multipart/form-data">
+                <form action="{{ isset($user) ? route('user.update', $user->id) : route('user.store') }}" method="post"
+                    enctype="multipart/form-data">
                     @method('put')
                     @csrf
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Form Update Data Fasilitas</h3>
+                            <h3 class="card-title">Update Data User</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
                         <form>
                             <div class="card-body">
-                                <div class="form-group">
-                                    <label for="facility_code">Kode Fasilitas</label>
-                                    <input type="text" style="text-transform:uppercase"
-                                        oninput="this.value = this.value.toUpperCase()"
-                                        class="form-control @error('facility_code') is-invalid @enderror" id="facility_code"
-                                        name="facility_code" required autofocus
-                                        value="{{ old('facility_code', $facility->facility_code) }}">
-                                    @error('facility_code')
+                                <div class="form-group {{ $errors->get('email') ? 'has-error' : '' }}">
+                                    <label for="name">Name</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                        id="name" name="name" required autofocus
+                                        value="{{ old('name', $user->name) }}">
+                                    @error('name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
                                 <div class="form-group">
-                                    <label for="facility_name">Nama Fasilitas</label>
-                                    <input type="text" style="text-transform:uppercase"
-                                        oninput="this.value = this.value.toUpperCase()"
-                                        class="form-control @error('slug') is-invalid @enderror" id="facility_name"
-                                        name="facility_name" value="{{ old('facility_name', $facility->facility_name) }}"
-                                        required>
-                                    @error('facility_name')
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror"
+                                        id="email" name="email" value="{{ old('email', $user->email) }}" required>
+                                    @error('email')
                                         <div class="invalid-feedback">
                                             {{ $message }}
                                         </div>
                                     @enderror
                                 </div>
+                                {{-- <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
+                                        id="password" name="password" required autofocus
+                                        value="{{ old('password', $user->password) }}">
+                                    <input type="checkbox" id="checkbox">
+                                    <small>Show Password</small>
+                                    @error('password')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div> --}}
+                                {{-- <div class="form-group">
+                                    <label for="role">Role</label>
+                                    <input type="text" class="form-control @error('role') is-invalid @enderror"
+                                        id="role" name="role" placeholder="Inputkan 'admin' atau 'user'"
+                                        value="{{ old('role', $user->role) }}" required>
+                                    @error('role')
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
+                                </div> --}}
                                 <div class="form-group">
-                                    <label for="city_option">Kota</label>
-                                    <select class="form-control" name="city_option" id="city_option">
-                                        <option disabled value>Pilih Jabatan : </option>
-                                        <option value="{{ $facility->city_id }}">{{ $facility->city->city_name }}</option>
+                                    <label for="role_id">Role</label>
+                                    <select class="form-control @error('role_id') is-invalid @enderror" id="role_id"
+                                        name="role_id">
+                                        <option value="" disabled selected>Pilih Role</option>
+                                        @foreach ($role as $data)
+                                            <option value="{{ $data->id }}"
+                                                {{ $data->id == $user->role_id ? 'selected' : '' }}>{{ $data->name }}
+                                            </option>
+                                            @error('role_id')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="city_id">Kota</label>
+                                    <select class="form-control" name="city_id" id="city_id">
+                                        <option value="" disabled selected>Pilih Kota</option>
                                         @foreach ($city as $data)
-                                            <option value="{{ $data->id }}">
+                                            <option value="{{ $data->id }}"
+                                                {{ $data->id == $user->city_id ? 'selected' : '' }}>
                                                 {{ $data->city_name }}</option>
                                         @endforeach
                                     </select>

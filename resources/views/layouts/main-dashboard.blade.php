@@ -19,7 +19,7 @@
         </div>
         <!-- /.content-header -->
         <!-- Main content -->
-        @if (auth()->user()->role == 'admin')
+        @if (auth()->user()->role_id == '1')
             @include('layouts.admin-dashboard')
         @else
             @include('layouts.user-dashboard')

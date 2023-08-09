@@ -2,9 +2,6 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="#" class="brand-link">
-        {{-- <img src="{{ asset('logo-sos.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-            style="opacity: .8"> --}}
-
         <div class="row justify-content-center">
             <h5>SIANAS</h5>
             <h6 class="brand-text">(Sistem Informasi Aset Nasional)</h6>
@@ -38,30 +35,37 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('user.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
+                    <a href="{{ route('aset.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
                         <p>
-                            User
+                            Daftar Aset
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('city.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-map-marker-alt"></i>
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-tasks"></i>
                         <p>
-                            Kota
+                            Aset Write Off
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('facility.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-book"></i>
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
-                            Fasilitas
+                            Daftar Inventaris
                         </p>
                     </a>
                 </li>
-
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-handshake"></i>
+                        <p>
+                            Peminjaman Aset
+                        </p>
+                    </a>
+                </li>
                 <li class="nav-header">PENGATURAN</li>
                 <li class="nav-item">
                     <a href="{{ route('profile.edit') }}" class="nav-link">
@@ -72,12 +76,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <form method="POST" action="{{ route('logout') }}">
+                    <form method="POST" action="{{ route('logout') }}" id="logout-form">
                         @csrf
-                        <a href="{{ route('logout') }}"
-                            onclick="event.preventDefault();
-                    this.closest('form').submit();"
-                            class="nav-link">
+                        <a href="{{ route('logout') }}" onclick="return logout(event);" class="nav-link">
                             <i class="nav-icon fa fa-share-square"></i>
                             <p>
                                 Logout

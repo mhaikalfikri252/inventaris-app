@@ -19,10 +19,12 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('role', ['admin', 'user'])->default('user');
+            $table->bigInteger('role_id')->unsigned();
+            $table->foreign('role_id')->references('id')
+                ->on('roles')->onDelete('cascade');
             $table->bigInteger('city_id')->unsigned();
             $table->foreign('city_id')->references('id')
-                ->on('city');
+                ->on('city')->onDelete('cascade');
             $table->rememberToken();
             $table->timestamps();
         });

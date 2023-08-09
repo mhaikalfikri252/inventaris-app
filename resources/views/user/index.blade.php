@@ -52,7 +52,7 @@
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $data->name }}</td>
                                                 <td>{{ $data->email }}</td>
-                                                <td>{{ $data->role }}</td>
+                                                <td>{{ $data->role->name }}</td>
                                                 <td>{{ $data->city->city_name }}</td>
                                                 <td>
                                                     <a href="{{ route('user.edit', $data->id) }}"
@@ -62,7 +62,7 @@
                                                         @method('delete')
                                                         @csrf
                                                         <button class="btn btn-danger"
-                                                            onclick="return confirm('Are you sure?')">
+                                                            onclick="return confirm('Apakah anda yakin ingin menghapus user?')">
                                                             Delete
                                                         </button>
                                                     </form>

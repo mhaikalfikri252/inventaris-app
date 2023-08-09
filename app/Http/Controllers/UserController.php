@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\City;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Role as ModelsRole;
 
 class UserController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +17,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::with('city')->get();
+        $user = User::with('role', 'city')->get();
 
         return view('user.index', compact('user'));
     }
@@ -27,8 +29,9 @@ class UserController extends Controller
      */
     public function create()
     {
+        $role = ModelsRole::all();
         $city = City::all();
-        return view('user.create-form', compact('city'));
+        return view('user.create-form', compact('role', 'city'));
     }
 
     /**
@@ -41,15 +44,24 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|unique:users,email',
             'password' => 'required',
-            'role' => 'required',
+            'role_id' => 'required',
             'city_id' => 'required'
         ]);
 
+
         $data['password'] = bcrypt($data['password']);
 
-        User::create($data);
+        $create = User::create($data);
+
+        if ($data['role_id'] == '1') {
+            $create->assignRole('admin');
+        } else {
+            $create->assignRole('user');
+        }
+
+        toast('Berhasil menambahkan user!', 'success');
 
         return redirect()->route('user.index');
     }
@@ -73,9 +85,10 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        $user = User::with('city')->findOrFail($id);
+        $user = User::with('role', 'city')->findOrFail($id);
+        $role = ModelsRole::all();
         $city = City::all();
-        return view('user.edit-form', compact('user', 'city'));
+        return view('user.edit-form', compact('user', 'role', 'city'));
     }
 
     /**
@@ -85,21 +98,39 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, $id)
     {
-        $rules = [
-            'name' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'role' => 'required',
-            'city_id' => 'required'
-        ];
+        $data = User::findOrFail($id);
 
-        $data = $request->validate($rules);
+        $request->validate([
+            'email' => 'email|unique:users,email',
+        ]);
 
-        User::find($id)->update($data);
+        $data->update([
+            'name' => $request->name,
+            'email'  => $request->email,
+            'role_id' => $request->role_id,
+            'city_id' => $request->city_id
+        ]);
 
-        return redirect()->route('user.index');
+        if ($data['role_id'] == '1') {
+            $data->syncRoles('admin');
+        } else {
+            $data->syncRoles('user');
+        }
+
+        toast('Berhasil mengedit user!', 'success');
+
+        if ($data['role_id'] == '1') {
+            return redirect()->route('user.index');
+        } else {
+            if (auth()->user()->id == $id) {
+                return redirect()->route('dashboard');
+            } else {
+                return redirect()->route('user.index');
+            }
+        }
     }
 
     /**

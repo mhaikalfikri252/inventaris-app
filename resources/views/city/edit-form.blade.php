@@ -29,7 +29,7 @@
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Form Update Data Kota</h3>
+                            <h3 class="card-title">Update Data Kota</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
@@ -37,7 +37,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="city_name">Nama Kota</label>
-                                    <input type="text" class="form-control @error('slug') is-invalid @enderror"
+                                    <input type="text" class="form-control @error('city_name') is-invalid @enderror"
                                         id="city_name" name="city_name" value="{{ old('city_name', $city->city_name) }}"
                                         required>
                                     @error('city_name')

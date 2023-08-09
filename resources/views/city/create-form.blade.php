@@ -35,7 +35,7 @@
                             <div class="card-body">
                                 <div class="form-group">
                                     <label for="city_name">Nama Kota</label>
-                                    <input type="text" class="form-control @error('slug') is-invalid @enderror"
+                                    <input type="text" class="form-control @error('city_name') is-invalid @enderror"
                                         id="city_name" name="city_name" value="{{ old('city_name') }}" required>
                                     @error('city_name')
                                         <div class="invalid-feedback">

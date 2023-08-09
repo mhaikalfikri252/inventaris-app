@@ -17,7 +17,8 @@
                     <div class="icon">
                         <i class="fas fas fa-users"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('user.index') }}" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -30,12 +31,13 @@
                         ?>
                         <h3>{{ $count }}</h3>
 
-                        <p>Daftar Lokasi</p>
+                        <p>Daftar Kota</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-map-marker-alt"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('city.index') }}" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->
@@ -53,7 +55,8 @@
                     <div class="icon">
                         <i class="fa fa-book"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                    <a href="{{ route('facility.index') }}" class="small-box-footer">More info <i
+                            class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
             <!-- ./col -->

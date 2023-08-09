@@ -31,7 +31,6 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="name">Nama</label>
@@ -66,26 +65,35 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="role">Role</label>
-                                <input type="text" class="form-control @error('slug') is-invalid @enderror"
-                                    id="role" name="role" placeholder="Inputkan 'admin' atau 'user'"
-                                    value="{{ old('role') }}" required>
-                                @error('role')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="city_id">Kota</label>
-                                <select class="form-control" id="city_id" name="city_id">
-                                    <option value="" disabled selected>Pilih Kota</option>
-                                    @foreach ($city as $data)
-                                        <option value="{{ $data->id }}">{{ $data->city_name }}</option>
+                                <label for="role_id">Role</label>
+                                <select class="form-control @error('role_id') is-invalid @enderror" id="role_id"
+                                    name="role_id">
+                                    <option value="" disabled selected>Pilih Role</option>
+                                    @foreach ($role as $data)
+                                        <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                        @error('role_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     @endforeach
                                 </select>
                             </div>
-
+                            <div class="form-group">
+                                <label for="city_id">Kota</label>
+                                <select class="form-control @error('city_id') is-invalid @enderror" id="city_id"
+                                    name="city_id">
+                                    <option value="" disabled selected>Pilih Kota</option>
+                                    @foreach ($city as $data)
+                                        <option value="{{ $data->id }}">{{ $data->city_name }}</option>
+                                        @error('city_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
                         <!-- /.card-body -->
 

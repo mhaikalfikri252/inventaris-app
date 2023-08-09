@@ -1,7 +1,7 @@
 @extends('slice.app')
 
 @section('title')
-    Kota
+    Aset
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Kota</h1>
+                        <h1 class="m-0">Aset</h1>
                     </div>
                     <!-- /.col -->
                 </div><!-- /.row -->
@@ -25,12 +25,12 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
                     <div class="col-md-2">
-                        <a href="{{ route('city.create') }}" class="btn btn-success">Tambah Kota</a>
+                        <a href="{{ route('city.create') }}" class="btn btn-success">Tambah Aset</a>
                     </div>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Data Kota</h3>
+                                <h3 class="card-title">Data Aset</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -38,7 +38,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Kota</th>
+                                            <th>Nama Aset</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -58,7 +58,7 @@
                                                         @method('delete')
                                                         @csrf
                                                         <button class="btn btn-danger"
-                                                            onclick="return confirm('Apakah anda yakin ingin menghapus kota?')">
+                                                            onclick="return confirm('Are you sure?')">
                                                             Delete
                                                         </button>
                                                     </form>
@@ -69,7 +69,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Kota</th>
+                                            <th>Nama Aset</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>

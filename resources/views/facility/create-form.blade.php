@@ -32,7 +32,6 @@
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
-
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="facility_code">Kode Fasilitas</label>
@@ -50,7 +49,7 @@
                                 <label for="facility_name">Nama Fasilitas</label>
                                 <input type="text" style="text-transform:uppercase"
                                     oninput="this.value = this.value.toUpperCase()"
-                                    class="form-control @error('slug') is-invalid @enderror" id="facility_name"
+                                    class="form-control @error('facility_name') is-invalid @enderror" id="facility_name"
                                     name="facility_name" value="{{ old('facility_name') }}" required>
                                 @error('facility_name')
                                     <div class="invalid-feedback">
@@ -67,7 +66,6 @@
                                     @endforeach
                                 </select>
                             </div>
-
                         </div>
                         <!-- /.card-body -->
 

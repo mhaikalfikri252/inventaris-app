@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('facility_name');
             $table->bigInteger('city_id')->unsigned();
             $table->foreign('city_id')->references('id')
-                ->on('city');
+                ->on('city')->onDelete('cascade');
             $table->timestamps();
         });
     }

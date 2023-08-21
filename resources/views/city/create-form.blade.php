@@ -36,7 +36,7 @@
                                 <div class="form-group">
                                     <label for="city_name">Nama Kota</label>
                                     <input type="text" class="form-control @error('city_name') is-invalid @enderror"
-                                        id="city_name" name="city_name" value="{{ old('city_name') }}" required>
+                                        id="city_name" name="city_name" value="{{ old('city_name') }}" autofocus required>
                                     @error('city_name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -48,7 +48,7 @@
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-success">Submit</button>
-                                <a href="{{ url()->previous() }}" class="btn btn-danger">Cancel</a>
+                                <a href="{{ route('city.index') }}" class="btn btn-danger">Cancel</a>
                             </div>
                         </form>
                     </div>

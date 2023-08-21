@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a class="brand-link">
         <div class="row justify-content-center">
             <h5>SIANAS</h5>
             <h6 class="brand-text">(Sistem Informasi Aset Nasional)</h6>
@@ -16,7 +16,7 @@
                 <img src="{{ asset('icon-user.png') }}" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+                <a class="d-block">{{ auth()->user()->name }}</a>
             </div>
         </div>
 
@@ -35,7 +35,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('aset.index') }}" class="nav-link">
+                    <a href="{{ route('asset.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>
                             Daftar Aset
@@ -43,7 +43,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('writeoff.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-tasks"></i>
                         <p>
                             Aset Write Off
@@ -51,7 +51,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('inventory.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             Daftar Inventaris
@@ -59,7 +59,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="{{ route('lending.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-handshake"></i>
                         <p>
                             Peminjaman Aset

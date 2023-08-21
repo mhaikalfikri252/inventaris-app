@@ -33,6 +33,8 @@
     <link rel="stylesheet"
         href="{{ asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    {{-- Date Picker --}}
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
 
 </head>
 
@@ -56,8 +58,13 @@
     </div>
     <!-- ./wrapper -->
 
-    <script src="sweetalert2.all.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
+    {{-- Date Picker --}}
+    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    {{-- Sweet Alert 2 --}}
+    <script src="sweetalert2.all.min.js"></script>
     <!-- jQuery -->
     <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
@@ -106,6 +113,7 @@
 
     <!-- Page specific script -->
     <script>
+        // Data Table
         $(function() {
             $("#example1").DataTable({
                 "responsive": true,
@@ -131,6 +139,7 @@
             });
         });
 
+        // Logout
         function logout(event) {
             event.preventDefault();
             var check = confirm("Apakah anda yakin ingin keluar?");
@@ -138,6 +147,58 @@
                 document.getElementById('logout-form').submit();
             }
         }
+
+        // Date Picker
+        $("#purchase_date").datepicker({
+            dateFormat: "dd-mm-yy"
+        });
+
+
+        // Preview Image
+        function previewImage() {
+            const photo = document.querySelector('#photo');
+            const photoPreview = document.querySelector('.photo-preview');
+
+            photoPreview.style.display = 'block';
+
+            const oFReader = new FileReader();
+            oFReader.readAsDataURL(photo.files[0]);
+
+            oFReader.onload = function(oFREvent) {
+                photoPreview.src = oFREvent.target.result;
+            }
+        }
+
+
+        // Rupiah
+        // $(function() {
+        //     $("#price").keyup(function(e) {
+        //         $(this).val(format($(this).val()));
+        //     });
+        // });
+        // var format = function(num) {
+        //     var str = num.toString().replace("", ""),
+        //         parts = false,
+        //         output = [],
+        //         i = 1,
+        //         formatted = null;
+        //     if (str.indexOf(",") > 0) {
+        //         parts = str.split(",");
+        //         str = parts[0];
+        //     }
+        //     str = str.split("").reverse();
+        //     for (var j = 0, len = str.length; j < len; j++) {
+        //         if (str[j] != ".") {
+        //             output.push(str[j]);
+        //             if (i % 3 == 0 && j < (len - 1)) {
+        //                 output.push(".");
+        //             }
+        //             i++;
+        //         }
+        //     }
+        //     formatted = output.reverse().join("");
+        //     return ("" + formatted + ((parts) ? "," + parts[1].substr(0, 2) : ""));
+        // };
     </script>
 
 </body>

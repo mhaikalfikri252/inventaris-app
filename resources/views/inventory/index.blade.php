@@ -1,7 +1,7 @@
 @extends('slice.app')
 
 @section('title')
-    Aset
+    Inventaris
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Aset</h1>
+                        <h1 class="m-0">Inventaris</h1>
                     </div>
                     <!-- /.col -->
                 </div><!-- /.row -->
@@ -25,12 +25,12 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
                     <div class="col-md-2">
-                        <a href="{{ route('city.create') }}" class="btn btn-success">Tambah Aset</a>
+                        <a href="{{ route('city.create') }}" class="btn btn-success">Tambah Inventaris</a>
                     </div>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Data Aset</h3>
+                                <h3 class="card-title">Data Inventaris</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -38,17 +38,50 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Aset</th>
+                                            <th>No FA</th>
+                                            <th>Nama</th>
+                                            <th>Fasilitas</th>
+                                            <th>Tanggal</th>
+                                            <th>Lokasi</th>
+                                            <th>Pic</th>
+                                            <th>Harga</th>
+                                            <th>Foto</th>
+                                            <th>Status</th>
+                                            <th>Keterangan</th>
+                                            <th>QR Code</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @php($no = 1)
-                                        @foreach ($city as $data)
+                                        <td>1</td>
+                                        <td>2009FA8141</td>
+                                        <td>1 unit Laptop Samsung Chromebook 4</td>
+                                        <td>SFC Banda Aceh</td>
+                                        <td>19/12/2022</td>
+                                        <td>R. Server</td>
+                                        <td>Reza</td>
+                                        <td>Rp.1.000.0000-.</td>
+                                        <td>Foto</td>
+                                        <td>Baik</td>
+                                        <td>Tagging OK</td>
+                                        <td>QR Code</td>
+                                        <td>
+                                            <a href="" class="btn btn-primary">Show</a>
+                                            <a href="" class="btn btn-warning">Edit</a>
+                                            <form action="" method="post" class="d-inline">
+                                                @method('delete')
+                                                @csrf
+                                                <button class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                                                    Delete
+                                                </button>
+                                            </form>
+                                        </td>
+                                        {{-- @php($no = 1) --}}
+                                        {{-- @foreach ($asset as $data)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                <td>{{ $data->city_name }}</td>
-                                                <td>
+                                                {{-- <td>{{ $data->city_name }}</td> --}}
+                                        {{-- <td>
                                                     <a href="{{ route('city.show', $data->id) }}"
                                                         class="btn btn-primary">Show</a>
                                                     <a href="{{ route('city.edit', $data->id) }}"
@@ -64,12 +97,22 @@
                                                     </form>
                                                 </td>
                                             </tr>
-                                        @endforeach
+                                        @endforeach --}}
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama Aset</th>
+                                            <th>No FA</th>
+                                            <th>Nama</th>
+                                            <th>Fasilitas</th>
+                                            <th>Tanggal</th>
+                                            <th>Lokasi</th>
+                                            <th>Pic</th>
+                                            <th>Harga</th>
+                                            <th>Photo</th>
+                                            <th>Status</th>
+                                            <th>Keterangan</th>
+                                            <th>QR Code</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>

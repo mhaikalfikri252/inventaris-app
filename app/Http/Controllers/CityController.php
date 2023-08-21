@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CityUpdateRequest;
 use App\Models\City;
 use Illuminate\Http\Request;
 
@@ -38,7 +39,7 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'city_name' => 'required|unique:city'
+            'city_name' => 'required|string|max:255|unique:city,city_name'
         ]);
 
         City::create($data);
@@ -57,7 +58,8 @@ class CityController extends Controller
     public function show($id)
     {
         $city = City::findOrFail($id);
-        return view('city.show-city', compact('city'));
+
+        return view('city.show-form', compact('city'));
     }
 
     /**
@@ -69,6 +71,7 @@ class CityController extends Controller
     public function edit($id)
     {
         $city = City::findOrFail($id);
+
         return view('city.edit-form', compact('city'));
     }
 
@@ -79,15 +82,11 @@ class CityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CityUpdateRequest $request, $id)
     {
-        $rules = [
-            'city_name' => 'required'
-        ];
+        $data = $request->validated();
 
-        $data = $request->validate($rules);
-
-        City::find($id)->update($data);
+        City::findOrFail($id)->update($data);
 
         toast('Berhasil mengedit kota!', 'success');
 
@@ -103,6 +102,7 @@ class CityController extends Controller
     public function destroy(City $city)
     {
         City::destroy($city->id);
+
         return redirect()->route('city.index');
     }
 }

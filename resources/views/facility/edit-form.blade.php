@@ -39,8 +39,8 @@
                                 <input type="text" style="text-transform:uppercase"
                                     oninput="this.value = this.value.toUpperCase()"
                                     class="form-control @error('facility_code') is-invalid @enderror" id="facility_code"
-                                    name="facility_code" required autofocus
-                                    value="{{ old('facility_code', $facility->facility_code) }}">
+                                    name="facility_code" value="{{ old('facility_code', $facility->facility_code) }}"
+                                    required autofocus>
                                 @error('facility_code')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -62,7 +62,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="city_id">Kota</label>
-                                <select class="form-control" name="city_id" id="city_id">
+                                <select class="form-control" name="city_id" id="city_id" required>
                                     <option value="" disabled selected>Pilih Kota</option>
                                     @foreach ($city as $data)
                                         <option value="{{ $data->id }}"
@@ -76,7 +76,7 @@
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success">Update</button>
-                            <a href="{{ url()->previous() }}" class="btn btn-danger">Cancel</a>
+                            <a href="{{ route('facility.index') }}" class="btn btn-danger">Cancel</a>
                         </div>
                     </div>
                     <!-- /.card -->

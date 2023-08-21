@@ -1,10 +1,13 @@
 <?php
 
-use App\Http\Controllers\AsetController;
+use App\Http\Controllers\AssetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CityController;
 use App\Http\Controllers\FacilityController;
+use App\Http\Controllers\LendingController;
+use App\Http\Controllers\InventoryController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WriteOffController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,14 +36,6 @@ Route::middleware(['auth'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Route::controller(FacilityController::class)->prefix('facility')->group(function () {
-    //     Route::get('', 'index')->name('facility.index');
-    //     Route::get('create', 'create')->name('facility.create');
-    //     Route::post('store', 'store')->name('facility.store');
-    //     Route::get('edit/{id}', 'edit')->name('facility.update');
-    //     Route::get('destroy/{id}', 'destroy')->name('facility.destroy');
-    // });
-
     Route::middleware(['role:admin'])->group(function () {
         Route::resource('user', UserController::class);
         Route::resource('city', CityController::class);
@@ -48,7 +43,11 @@ Route::middleware(['auth'])->group(function () {
     });
 
     Route::middleware(['role:user'])->group(function () {
-        Route::resource('aset', AsetController::class);
+        Route::resource('asset', AssetController::class);
+        Route::resource('inventory', InventoryController::class);
+        Route::resource('lending', LendingController::class);
+
+        Route::get('/writeoff', [WriteOffController::class, 'index'])->name('writeoff.index');
     });
 });
 

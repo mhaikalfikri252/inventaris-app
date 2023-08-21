@@ -21,4 +21,14 @@ class Facility extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function asset()
+    {
+        return $this->hasMany(Asset::class);
+    }
+
+    public function inventory()
+    {
+        return $this->hasMany(Inventory::class);
+    }
 }

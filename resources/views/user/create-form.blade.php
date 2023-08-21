@@ -35,7 +35,7 @@
                             <div class="form-group">
                                 <label for="name">Nama</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    id="name" name="name" required autofocus value="{{ old('name') }}">
+                                    id="name" name="name" value="{{ old('name') }}" autofocus required>
                                 @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -45,7 +45,7 @@
                             <div class="form-group">
                                 <label for="email">Email</label>
                                 <input type="email" class="form-control @error('email') is-invalid @enderror"
-                                    id="email" name="email" required autofocus value="{{ old('email') }}">
+                                    id="email" name="email" value="{{ old('email') }}" required>
                                 @error('email')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -55,7 +55,7 @@
                             <div class="form-group">
                                 <label for="password">Password</label>
                                 <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                    id="password" name="password" required autofocus value="{{ old('password') }}">
+                                    id="password" name="password" value="{{ old('password') }}" required>
                                 <input type="checkbox" id="checkbox">
                                 <small>Show Password</small>
                                 @error('password')
@@ -99,7 +99,7 @@
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{ url()->previous() }}" class="btn btn-danger">Cancel</a>
+                            <a href="{{ route('user.index') }}" class="btn btn-danger">Cancel</a>
                         </div>
                     </div>
                     <!-- /.card -->

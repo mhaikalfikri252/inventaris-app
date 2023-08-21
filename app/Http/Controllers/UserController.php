@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserUpdateRequest;
 use App\Models\City;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Password;
 use Spatie\Permission\Models\Role as ModelsRole;
 
 class UserController extends Controller
@@ -31,6 +33,7 @@ class UserController extends Controller
     {
         $role = ModelsRole::all();
         $city = City::all();
+
         return view('user.create-form', compact('role', 'city'));
     }
 
@@ -43,13 +46,12 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required',
-            'email' => 'required|unique:users,email',
-            'password' => 'required',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => ['required', Password::min(8)->letters()->numbers()],
             'role_id' => 'required',
             'city_id' => 'required'
         ]);
-
 
         $data['password'] = bcrypt($data['password']);
 
@@ -88,6 +90,7 @@ class UserController extends Controller
         $user = User::with('role', 'city')->findOrFail($id);
         $role = ModelsRole::all();
         $city = City::all();
+
         return view('user.edit-form', compact('user', 'role', 'city'));
     }
 
@@ -99,13 +102,12 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
+
         $data = User::findOrFail($id);
 
-        $request->validate([
-            'email' => 'email|unique:users,email',
-        ]);
+        $request->validated();
 
         $data->update([
             'name' => $request->name,
@@ -142,6 +144,7 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         User::destroy($user->id);
+
         return redirect()->route('user.index');
     }
 }

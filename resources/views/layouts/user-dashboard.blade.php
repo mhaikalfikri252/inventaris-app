@@ -7,14 +7,25 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <h3>150</h3>
+                        <?php
+                        $location = auth()->user()->city_id;
+                        $facility = DB::table('facility')
+                            ->where('city_id', $location)
+                            ->pluck('id');
+                        $asset = DB::table('assets')
+                            ->where('status_id', 1)
+                            ->whereIn('facility_id', $facility)
+                            ->count();
+                        ?>
+                        <h3>{{ $asset }}</h3>
+
 
                         <p>Daftar Aset</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-file-alt"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i
+                    <a href="{{ route('asset.index') }}" class="small-box-footer">More info <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -23,14 +34,25 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <h3>53</h3>
+                        <?php
+                        $location = auth()->user()->city_id;
+                        $facility = DB::table('facility')
+                            ->where('city_id', $location)
+                            ->pluck('id');
+                        $writeoff = DB::table('assets')
+                            ->where('status_id', 2)
+                            ->whereIn('facility_id', $facility)
+                            ->count();
+                        ?>
+                        <h3>{{ $writeoff }}</h3>
+
 
                         <p>Aset Write Off</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-tasks"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i
+                    <a href="{{ route('writeoff.index') }}" class="small-box-footer">More info <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -39,14 +61,18 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <h3>44</h3>
+                        <?php
+                        $count = DB::table('inventories')->count();
+                        ?>
+                        <h3>{{ $count }}</h3>
+
 
                         <p>Daftar Inventaris</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-clipboard-list"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i
+                    <a href="{{ route('inventory.index') }}" class="small-box-footer">More info <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>
@@ -55,14 +81,18 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <h3>65</h3>
+                        <?php
+                        $count = DB::table('lendings')->count();
+                        ?>
+                        <h3>{{ $count }}</h3>
+
 
                         <p>Peminjaman Aset</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-handshake"></i>
                     </div>
-                    <a href="#" class="small-box-footer">More info <i
+                    <a href="{{ route('lending.index') }}" class="small-box-footer">More info <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>

@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\City;
-use App\Models\Facility;
+use App\Models\Lending;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
 
-class FacilityController extends Controller
+class LendingController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +14,9 @@ class FacilityController extends Controller
      */
     public function index()
     {
-        $facility = Facility::with('city')->get();
+        $lending = Lending::with('asset')->get();
 
-        return view('facility.index', compact('facility'));
+        return view('lending.index', compact('lending'));
     }
 
     /**
@@ -28,9 +26,7 @@ class FacilityController extends Controller
      */
     public function create()
     {
-        $city = City::all();
-        
-        return view('facility.create-form', compact('city'));
+        //
     }
 
     /**
@@ -41,17 +37,7 @@ class FacilityController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'facility_code' => 'required',
-            'facility_name' => 'required',
-            'city_id' => 'required'
-        ]);
-
-        Facility::create($data);
-
-        toast('Berhasil menambahkan fasilitas!', 'success');
-
-        return redirect()->route('facility.index');
+        //
     }
 
     /**
@@ -73,10 +59,7 @@ class FacilityController extends Controller
      */
     public function edit($id)
     {
-        $facility = Facility::with('city')->findOrFail($id);
-        $city = City::all();
-
-        return view('facility.edit-form', compact('facility', 'city'));
+        //
     }
 
     /**
@@ -88,19 +71,7 @@ class FacilityController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $rules = [
-            'facility_code' => 'required',
-            'facility_name' => 'required',
-            'city_id' => 'required',
-        ];
-
-        $data = $request->validate($rules);
-
-        Facility::findOrFail($id)->update($data);
-
-        toast('Berhasil mengedit fasilitas!', 'success');
-
-        return redirect()->route('facility.index');
+        //
     }
 
     /**
@@ -109,10 +80,8 @@ class FacilityController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Facility $facility)
+    public function destroy($id)
     {
-        Facility::destroy($facility->id);
-
-        return redirect()->route('facility.index');
+        //
     }
 }

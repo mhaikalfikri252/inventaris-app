@@ -24,10 +24,7 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
-                    {{-- <div class="col-md-2">
-                        <a href="{{ route('city.create') }}" class="btn btn-primary">Tambah</a>
-                    </div> --}}
-                    <a href="{{ url()->previous() }}" class="btn btn-danger">Back</a>
+                    <a href="{{ route('city.index') }}" class="btn btn-danger">Back</a>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">
@@ -50,9 +47,6 @@
                                                 {{-- <td>{{ $no++ }}</td>
                                                 <td>{{ $row->city_name }}</td>
                                                 <td>
-
-                                                    <a href="{{ route('city.edit', $row->id) }}"
-                                                        class="btn btn-warning">Edit</a>
                                                     <form action="{{ route('city.destroy', $row->id) }}" method="post"
                                                         class="d-inline">
                                                         @method('delete')

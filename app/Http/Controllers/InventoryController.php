@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\City;
+use App\Models\Inventory;
 use Illuminate\Http\Request;
 
-class AsetController extends Controller
+class InventoryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,13 +14,9 @@ class AsetController extends Controller
      */
     public function index()
     {
-        $city = City::all();
+        $inventory = Inventory::with('facility')->get();
 
-        $title = 'Hapus!';
-        $text = "Apakah Anda yakin ingin menghapus kota?";
-        confirmDelete($title, $text);
-
-        return view('aset.index', compact('city'));
+        return view('inventory.index', compact('inventory'));
     }
 
     /**

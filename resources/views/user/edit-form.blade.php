@@ -35,11 +35,12 @@
                         <!-- form start -->
                         <form>
                             <div class="card-body">
-                                <div class="form-group {{ $errors->get('email') ? 'has-error' : '' }}">
+                                {{-- <div class="form-group {{ $errors->get('email') ? 'has-error' : '' }}"> --}}
+                                <div class="form-group">
                                     <label for="name">Name</label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                        id="name" name="name" required autofocus
-                                        value="{{ old('name', $user->name) }}">
+                                        id="name" name="name" value="{{ old('name', $user->name) }}" required
+                                        autofocus>
                                     @error('name')
                                         <div class="invalid-feedback">
                                             {{ $message }}
@@ -56,34 +57,10 @@
                                         </div>
                                     @enderror
                                 </div>
-                                {{-- <div class="form-group">
-                                    <label for="password">Password</label>
-                                    <input type="password" class="form-control @error('password') is-invalid @enderror"
-                                        id="password" name="password" required autofocus
-                                        value="{{ old('password', $user->password) }}">
-                                    <input type="checkbox" id="checkbox">
-                                    <small>Show Password</small>
-                                    @error('password')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div> --}}
-                                {{-- <div class="form-group">
-                                    <label for="role">Role</label>
-                                    <input type="text" class="form-control @error('role') is-invalid @enderror"
-                                        id="role" name="role" placeholder="Inputkan 'admin' atau 'user'"
-                                        value="{{ old('role', $user->role) }}" required>
-                                    @error('role')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div> --}}
                                 <div class="form-group">
                                     <label for="role_id">Role</label>
                                     <select class="form-control @error('role_id') is-invalid @enderror" id="role_id"
-                                        name="role_id">
+                                        name="role_id" required>
                                         <option value="" disabled selected>Pilih Role</option>
                                         @foreach ($role as $data)
                                             <option value="{{ $data->id }}"
@@ -99,7 +76,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="city_id">Kota</label>
-                                    <select class="form-control" name="city_id" id="city_id">
+                                    <select class="form-control" name="city_id" id="city_id" required>
                                         <option value="" disabled selected>Pilih Kota</option>
                                         @foreach ($city as $data)
                                             <option value="{{ $data->id }}"
@@ -113,7 +90,7 @@
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-success">Update</button>
-                                <a href="{{ url()->previous() }}" class="btn btn-danger">Cancel</a>
+                                <a href="{{ route('user.index') }}" class="btn btn-danger">Cancel</a>
                             </div>
                         </form>
                     </div>

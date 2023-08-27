@@ -24,9 +24,6 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
-                    <div class="col-md-2">
-                        {{-- <a href="{{ route('asset.create') }}" class="btn btn-success">Tambah Aset Write Off</a> --}}
-                    </div>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">
@@ -48,7 +45,7 @@
                                             <th>Foto</th>
                                             <th>Status</th>
                                             <th>Keterangan</th>
-                                            <th>QR Code</th>
+                                            {{-- <th>QR Code</th> --}}
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -67,11 +64,44 @@
                                                 <td>{{ rupiah($data->price) }}</td>
                                                 <td>
                                                     <img src="{{ asset('images/' . $data->photo) }}"
-                                                        style="width: 100px; height: 70px;">
+                                                        style="width: 100px; height: 80px;">
                                                 </td>
                                                 <td>{{ $data->status->status_name }}</td>
                                                 <td>{{ $data->information }}</td>
-                                                <td>{!! QrCode::generate($data->asset_code) !!}</td>
+                                                {{-- <td>
+                                                    <img src="data:image/png;base64, {!! base64_encode(
+                                                        QrCode::format('png')->generate(
+                                                            'No FA : ' .
+                                                                $data->asset_code .
+                                                                "\n" .
+                                                                'Nama : ' .
+                                                                $data->asset_name .
+                                                                "\n" .
+                                                                'Fasilitas : ' .
+                                                                $data->facility->facility_name .
+                                                                ' ' .
+                                                                $data->facility->city->city_name .
+                                                                "\n" .
+                                                                'Tanggal : ' .
+                                                                \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') .
+                                                                "\n" .
+                                                                'Lokasi : ' .
+                                                                $data->location .
+                                                                "\n" .
+                                                                'Pic : ' .
+                                                                $data->pic .
+                                                                "\n" .
+                                                                'Harga : ' .
+                                                                $data->price .
+                                                                "\n" .
+                                                                'Status : ' .
+                                                                $data->status->status_name .
+                                                                "\n" .
+                                                                'Keterangan : ' .
+                                                                $data->information,
+                                                        ),
+                                                    ) !!} ">
+                                                </td> --}}
                                                 <td>
                                                     <a href="{{ route('asset.show', $data->id) }}"
                                                         class="btn btn-primary">Show</a>
@@ -100,10 +130,10 @@
                                             <th>Lokasi</th>
                                             <th>Pic</th>
                                             <th>Harga</th>
-                                            <th>Photo</th>
+                                            <th>Foto</th>
                                             <th>Status</th>
                                             <th>Keterangan</th>
-                                            <th>QR Code</th>
+                                            {{-- <th>QR Code</th> --}}
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>

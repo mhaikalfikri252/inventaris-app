@@ -8,7 +8,6 @@ use App\Models\Facility;
 use App\Models\Status;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AssetController extends Controller
 {
@@ -50,7 +49,7 @@ class AssetController extends Controller
     {
 
         $data = $request->validate([
-            'asset_code' => 'required|max:255|unique:assets,asset_code|max:255',
+            'asset_code' => 'required|max:255|unique:assets,asset_code',
             'asset_name' => 'required|string|max:255',
             'facility_id' => 'required',
             'purchase_date' => 'required|date',
@@ -128,6 +127,7 @@ class AssetController extends Controller
         $data->asset_name = $request->input('asset_name');
         $data->facility_id = $request->input('facility_id');
         $data->purchase_date = $request->input('purchase_date');
+        $data->location = $request->input('location');
         $data->pic = $request->input('pic');
         $data->price = $request->input('price');
         $data->status_id = $request->input('status_id');

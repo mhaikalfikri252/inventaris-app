@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('lendings', function (Blueprint $table) {
             $table->id();
             $table->string('person_name');
-            $table->bigInteger('asset_id')->unsigned();
+            $table->bigInteger('asset_id')->unsigned()->unique();
             $table->foreign('asset_id')->references('id')
                 ->on('assets')->onDelete('cascade');
             $table->date('loan_date');

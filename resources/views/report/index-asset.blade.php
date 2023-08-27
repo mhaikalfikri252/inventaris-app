@@ -67,7 +67,7 @@
                                                 <td>{{ rupiah($data->price) }}</td>
                                                 <td>
                                                     <img src="{{ asset('images/' . $data->photo) }}"
-                                                        style="width: 100px; height: 80px;">
+                                                        style="width: 100px; height: 70px;">
                                                 </td>
                                                 <td>{{ $data->status->status_name }}</td>
                                                 <td>{{ $data->information }}</td>

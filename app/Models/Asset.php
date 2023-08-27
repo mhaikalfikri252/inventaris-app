@@ -26,6 +26,6 @@ class Asset extends Model
 
     public function lending()
     {
-        return $this->hasMany(Lending::class);
+        return $this->hasOne(Lending::class);
     }
 }

@@ -62,9 +62,15 @@
                 <div class="small-box bg-warning">
                     <div class="inner">
                         <?php
-                        $count = DB::table('inventories')->count();
+                        $location = auth()->user()->city_id;
+                        $facility = DB::table('facility')
+                            ->where('city_id', $location)
+                            ->pluck('id');
+                        $inventories = DB::table('inventories')
+                            ->whereIn('facility_id', $facility)
+                            ->count();
                         ?>
-                        <h3>{{ $count }}</h3>
+                        <h3>{{ $inventories }}</h3>
 
 
                         <p>Daftar Inventaris</p>
@@ -82,9 +88,18 @@
                 <div class="small-box bg-danger">
                     <div class="inner">
                         <?php
-                        $count = DB::table('lendings')->count();
+                        $location = auth()->user()->city_id;
+                        $facility = DB::table('facility')
+                            ->where('city_id', $location)
+                            ->pluck('id');
+                        $asset = DB::table('assets')
+                            ->whereIn('facility_id', $facility)
+                            ->pluck('id');
+                        $lending = DB::table('lendings')
+                            ->whereIn('asset_id', $asset)
+                            ->count();
                         ?>
-                        <h3>{{ $count }}</h3>
+                        <h3>{{ $lending }}</h3>
 
 
                         <p>Peminjaman Aset</p>

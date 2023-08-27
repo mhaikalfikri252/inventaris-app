@@ -23,7 +23,7 @@ return new class extends Migration
             $table->date('purchase_date');
             $table->string('location');
             $table->string('pic');
-            $table->decimal('price', 15, 2);
+            $table->decimal('price', 19, 0);
             $table->string('photo');
             $table->bigInteger('status_id')->unsigned();
             $table->foreign('status_id')->references('id')

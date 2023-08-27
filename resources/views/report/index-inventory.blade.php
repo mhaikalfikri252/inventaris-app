@@ -1,7 +1,7 @@
 @extends('slice.app')
 
 @section('title')
-    Aset
+    Inventaris
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Aset</h1>
+                        <h1 class="m-0">Inventaris</h1>
                     </div>
                     <!-- /.col -->
                 </div><!-- /.row -->
@@ -25,12 +25,12 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
                     <div class="col-md-2">
-                        <a href="{{ route('asset.create') }}" class="btn btn-success">Tambah Aset</a>
+                        <a href="{{ route('inventory.create') }}" class="btn btn-success">Tambah Inventaris</a>
                     </div>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Data Aset</h3>
+                                <h3 class="card-title">Data Inventaris</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -38,7 +38,6 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>No FA</th>
                                             <th>Nama</th>
                                             <th>Fasilitas</th>
                                             <th>Tanggal</th>
@@ -46,7 +45,6 @@
                                             <th>Pic</th>
                                             <th>Harga</th>
                                             <th>Foto</th>
-                                            <th>Status</th>
                                             <th>Keterangan</th>
                                             {{-- <th>QR Code</th> --}}
                                             <th>Aksi</th>
@@ -54,11 +52,10 @@
                                     </thead>
                                     <tbody>
                                         @php($no = 1)
-                                        @foreach ($asset as $data)
+                                        @foreach ($inventory as $data)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                <td>{{ $data->asset_code }}</td>
-                                                <td>{{ $data->asset_name }}</td>
+                                                <td>{{ $data->inventory_name }}</td>
                                                 <td>{{ $data->facility->facility_name . ' ' . $data->facility->city->city_name }}
                                                 </td>
                                                 <td>{{ \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') }}</td>
@@ -67,18 +64,14 @@
                                                 <td>{{ rupiah($data->price) }}</td>
                                                 <td>
                                                     <img src="{{ asset('images/' . $data->photo) }}"
-                                                        style="width: 100px; height: 80px;">
+                                                        style="width: 100px; height: 70px;">
                                                 </td>
-                                                <td>{{ $data->status->status_name }}</td>
                                                 <td>{{ $data->information }}</td>
                                                 {{-- <td>
                                                     <img src="data:image/png;base64, {!! base64_encode(
                                                         QrCode::format('png')->generate(
-                                                            'No FA : ' .
-                                                                $data->asset_code .
-                                                                "\n" .
-                                                                'Nama : ' .
-                                                                $data->asset_name .
+                                                            'Nama : ' .
+                                                                $data->inventory_name .
                                                                 "\n" .
                                                                 'Fasilitas : ' .
                                                                 $data->facility->facility_name .
@@ -97,25 +90,22 @@
                                                                 'Harga : ' .
                                                                 $data->price .
                                                                 "\n" .
-                                                                'Status : ' .
-                                                                $data->status->status_name .
-                                                                "\n" .
                                                                 'Keterangan : ' .
                                                                 $data->information,
                                                         ),
                                                     ) !!} ">
                                                 </td> --}}
                                                 <td>
-                                                    <a href="{{ route('asset.show', $data->id) }}"
+                                                    <a href="{{ route('inventory.show', $data->id) }}"
                                                         class="btn btn-primary">Show</a>
-                                                    <a href="{{ route('asset.edit', $data->id) }}"
+                                                    <a href="{{ route('inventory.edit', $data->id) }}"
                                                         class="btn btn-warning">Edit</a>
-                                                    <form action="{{ route('asset.destroy', $data->id) }}" method="post"
-                                                        class="d-inline">
+                                                    <form action="{{ route('inventory.destroy', $data->id) }}"
+                                                        method="post" class="d-inline">
                                                         @method('delete')
                                                         @csrf
                                                         <button class="btn btn-danger"
-                                                            onclick="return confirm('Apakah anda yakin ingin menghapus aset?')">
+                                                            onclick="return confirm('Apakah anda yakin ingin menghapus inventaris?')">
                                                             Delete
                                                         </button>
                                                     </form>
@@ -126,7 +116,6 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>No FA</th>
                                             <th>Nama</th>
                                             <th>Fasilitas</th>
                                             <th>Tanggal</th>
@@ -134,7 +123,6 @@
                                             <th>Pic</th>
                                             <th>Harga</th>
                                             <th>Foto</th>
-                                            <th>Status</th>
                                             <th>Keterangan</th>
                                             {{-- <th>QR Code</th> --}}
                                             <th>Aksi</th>

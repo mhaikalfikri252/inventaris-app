@@ -1,7 +1,7 @@
 @extends('slice.app')
 
 @section('title')
-    Aset {{ $asset->asset_code }}
+    Inventaris {{ $inventory->inventory_name }}
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Data Aset</h1>
+                        <h1 class="m-0">Data Inventaris</h1>
                     </div>
                     <!-- /.col -->
                 </div><!-- /.row -->
@@ -24,73 +24,61 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
-                    <a href="{{ route('asset.index') }}" class="btn btn-primary">Kembali</a>
+                    <a href="{{ route('inventory.index') }}" class="btn btn-primary">Kembali</a>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Aset {{ $asset->asset_code }}</h3>
+                                <h3 class="card-title">Inventaris {{ $inventory->inventory_name }}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
                                 <div class="row mb-3">
-                                    <label class="col col-label-form">No FA : </label>
-                                    <div class="col-sm-10">
-                                        {{ $asset->asset_code }}
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
                                     <label class="col-sm-2 col-label-form">Nama : </label>
                                     <div class="col-sm-10">
-                                        {{ $asset->asset_name }}
+                                        {{ $inventory->inventory_name }}
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-label-form">Fasilitas : </label>
                                     <div class="col-sm-10">
-                                        {{ $asset->facility->facility_name . ' ' . $asset->facility->city->city_name }}
+                                        {{ $inventory->facility->facility_name . ' ' . $inventory->facility->city->city_name }}
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-label-form">Tanggal : </label>
                                     <div class="col-sm-10">
-                                        {{ \Carbon\Carbon::parse($asset->purchase_date)->format('d/m/Y') }}
+                                        {{ \Carbon\Carbon::parse($inventory->purchase_date)->format('d/m/Y') }}
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-label-form">Lokasi : </label>
                                     <div class="col-sm-10">
-                                        {{ $asset->location }}
+                                        {{ $inventory->location }}
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-label-form">Pic : </label>
                                     <div class="col-sm-10">
-                                        {{ $asset->pic }}
+                                        {{ $inventory->pic }}
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-label-form">Harga : </label>
                                     <div class="col-sm-10">
-                                        {{ rupiah($asset->price) }}
+                                        {{ rupiah($inventory->price) }}
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-label-form">Foto : </label>
                                     <div class="col-sm-10">
-                                        <img src="{{ asset('images/' . $asset->photo) }}"
+                                        <img src="{{ asset('images/' . $inventory->photo) }}"
                                             style="width: 100px; height: 70px;">
-                                    </div>
-                                </div>
-                                <div class="row mb-3">
-                                    <label class="col-sm-2 col-label-form">Status : </label>
-                                    <div class="col-sm-10">
-                                        {{ $asset->status->status_name }}
                                     </div>
                                 </div>
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-label-form">Keterangan : </label>
                                     <div class="col-sm-10">
-                                        {{ $asset->information }}
+                                        {{ $inventory->information }}
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -98,34 +86,28 @@
                                     <div class="col-sm-10">
                                         <img src="data:image/png;base64, {!! base64_encode(
                                             QrCode::format('png')->generate(
-                                                'No FA : ' .
-                                                    $asset->asset_code .
-                                                    "\n" .
-                                                    'Nama : ' .
-                                                    $asset->asset_name .
+                                                'Nama : ' .
+                                                    $inventory->inventory_name .
                                                     "\n" .
                                                     'Fasilitas : ' .
-                                                    $asset->facility->facility_name .
+                                                    $inventory->facility->facility_name .
                                                     ' ' .
-                                                    $asset->facility->city->city_name .
+                                                    $inventory->facility->city->city_name .
                                                     "\n" .
                                                     'Tanggal : ' .
-                                                    \Carbon\Carbon::parse($asset->purchase_date)->format('d/m/Y') .
+                                                    \Carbon\Carbon::parse($inventory->purchase_date)->format('d/m/Y') .
                                                     "\n" .
                                                     'Lokasi : ' .
-                                                    $asset->location .
+                                                    $inventory->location .
                                                     "\n" .
                                                     'Pic : ' .
-                                                    $asset->pic .
+                                                    $inventory->pic .
                                                     "\n" .
                                                     'Harga : ' .
-                                                    $asset->price .
-                                                    "\n" .
-                                                    'Status : ' .
-                                                    $asset->status->status_name .
+                                                    $inventory->price .
                                                     "\n" .
                                                     'Keterangan : ' .
-                                                    $asset->information,
+                                                    $inventory->information,
                                             ),
                                         ) !!} ">
                                     </div>

@@ -62,7 +62,10 @@
                                 <select class="form-control" id="city_id" name="city_id" required>
                                     <option value="" disabled selected>Pilih Kota</option>
                                     @foreach ($city as $data)
-                                        <option value="{{ $data->id }}">{{ $data->city_name }}</option>
+                                        <option value="{{ $data->id }}"
+                                            {{ old('city_id') == $data->id ? 'selected' : '' }}>
+                                            {{ $data->city_name }}
+                                        </option>
                                     @endforeach
                                 </select>
                             </div>

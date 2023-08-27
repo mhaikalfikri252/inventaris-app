@@ -1,7 +1,7 @@
 @extends('slice.app')
 
 @section('title')
-    Aset
+    Inventaris
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Aset</h1>
+                        <h1 class="m-0">Inventaris</h1>
                     </div>
                     <!-- /.col -->
                 </div><!-- /.row -->
@@ -22,33 +22,21 @@
         <!-- Main content -->
         <section class="content">
             <div class="container-fluid">
-                <form action="{{ route('asset.store') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ route('inventory.store') }}" method="post" enctype="multipart/form-data">
                     @csrf
                     <!-- general form elements -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Tambah Data Aset</h3>
+                            <h3 class="card-title">Tambah Data Inventaris</h3>
                         </div>
                         <!-- /.card-header -->
                         <!-- form start -->
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="asset_code">No FA</label>
-                                <input type="text" style="text-transform:uppercase"
-                                    oninput="this.value = this.value.toUpperCase()"
-                                    class="form-control @error('asset_code') is-invalid @enderror" id="asset_code"
-                                    name="asset_code" value="{{ old('asset_code') }}" required autofocus>
-                                @error('asset_code')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="asset_name">Nama</label>
-                                <input type="text" class="form-control @error('asset_name') is-invalid @enderror"
-                                    id="asset_name" name="asset_name" value="{{ old('asset_name') }}" required>
-                                @error('asset_name')
+                                <label for="inventory_name">Nama</label>
+                                <input type="text" class="form-control @error('inventory_name') is-invalid @enderror"
+                                    id="inventory_name" name="inventory_name" value="{{ old('inventory_name') }}" required>
+                                @error('inventory_name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -114,24 +102,6 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="status_id">Status</label>
-                                <select class="form-control @error('status_id') is-invalid @enderror" id="status_id"
-                                    name="status_id" required>
-                                    <option value="" disabled selected>Pilih Status</option>
-                                    @foreach ($status as $data)
-                                        <option value="{{ $data->id }}"
-                                            {{ old('status_id') == $data->id ? 'selected' : '' }}>
-                                            {{ $data->status_name }}
-                                        </option>
-                                        @error('status_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    @endforeach
-                                </select>
-                            </div>
-                            <div class="form-group">
                                 <label for="information">Keterangan</label>
                                 <input type="text" class="form-control @error('information') is-invalid @enderror"
                                     id="information" name="information" value="{{ old('information') }}" required>
@@ -158,7 +128,7 @@
 
                         <div class="card-footer">
                             <button type="submit" class="btn btn-success">Submit</button>
-                            <a href="{{ route('asset.index') }}" class="btn btn-danger">Cancel</a>
+                            <a href="{{ route('inventory.index') }}" class="btn btn-danger">Cancel</a>
                         </div>
                     </div>
                     <!-- /.card -->

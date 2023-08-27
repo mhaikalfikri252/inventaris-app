@@ -1,7 +1,7 @@
 @extends('slice.app')
 
 @section('title')
-    Aset
+    Aset Write Off
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Aset</h1>
+                        <h1 class="m-0">Aset Write Off</h1>
                     </div>
                     <!-- /.col -->
                 </div><!-- /.row -->
@@ -24,13 +24,10 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
-                    <div class="col-md-2">
-                        <a href="{{ route('asset.create') }}" class="btn btn-success">Tambah Aset</a>
-                    </div>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Data Aset</h3>
+                                <h3 class="card-title">Data Aset Write Off</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -54,7 +51,7 @@
                                     </thead>
                                     <tbody>
                                         @php($no = 1)
-                                        @foreach ($asset as $data)
+                                        @foreach ($writeoff as $data)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $data->asset_code }}</td>
@@ -67,7 +64,7 @@
                                                 <td>{{ rupiah($data->price) }}</td>
                                                 <td>
                                                     <img src="{{ asset('images/' . $data->photo) }}"
-                                                        style="width: 100px; height: 80px;">
+                                                        style="width: 100px; height: 70px;">
                                                 </td>
                                                 <td>{{ $data->status->status_name }}</td>
                                                 <td>{{ $data->information }}</td>

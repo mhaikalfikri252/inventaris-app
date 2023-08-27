@@ -58,8 +58,9 @@ class CityController extends Controller
     public function show($id)
     {
         $city = City::findOrFail($id);
+        $cityAll = City::all();
 
-        return view('city.show-form', compact('city'));
+        return view('city.show-form', compact('city', 'cityAll'));
     }
 
     /**

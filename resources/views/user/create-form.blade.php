@@ -70,7 +70,10 @@
                                     name="role_id">
                                     <option value="" disabled selected>Pilih Role</option>
                                     @foreach ($role as $data)
-                                        <option value="{{ $data->id }}">{{ $data->name }}</option>
+                                        <option value="{{ $data->id }}"
+                                            {{ old('role_id') == $data->id ? 'selected' : '' }}>
+                                            {{ $data->name }}
+                                        </option>
                                         @error('role_id')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -85,7 +88,10 @@
                                     name="city_id">
                                     <option value="" disabled selected>Pilih Kota</option>
                                     @foreach ($city as $data)
-                                        <option value="{{ $data->id }}">{{ $data->city_name }}</option>
+                                        <option value="{{ $data->id }}"
+                                            {{ old('city_id') == $data->id ? 'selected' : '' }}>
+                                            {{ $data->city_name }}
+                                        </option>
                                         @error('city_id')
                                             <div class="invalid-feedback">
                                                 {{ $message }}

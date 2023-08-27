@@ -153,6 +153,13 @@
             dateFormat: "dd-mm-yy"
         });
 
+        $("#loan_date").datepicker({
+            dateFormat: "dd-mm-yy"
+        });
+
+        $("#return_date").datepicker({
+            dateFormat: "dd-mm-yy"
+        });
 
         // Preview Image
         function previewImage() {

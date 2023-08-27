@@ -25,7 +25,7 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
                     <div class="col-md-2">
-                        <a href="{{ route('city.create') }}" class="btn btn-success">Tambah Peminjaman Aset</a>
+                        <a href="{{ route('lending.create') }}" class="btn btn-success">Pinjam Aset</a>
                     </div>
                     <div class="col mt-4">
                         <div class="card">
@@ -38,81 +38,53 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>No FA</th>
                                             <th>Nama</th>
-                                            <th>Fasilitas</th>
-                                            <th>Tanggal</th>
-                                            <th>Lokasi</th>
-                                            <th>Pic</th>
-                                            <th>Harga</th>
-                                            <th>Foto</th>
+                                            <th>No FA</th>
+                                            <th>Barang</th>
+                                            <th>Tanggal Pinjam</th>
+                                            <th>Tanggal Kembali</th>
                                             <th>Status</th>
-                                            <th>Keterangan</th>
-                                            <th>QR Code</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <td>1</td>
-                                        <td>2009FA8141</td>
-                                        <td>1 unit Laptop Samsung Chromebook 4</td>
-                                        <td>SFC Banda Aceh</td>
-                                        <td>19/12/2022</td>
-                                        <td>R. Server</td>
-                                        <td>Reza</td>
-                                        <td>Rp.1.000.0000-.</td>
-                                        <td>Foto</td>
-                                        <td>Baik</td>
-                                        <td>Tagging OK</td>
-                                        <td>QR Code</td>
-                                        <td>
-                                            <a href="" class="btn btn-primary">Show</a>
-                                            <a href="" class="btn btn-warning">Edit</a>
-                                            <form action="" method="post" class="d-inline">
-                                                @method('delete')
-                                                @csrf
-                                                <button class="btn btn-danger" onclick="return confirm('Are you sure?')">
-                                                    Delete
-                                                </button>
-                                            </form>
-                                        </td>
-                                        {{-- @php($no = 1) --}}
-                                        {{-- @foreach ($asset as $data)
+                                        @php($no = 1)
+                                        @foreach ($lending as $data)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                {{-- <td>{{ $data->city_name }}</td> --}}
-                                        {{-- <td>
-                                                    <a href="{{ route('city.show', $data->id) }}"
+                                                <td>{{ $data->person_name }}</td>
+                                                <td>{{ $data->asset->asset_code }}</td>
+                                                <td>{{ $data->asset->asset_name }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($data->loan_date)->format('d/m/Y') }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($data->return_date)->format('d/m/Y') }}</td>
+                                                <td>{{ $data->status_lending->status_name }}</td>
+                                                <td>
+                                                    <a href="{{ route('lending.show', $data->id) }}"
                                                         class="btn btn-primary">Show</a>
-                                                    <a href="{{ route('city.edit', $data->id) }}"
+                                                    <a href="{{ route('lending.edit', $data->id) }}"
                                                         class="btn btn-warning">Edit</a>
-                                                    <form action="{{ route('city.destroy', $data->id) }}" method="post"
+                                                    <form action="{{ route('lending.destroy', $data->id) }}" method="post"
                                                         class="d-inline">
                                                         @method('delete')
                                                         @csrf
                                                         <button class="btn btn-danger"
-                                                            onclick="return confirm('Are you sure?')">
+                                                            onclick="return confirm('Apakah anda yakin ingin menghapus aset?')">
                                                             Delete
                                                         </button>
                                                     </form>
                                                 </td>
                                             </tr>
-                                        @endforeach --}}
+                                        @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>No FA</th>
                                             <th>Nama</th>
-                                            <th>Fasilitas</th>
-                                            <th>Tanggal</th>
-                                            <th>Lokasi</th>
-                                            <th>Pic</th>
-                                            <th>Harga</th>
-                                            <th>Photo</th>
+                                            <th>No FA</th>
+                                            <th>Barang</th>
+                                            <th>Tanggal Pinjam</th>
+                                            <th>Tanggal Kembali</th>
                                             <th>Status</th>
-                                            <th>Keterangan</th>
-                                            <th>QR Code</th>
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>

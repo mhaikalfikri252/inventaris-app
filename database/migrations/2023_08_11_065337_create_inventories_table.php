@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('purchase_date');
             $table->string('location');
             $table->string('pic');
-            $table->string('price');
+            $table->decimal('price', 19, 0);
             $table->string('photo');
             $table->string('information');
             $table->timestamps();

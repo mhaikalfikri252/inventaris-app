@@ -25,7 +25,7 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
                     <div class="col-md-2">
-                        <a href="{{ route('city.create') }}" class="btn btn-success">Tambah Inventaris</a>
+                        <a href="{{ route('inventory.create') }}" class="btn btn-success">Tambah Inventaris</a>
                     </div>
                     <div class="col mt-4">
                         <div class="card">
@@ -38,7 +38,6 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>No FA</th>
                                             <th>Nama</th>
                                             <th>Fasilitas</th>
                                             <th>Tanggal</th>
@@ -46,73 +45,86 @@
                                             <th>Pic</th>
                                             <th>Harga</th>
                                             <th>Foto</th>
-                                            <th>Status</th>
                                             <th>Keterangan</th>
-                                            <th>QR Code</th>
+                                            {{-- <th>QR Code</th> --}}
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <td>1</td>
-                                        <td>2009FA8141</td>
-                                        <td>1 unit Laptop Samsung Chromebook 4</td>
-                                        <td>SFC Banda Aceh</td>
-                                        <td>19/12/2022</td>
-                                        <td>R. Server</td>
-                                        <td>Reza</td>
-                                        <td>Rp.1.000.0000-.</td>
-                                        <td>Foto</td>
-                                        <td>Baik</td>
-                                        <td>Tagging OK</td>
-                                        <td>QR Code</td>
-                                        <td>
-                                            <a href="" class="btn btn-primary">Show</a>
-                                            <a href="" class="btn btn-warning">Edit</a>
-                                            <form action="" method="post" class="d-inline">
-                                                @method('delete')
-                                                @csrf
-                                                <button class="btn btn-danger" onclick="return confirm('Are you sure?')">
-                                                    Delete
-                                                </button>
-                                            </form>
-                                        </td>
-                                        {{-- @php($no = 1) --}}
-                                        {{-- @foreach ($asset as $data)
+                                        @php($no = 1)
+                                        @foreach ($inventory as $data)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                {{-- <td>{{ $data->city_name }}</td> --}}
-                                        {{-- <td>
-                                                    <a href="{{ route('city.show', $data->id) }}"
+                                                <td>{{ $data->inventory_name }}</td>
+                                                <td>{{ $data->facility->facility_name . ' ' . $data->facility->city->city_name }}
+                                                </td>
+                                                <td>{{ \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') }}</td>
+                                                <td>{{ $data->location }}</td>
+                                                <td>{{ $data->pic }}</td>
+                                                <td>{{ rupiah($data->price) }}</td>
+                                                <td>
+                                                    <img src="{{ asset('images/' . $data->photo) }}"
+                                                        style="width: 100px; height: 80px;">
+                                                </td>
+                                                <td>{{ $data->information }}</td>
+                                                {{-- <td>
+                                                    <img src="data:image/png;base64, {!! base64_encode(
+                                                        QrCode::format('png')->generate(
+                                                            'Nama : ' .
+                                                                $data->inventory_name .
+                                                                "\n" .
+                                                                'Fasilitas : ' .
+                                                                $data->facility->facility_name .
+                                                                ' ' .
+                                                                $data->facility->city->city_name .
+                                                                "\n" .
+                                                                'Tanggal : ' .
+                                                                \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') .
+                                                                "\n" .
+                                                                'Lokasi : ' .
+                                                                $data->location .
+                                                                "\n" .
+                                                                'Pic : ' .
+                                                                $data->pic .
+                                                                "\n" .
+                                                                'Harga : ' .
+                                                                $data->price .
+                                                                "\n" .
+                                                                'Keterangan : ' .
+                                                                $data->information,
+                                                        ),
+                                                    ) !!} ">
+                                                </td> --}}
+                                                <td>
+                                                    <a href="{{ route('inventory.show', $data->id) }}"
                                                         class="btn btn-primary">Show</a>
-                                                    <a href="{{ route('city.edit', $data->id) }}"
+                                                    <a href="{{ route('inventory.edit', $data->id) }}"
                                                         class="btn btn-warning">Edit</a>
-                                                    <form action="{{ route('city.destroy', $data->id) }}" method="post"
-                                                        class="d-inline">
+                                                    <form action="{{ route('inventory.destroy', $data->id) }}"
+                                                        method="post" class="d-inline">
                                                         @method('delete')
                                                         @csrf
                                                         <button class="btn btn-danger"
-                                                            onclick="return confirm('Are you sure?')">
+                                                            onclick="return confirm('Apakah anda yakin ingin menghapus inventaris?')">
                                                             Delete
                                                         </button>
                                                     </form>
                                                 </td>
                                             </tr>
-                                        @endforeach --}}
+                                        @endforeach
                                     </tbody>
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>No FA</th>
                                             <th>Nama</th>
                                             <th>Fasilitas</th>
                                             <th>Tanggal</th>
                                             <th>Lokasi</th>
                                             <th>Pic</th>
                                             <th>Harga</th>
-                                            <th>Photo</th>
-                                            <th>Status</th>
+                                            <th>Foto</th>
                                             <th>Keterangan</th>
-                                            <th>QR Code</th>
+                                            {{-- <th>QR Code</th> --}}
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>

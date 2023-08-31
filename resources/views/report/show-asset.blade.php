@@ -24,7 +24,8 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
-                    <a href="{{ route('asset.index') }}" class="btn btn-primary">Kembali</a>
+                    <a href="{{ url()->previous() }}" class="btn btn-primary"><i class="fas fa-arrow-circle-left"></i>
+                        Back</a>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">

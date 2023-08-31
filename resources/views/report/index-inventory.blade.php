@@ -25,7 +25,8 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
                     <div class="col-md-2">
-                        <a href="{{ route('inventory.create') }}" class="btn btn-success">Tambah Inventaris</a>
+                        <a href="{{ route('city.show', $city->id) }}" class="btn btn-primary"><i
+                                class="fas fa-arrow-circle-left"></i> Back</a>
                     </div>
                     <div class="col mt-4">
                         <div class="card">
@@ -64,7 +65,7 @@
                                                 <td>{{ rupiah($data->price) }}</td>
                                                 <td>
                                                     <img src="{{ asset('images/' . $data->photo) }}"
-                                                        style="width: 100px; height: 70px;">
+                                                        style="width: 100px; height: 80px;">
                                                 </td>
                                                 <td>{{ $data->information }}</td>
                                                 {{-- <td>
@@ -96,11 +97,11 @@
                                                     ) !!} ">
                                                 </td> --}}
                                                 <td>
-                                                    <a href="{{ route('inventory.show', $data->id) }}"
+                                                    <a href="{{ route('report.inventory.show', $data->id) }}"
                                                         class="btn btn-primary">Show</a>
-                                                    <a href="{{ route('inventory.edit', $data->id) }}"
-                                                        class="btn btn-warning">Edit</a>
-                                                    <form action="{{ route('inventory.destroy', $data->id) }}"
+                                                    {{-- <a href="{{ route('inventory.edit', $data->id) }}"
+                                                        class="btn btn-warning">Edit</a> --}}
+                                                    <form action="{{ route('report.inventory.destroy', $data->id) }}"
                                                         method="post" class="d-inline">
                                                         @method('delete')
                                                         @csrf

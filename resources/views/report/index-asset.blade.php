@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Aset</h1>
+                        <h1 class="m-0">Aset {{ $city->city_name }}</h1>
                     </div>
                     <!-- /.col -->
                 </div><!-- /.row -->
@@ -25,12 +25,14 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
                     <div class="col-md-2">
-                        <a href="{{ route('asset.create') }}" class="btn btn-success">Tambah Aset</a>
+                        <a href="{{ route('city.show', $city->id) }}" class="btn btn-primary"><i
+                                class="fas fa-arrow-circle-left"></i>
+                            Back</a>
                     </div>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Data Aset</h3>
+                                <h3 class="card-title">Data Aset {{ $city->city_name }}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -67,7 +69,7 @@
                                                 <td>{{ rupiah($data->price) }}</td>
                                                 <td>
                                                     <img src="{{ asset('images/' . $data->photo) }}"
-                                                        style="width: 100px; height: 70px;">
+                                                        style="width: 100px; height: 80px;">
                                                 </td>
                                                 <td>{{ $data->status->status_name }}</td>
                                                 <td>{{ $data->information }}</td>
@@ -106,12 +108,12 @@
                                                     ) !!} ">
                                                 </td> --}}
                                                 <td>
-                                                    <a href="{{ route('asset.show', $data->id) }}"
+                                                    <a href="{{ route('report.asset.show', $data->id) }}"
                                                         class="btn btn-primary">Show</a>
-                                                    <a href="{{ route('asset.edit', $data->id) }}"
-                                                        class="btn btn-warning">Edit</a>
-                                                    <form action="{{ route('asset.destroy', $data->id) }}" method="post"
-                                                        class="d-inline">
+                                                    {{-- <a href="{{ route('asset.edit', $data->id) }}"
+                                                        class="btn btn-warning">Edit</a> --}}
+                                                    <form action="{{ route('report.asset.destroy', $data->id) }}"
+                                                        method="post" class="d-inline">
                                                         @method('delete')
                                                         @csrf
                                                         <button class="btn btn-danger"

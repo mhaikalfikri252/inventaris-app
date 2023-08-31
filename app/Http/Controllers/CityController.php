@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CityUpdateRequest;
+use App\Models\Asset;
 use App\Models\City;
 use Illuminate\Http\Request;
 
@@ -58,9 +59,8 @@ class CityController extends Controller
     public function show($id)
     {
         $city = City::findOrFail($id);
-        $cityAll = City::all();
 
-        return view('city.show-form', compact('city', 'cityAll'));
+        return view('city.show-form', compact('city'));
     }
 
     /**

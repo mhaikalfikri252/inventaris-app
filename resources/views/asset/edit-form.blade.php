@@ -160,7 +160,8 @@
 
                             <div class="card-footer">
                                 <button type="submit" class="btn btn-success">Update</button>
-                                <a href="{{ route('asset.index') }}" class="btn btn-danger">Cancel</a>
+                                <a href="{{ $asset->status_id == 1 ? route('asset.index') : route('writeoff.index') }}"
+                                    class="btn btn-danger">Cancel</a>
                             </div>
                         </form>
                     </div>

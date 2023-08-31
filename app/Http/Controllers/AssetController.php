@@ -178,6 +178,10 @@ class AssetController extends Controller
 
         toast('Berhasil menghapus aset!', 'success');
 
-        return redirect()->route('asset.index');
+        if ($asset->status_id == 1) {
+            return redirect()->route('asset.index');
+        } else if ($asset->status_id == 2) {
+            return redirect()->route('writeoff.index');
+        }
     }
 }

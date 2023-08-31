@@ -24,6 +24,10 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
+                    <div class="col-md-2">
+                        <a href="{{ route('city.show', $city->id) }}" class="btn btn-primary"><i
+                                class="fas fa-arrow-circle-left"></i>Back</a>
+                    </div>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">
@@ -103,12 +107,12 @@
                                                     ) !!} ">
                                                 </td> --}}
                                                 <td>
-                                                    <a href="{{ route('asset.show', $data->id) }}"
+                                                    <a href="{{ route('report.asset.show', $data->id) }}"
                                                         class="btn btn-primary">Show</a>
-                                                    <a href="{{ route('asset.edit', $data->id) }}"
-                                                        class="btn btn-warning">Edit</a>
-                                                    <form action="{{ route('asset.destroy', $data->id) }}" method="post"
-                                                        class="d-inline">
+                                                    {{-- <a href="{{ route('asset.edit', $data->id) }}"
+                                                        class="btn btn-warning">Edit</a> --}}
+                                                    <form action="{{ route('report.asset.destroy', $data->id) }}"
+                                                        method="post" class="d-inline">
                                                         @method('delete')
                                                         @csrf
                                                         <button class="btn btn-danger"

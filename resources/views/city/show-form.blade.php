@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="col mb-2">
                     <div class="col mt-3">
-                        <a href="{{ route('city.index') }}" class="btn btn-primary mb-5"><i
+                        <a href="{{ route('city.index') }}" class="btn btn-primary mb-4"><i
                                 class="fas fa-arrow-circle-left"></i> Back</a>
                         <h1 class="m-0">Kota {{ $city->city_name }}</h1>
                     </div>
@@ -48,7 +48,7 @@
                             <div class="icon">
                                 <i class="fas fa-file-alt"></i>
                             </div>
-                            <a href="{{ route('asset.index') }}" class="small-box-footer">More info <i
+                            <a href="{{ route('report.asset.index', $city->id) }}" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                             <div class="icon">
                                 <i class="fas fa-tasks"></i>
                             </div>
-                            <a href="{{ route('writeoff.index') }}" class="small-box-footer">More info <i
+                            <a href="{{ route('report.writeoff.index', $city->id) }}" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -101,7 +101,7 @@
                             <div class="icon">
                                 <i class="fas fa-clipboard-list"></i>
                             </div>
-                            <a href="{{ route('inventory.index') }}" class="small-box-footer">More info <i
+                            <a href="{{ route('report.inventory.index', $city->id) }}" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
@@ -130,7 +130,7 @@
                             <div class="icon">
                                 <i class="fas fa-handshake"></i>
                             </div>
-                            <a href="{{ route('lending.index') }}" class="small-box-footer">More info <i
+                            <a href="{{ route('report.lending.index', $city->id) }}" class="small-box-footer">More info <i
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>

@@ -119,7 +119,7 @@
                 "responsive": true,
                 "lengthChange": false,
                 "autoWidth": false,
-                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
             }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
             $('#example2').DataTable({
                 "paging": true,
@@ -144,7 +144,7 @@
             event.preventDefault();
             var check = confirm("Apakah anda yakin ingin keluar?");
             if (check) {
-                document.getElementById('logout-form').submit();
+                document.getElementById('logout').submit();
             }
         }
 
@@ -153,7 +153,7 @@
             dateFormat: "dd-mm-yy"
         });
 
-        $("#loan_date").datepicker({
+        $("#borrow_date").datepicker({
             dateFormat: "dd-mm-yy"
         });
 
@@ -176,36 +176,15 @@
             }
         }
 
-
-        // Rupiah
-        // $(function() {
-        //     $("#price").keyup(function(e) {
-        //         $(this).val(format($(this).val()));
-        //     });
-        // });
-        // var format = function(num) {
-        //     var str = num.toString().replace("", ""),
-        //         parts = false,
-        //         output = [],
-        //         i = 1,
-        //         formatted = null;
-        //     if (str.indexOf(",") > 0) {
-        //         parts = str.split(",");
-        //         str = parts[0];
-        //     }
-        //     str = str.split("").reverse();
-        //     for (var j = 0, len = str.length; j < len; j++) {
-        //         if (str[j] != ".") {
-        //             output.push(str[j]);
-        //             if (i % 3 == 0 && j < (len - 1)) {
-        //                 output.push(".");
-        //             }
-        //             i++;
-        //         }
-        //     }
-        //     formatted = output.reverse().join("");
-        //     return ("" + formatted + ((parts) ? "," + parts[1].substr(0, 2) : ""));
-        // };
+        document.getElementById('status_borrow_id').addEventListener("change", function(e) {
+            if (e.target.value == 1) {
+                document.getElementById('uploadletter').style.display = 'block';
+                // document.getElementById('file').required = 'true';
+            } else {
+                document.getElementById('uploadletter').style.display = 'none';
+                // document.getElementById('file').required = 'false';
+            }
+        });
     </script>
 
 </body>

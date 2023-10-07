@@ -13,10 +13,10 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('icon-user.png') }}" alt="User Image">
+                <img src="{{ asset('images/user.png') }}" alt="User Image">
             </div>
             <div class="info">
-                <a class="d-block">{{ auth()->user()->name }}</a>
+                <a class="d-block">{{ auth()->user()->username }}</a>
             </div>
         </div>
 
@@ -59,32 +59,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('lending.index') }}" class="nav-link">
+                    <a href="{{ route('borrow.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-handshake"></i>
                         <p>
                             Peminjaman Aset
                         </p>
                     </a>
-                </li>
-                <li class="nav-header">PENGATURAN</li>
-                <li class="nav-item">
-                    <a href="{{ route('profile.edit') }}" class="nav-link">
-                        <i class="nav-icon fa fa-user"></i>
-                        <p>
-                            Profile
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <form method="POST" action="{{ route('logout') }}" id="logout-form">
-                        @csrf
-                        <a href="{{ route('logout') }}" onclick="return logout(event);" class="nav-link">
-                            <i class="nav-icon fa fa-share-square"></i>
-                            <p>
-                                Logout
-                            </p>
-                        </a>
-                    </form>
                 </li>
             </ul>
         </nav>

@@ -33,10 +33,10 @@
                         <!-- form start -->
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="name">Nama</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror"
-                                    id="name" name="name" value="{{ old('name') }}" autofocus required>
-                                @error('name')
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control @error('username') is-invalid @enderror"
+                                    id="username" name="username" value="{{ old('username') }}" autofocus required>
+                                @error('username')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
@@ -104,7 +104,7 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success">Create</button>
                             <a href="{{ route('user.index') }}" class="btn btn-danger">Cancel</a>
                         </div>
                     </div>

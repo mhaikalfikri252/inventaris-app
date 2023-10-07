@@ -13,10 +13,10 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('icon-user.png') }}" alt="User Image">
+                <img src="{{ asset('images/user.png') }}" alt="User Image">
             </div>
             <div class="info">
-                <a class="d-block">{{ auth()->user()->name }}</a>
+                <a class="d-block">{{ auth()->user()->username }}</a>
             </div>
         </div>
 
@@ -36,9 +36,17 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('user.index') }}" class="nav-link">
-                        <i class="nav-icon fas fa-users"></i>
+                        <i class="nav-icon fas fa-user-alt"></i>
                         <p>
                             User
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('user.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-users"></i>
+                        <p>
+                            Karyawan
                         </p>
                     </a>
                 </li>
@@ -58,26 +66,37 @@
                         </p>
                     </a>
                 </li>
-
-                <li class="nav-header">PENGATURAN</li>
                 <li class="nav-item">
-                    <a href="{{ route('profile.edit') }}" class="nav-link">
-                        <i class="nav-icon fa fa-user"></i>
+                    <a href="{{ route('report.asset.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-file-alt"></i>
                         <p>
-                            Profile
+                            Daftar Aset
                         </p>
                     </a>
                 </li>
                 <li class="nav-item">
-                    <form method="POST" action="{{ route('logout') }}" id="logout-form">
-                        @csrf
-                        <a href="{{ route('logout') }}" onclick="return logout(event);" class="nav-link">
-                            <i class="nav-icon fa fa-share-square"></i>
-                            <p>
-                                Logout
-                            </p>
-                        </a>
-                    </form>
+                    <a href="{{ route('report.writeoff.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-tasks"></i>
+                        <p>
+                            Aset Write Off
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('report.inventory.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
+                        <p>
+                            Daftar Inventaris
+                        </p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('report.borrow.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-handshake"></i>
+                        <p>
+                            Peminjaman Aset
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>

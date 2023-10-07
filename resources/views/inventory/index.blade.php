@@ -25,7 +25,8 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
                     <div class="col-md-2">
-                        <a href="{{ route('inventory.create') }}" class="btn btn-success">Tambah Inventaris</a>
+                        <a href="{{ route('inventory.create') }}" class="btn btn-success"><i class="fas fa-plus"></i>
+                            Create</a>
                     </div>
                     <div class="col mt-4">
                         <div class="card">
@@ -40,7 +41,7 @@
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>Fasilitas</th>
-                                            <th>Tanggal</th>
+                                            <th>Tanggal Beli</th>
                                             <th>Lokasi</th>
                                             <th>Pic</th>
                                             <th>Harga</th>
@@ -60,7 +61,7 @@
                                                 </td>
                                                 <td>{{ \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') }}</td>
                                                 <td>{{ $data->location }}</td>
-                                                <td>{{ $data->pic }}</td>
+                                                <td>{{ $data->employee->employee_name }}</td>
                                                 <td>{{ rupiah($data->price) }}</td>
                                                 <td>
                                                     <img src="{{ asset('images/' . $data->photo) }}"
@@ -78,14 +79,14 @@
                                                                 ' ' .
                                                                 $data->facility->city->city_name .
                                                                 "\n" .
-                                                                'Tanggal : ' .
+                                                                'Tanggal Beli : ' .
                                                                 \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') .
                                                                 "\n" .
                                                                 'Lokasi : ' .
                                                                 $data->location .
                                                                 "\n" .
                                                                 'Pic : ' .
-                                                                $data->pic .
+                                                                $data->employee->employee_name .
                                                                 "\n" .
                                                                 'Harga : ' .
                                                                 $data->price .
@@ -96,10 +97,8 @@
                                                     ) !!} ">
                                                 </td> --}}
                                                 <td>
-                                                    <a href="{{ route('inventory.show', $data->id) }}"
-                                                        class="btn btn-primary">Show</a>
                                                     <a href="{{ route('inventory.edit', $data->id) }}"
-                                                        class="btn btn-warning">Edit</a>
+                                                        class="btn btn-warning">Update</a>
                                                     <form action="{{ route('inventory.destroy', $data->id) }}"
                                                         method="post" class="d-inline">
                                                         @method('delete')
@@ -118,7 +117,7 @@
                                             <th>No</th>
                                             <th>Nama</th>
                                             <th>Fasilitas</th>
-                                            <th>Tanggal</th>
+                                            <th>Tanggal Beli</th>
                                             <th>Lokasi</th>
                                             <th>Pic</th>
                                             <th>Harga</th>

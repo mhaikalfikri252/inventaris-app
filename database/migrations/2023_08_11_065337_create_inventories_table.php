@@ -18,13 +18,15 @@ return new class extends Migration
             $table->string('inventory_name');
             $table->bigInteger('facility_id')->unsigned();
             $table->foreign('facility_id')->references('id')
-                ->on('facility')->onDelete('cascade');
+                ->on('facilities')->onDelete('cascade');
             $table->date('purchase_date');
             $table->string('location');
-            $table->string('pic');
+            $table->bigInteger('employee_id')->unsigned();
+            $table->foreign('employee_id')->references('id')
+                ->on('employees')->onDelete('cascade');
             $table->decimal('price', 19, 0);
             $table->string('photo');
-            $table->string('information');
+            $table->string('information')->nullable();
             $table->timestamps();
         });
     }

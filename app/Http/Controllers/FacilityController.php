@@ -29,7 +29,7 @@ class FacilityController extends Controller
     public function create()
     {
         $city = City::all();
-        
+
         return view('facility.create-form', compact('city'));
     }
 
@@ -76,7 +76,7 @@ class FacilityController extends Controller
         $facility = Facility::with('city')->findOrFail($id);
         $city = City::all();
 
-        return view('facility.edit-form', compact('facility', 'city'));
+        return view('facility.update-form', compact('facility', 'city'));
     }
 
     /**

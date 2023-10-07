@@ -17,4 +17,9 @@ class Inventory extends Model
     {
         return $this->belongsTo(Facility::class);
     }
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

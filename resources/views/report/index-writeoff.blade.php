@@ -24,10 +24,6 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
-                    <div class="col-md-2">
-                        <a href="{{ route('city.show', $city->id) }}" class="btn btn-primary"><i
-                                class="fas fa-arrow-circle-left"></i>Back</a>
-                    </div>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">
@@ -42,11 +38,12 @@
                                             <th>No FA</th>
                                             <th>Nama</th>
                                             <th>Fasilitas</th>
-                                            <th>Tanggal</th>
+                                            <th>Tanggal Beli</th>
                                             <th>Lokasi</th>
                                             <th>Pic</th>
                                             <th>Harga</th>
                                             <th>Foto</th>
+                                            <th>Tanggal Write Off</th>
                                             <th>Status</th>
                                             <th>Keterangan</th>
                                             {{-- <th>QR Code</th> --}}
@@ -64,12 +61,13 @@
                                                 </td>
                                                 <td>{{ \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') }}</td>
                                                 <td>{{ $data->location }}</td>
-                                                <td>{{ $data->pic }}</td>
+                                                <td>{{ $data->employee->employee_name }}</td>
                                                 <td>{{ rupiah($data->price) }}</td>
                                                 <td>
                                                     <img src="{{ asset('images/' . $data->photo) }}"
                                                         style="width: 100px; height: 70px;">
                                                 </td>
+                                                <td>{{ \Carbon\Carbon::parse($data->updated_at)->format('d/m/Y') }}</td>
                                                 <td>{{ $data->status->status_name }}</td>
                                                 <td>{{ $data->information }}</td>
                                                 {{-- <td>
@@ -86,14 +84,14 @@
                                                                 ' ' .
                                                                 $data->facility->city->city_name .
                                                                 "\n" .
-                                                                'Tanggal : ' .
+                                                                'Tanggal Beli : ' .
                                                                 \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') .
                                                                 "\n" .
                                                                 'Lokasi : ' .
                                                                 $data->location .
                                                                 "\n" .
                                                                 'Pic : ' .
-                                                                $data->pic .
+                                                                $data->employee->employee_name .
                                                                 "\n" .
                                                                 'Harga : ' .
                                                                 $data->price .
@@ -107,8 +105,6 @@
                                                     ) !!} ">
                                                 </td> --}}
                                                 <td>
-                                                    <a href="{{ route('report.asset.show', $data->id) }}"
-                                                        class="btn btn-primary">Show</a>
                                                     {{-- <a href="{{ route('asset.edit', $data->id) }}"
                                                         class="btn btn-warning">Edit</a> --}}
                                                     <form action="{{ route('report.asset.destroy', $data->id) }}"
@@ -130,11 +126,12 @@
                                             <th>No FA</th>
                                             <th>Nama</th>
                                             <th>Fasilitas</th>
-                                            <th>Tanggal</th>
+                                            <th>Tanggal Beli</th>
                                             <th>Lokasi</th>
                                             <th>Pic</th>
                                             <th>Harga</th>
                                             <th>Foto</th>
+                                            <th>Tanggal Write Off</th>
                                             <th>Status</th>
                                             <th>Keterangan</th>
                                             {{-- <th>QR Code</th> --}}

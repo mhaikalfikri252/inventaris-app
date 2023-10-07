@@ -25,7 +25,8 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
                     <div class="col-md-2">
-                        <a href="{{ route('asset.create') }}" class="btn btn-success">Tambah Aset</a>
+                        <a href="{{ route('asset.create') }}" class="btn btn-success"> <i class="fas fa-plus"></i>
+                            Create</a>
                     </div>
                     <div class="col mt-4">
                         <div class="card">
@@ -41,7 +42,7 @@
                                             <th>No FA</th>
                                             <th>Nama</th>
                                             <th>Fasilitas</th>
-                                            <th>Tanggal</th>
+                                            <th>Tanggal Beli</th>
                                             <th>Lokasi</th>
                                             <th>Pic</th>
                                             <th>Harga</th>
@@ -63,13 +64,13 @@
                                                 </td>
                                                 <td>{{ \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') }}</td>
                                                 <td>{{ $data->location }}</td>
-                                                <td>{{ $data->pic }}</td>
+                                                <td>{{ $data->employee->employee_name }}</td>
                                                 <td>{{ rupiah($data->price) }}</td>
                                                 <td>
                                                     <img src="{{ asset('images/' . $data->photo) }}"
                                                         style="width: 100px; height: 80px;">
                                                 </td>
-                                                <td>{{ $data->status->status_name }}</td>
+                                                <td>{{ $data->status_asset->status_name }}</td>
                                                 <td>{{ $data->information }}</td>
                                                 {{-- <td>
                                                     <img src="data:image/png;base64, {!! base64_encode(
@@ -92,7 +93,7 @@
                                                                 $data->location .
                                                                 "\n" .
                                                                 'Pic : ' .
-                                                                $data->pic .
+                                                                $data->employee->employee_name .
                                                                 "\n" .
                                                                 'Harga : ' .
                                                                 $data->price .
@@ -106,10 +107,8 @@
                                                     ) !!} ">
                                                 </td> --}}
                                                 <td>
-                                                    <a href="{{ route('asset.show', $data->id) }}"
-                                                        class="btn btn-primary">Show</a>
                                                     <a href="{{ route('asset.edit', $data->id) }}"
-                                                        class="btn btn-warning">Edit</a>
+                                                        class="btn btn-warning">Update</a>
                                                     <form action="{{ route('asset.destroy', $data->id) }}" method="post"
                                                         class="d-inline">
                                                         @method('delete')
@@ -129,7 +128,7 @@
                                             <th>No FA</th>
                                             <th>Nama</th>
                                             <th>Fasilitas</th>
-                                            <th>Tanggal</th>
+                                            <th>Tanggal Beli</th>
                                             <th>Lokasi</th>
                                             <th>Pic</th>
                                             <th>Harga</th>

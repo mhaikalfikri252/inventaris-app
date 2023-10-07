@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AssetUpdateRequest;
 use App\Models\Asset;
+use App\Models\Employee;
 use App\Models\Facility;
-use App\Models\Status;
+use App\Models\StatusAsset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -20,7 +21,7 @@ class AssetController extends Controller
     {
         $location = auth()->user()->city_id;
         $facility = Facility::where('city_id', $location)->pluck('id');
-        $asset = Asset::where('status_id', 1)->whereIn('facility_id', $facility)->with('facility', 'status')->get();
+        $asset = Asset::where('status_asset_id', 1)->whereNot('status_borrow_id', 2)->orWhereNull('status_borrow_id')->whereIn('facility_id', $facility)->with('facility', 'status_asset')->get();
 
         return view('asset.index', compact('asset'));
     }
@@ -32,11 +33,12 @@ class AssetController extends Controller
      */
     public function create()
     {
-        $status = Status::all();
+        $status_asset = StatusAsset::all();
         $location = auth()->user()->city_id;
         $facility = Facility::where('city_id', $location)->get();
+        $employee = Employee::where('city_id', $location)->get();
 
-        return view('asset.create-form', compact('facility', 'status'));
+        return view('asset.create-form', compact('facility', 'status_asset', 'employee'));
     }
 
     /**
@@ -54,10 +56,10 @@ class AssetController extends Controller
             'facility_id' => 'required',
             'purchase_date' => 'required|date',
             'location' => 'required|max:255',
-            'pic' => 'required|string|max:255',
+            'employee_id' => 'required',
             'price' => 'required|numeric|gte:1000000',
-            'status_id' => 'required',
-            'information' => 'required|string',
+            'status_asset_id' => 'required',
+            'information' => 'nullable|string',
             'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -77,9 +79,9 @@ class AssetController extends Controller
 
         toast('Berhasil menambahkan aset!', 'success');
 
-        if ($data['status_id'] == 1) {
+        if ($data['status_asset_id'] == 1) {
             return redirect()->route('asset.index');
-        } else if ($data['status_id'] == 2) {
+        } else if ($data['status_asset_id'] == 2) {
             return redirect()->route('writeoff.index');
         }
     }
@@ -92,9 +94,6 @@ class AssetController extends Controller
      */
     public function show($id)
     {
-        $asset = Asset::with('facility', 'status')->findOrFail($id);
-
-        return view('asset.show-form', compact('asset'));
     }
 
     /**
@@ -105,12 +104,13 @@ class AssetController extends Controller
      */
     public function edit($id)
     {
-        $asset = Asset::with('facility', 'status')->findOrFail($id);
+        $asset = Asset::with('facility', 'status_asset')->findOrFail($id);
         $location = auth()->user()->city_id;
         $facility = Facility::where('city_id', $location)->get();
-        $status = Status::all();
+        $employee = Employee::where('city_id', $location)->get();
+        $status_asset = StatusAsset::all();
 
-        return view('asset.edit-form', compact('asset', 'facility', 'status'));
+        return view('asset.update-form', compact('asset', 'facility', 'status_asset', 'employee'));
     }
 
     /**
@@ -128,9 +128,9 @@ class AssetController extends Controller
         $data->facility_id = $request->input('facility_id');
         $data->purchase_date = $request->input('purchase_date');
         $data->location = $request->input('location');
-        $data->pic = $request->input('pic');
+        $data->employee_id = $request->input('employee_id');
         $data->price = $request->input('price');
-        $data->status_id = $request->input('status_id');
+        $data->status_asset_id = $request->input('status_asset_id');
         $data->information = $request->input('information');
 
         $data->purchase_date = date('Y-m-d H:i:s', strtotime($data->purchase_date));
@@ -152,9 +152,9 @@ class AssetController extends Controller
 
         toast('Berhasil mengedit aset!', 'success');
 
-        if ($data['status_id'] == 1) {
+        if ($data['status_asset_id'] == 1) {
             return redirect()->route('asset.index');
-        } else if ($data['status_id'] == 2) {
+        } else if ($data['status_asset_id'] == 2) {
             return redirect()->route('writeoff.index');
         }
     }
@@ -178,9 +178,9 @@ class AssetController extends Controller
 
         toast('Berhasil menghapus aset!', 'success');
 
-        if ($asset->status_id == 1) {
+        if ($asset->status_asset_id == 1) {
             return redirect()->route('asset.index');
-        } else if ($asset->status_id == 2) {
+        } else if ($asset->status_asset_id == 2) {
             return redirect()->route('writeoff.index');
         }
     }

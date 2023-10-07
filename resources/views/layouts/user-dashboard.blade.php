@@ -7,19 +7,7 @@
                 <!-- small box -->
                 <div class="small-box bg-info">
                     <div class="inner">
-                        <?php
-                        $location = auth()->user()->city_id;
-                        $facility = DB::table('facility')
-                            ->where('city_id', $location)
-                            ->pluck('id');
-                        $asset = DB::table('assets')
-                            ->where('status_id', 1)
-                            ->whereIn('facility_id', $facility)
-                            ->count();
-                        ?>
                         <h3>{{ $asset }}</h3>
-
-
                         <p>Daftar Aset</p>
                     </div>
                     <div class="icon">
@@ -34,19 +22,7 @@
                 <!-- small box -->
                 <div class="small-box bg-success">
                     <div class="inner">
-                        <?php
-                        $location = auth()->user()->city_id;
-                        $facility = DB::table('facility')
-                            ->where('city_id', $location)
-                            ->pluck('id');
-                        $writeoff = DB::table('assets')
-                            ->where('status_id', 2)
-                            ->whereIn('facility_id', $facility)
-                            ->count();
-                        ?>
                         <h3>{{ $writeoff }}</h3>
-
-
                         <p>Aset Write Off</p>
                     </div>
                     <div class="icon">
@@ -61,18 +37,7 @@
                 <!-- small box -->
                 <div class="small-box bg-warning">
                     <div class="inner">
-                        <?php
-                        $location = auth()->user()->city_id;
-                        $facility = DB::table('facility')
-                            ->where('city_id', $location)
-                            ->pluck('id');
-                        $inventories = DB::table('inventories')
-                            ->whereIn('facility_id', $facility)
-                            ->count();
-                        ?>
-                        <h3>{{ $inventories }}</h3>
-
-
+                        <h3>{{ $inventory }}</h3>
                         <p>Daftar Inventaris</p>
                     </div>
                     <div class="icon">
@@ -87,27 +52,13 @@
                 <!-- small box -->
                 <div class="small-box bg-danger">
                     <div class="inner">
-                        <?php
-                        $location = auth()->user()->city_id;
-                        $facility = DB::table('facility')
-                            ->where('city_id', $location)
-                            ->pluck('id');
-                        $asset = DB::table('assets')
-                            ->whereIn('facility_id', $facility)
-                            ->pluck('id');
-                        $lending = DB::table('lendings')
-                            ->whereIn('asset_id', $asset)
-                            ->count();
-                        ?>
-                        <h3>{{ $lending }}</h3>
-
-
+                        <h3>{{ $borrow }}</h3>
                         <p>Peminjaman Aset</p>
                     </div>
                     <div class="icon">
                         <i class="fas fa-handshake"></i>
                     </div>
-                    <a href="{{ route('lending.index') }}" class="small-box-footer">More info <i
+                    <a href="{{ route('borrow.index') }}" class="small-box-footer">More info <i
                             class="fas fa-arrow-circle-right"></i></a>
                 </div>
             </div>

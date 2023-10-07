@@ -46,7 +46,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email',
             'password' => ['required', Password::min(8)->letters()->numbers()],
             'role_id' => 'required',
@@ -91,7 +91,7 @@ class UserController extends Controller
         $role = ModelsRole::all();
         $city = City::all();
 
-        return view('user.edit-form', compact('user', 'role', 'city'));
+        return view('user.update-form', compact('user', 'role', 'city'));
     }
 
     /**
@@ -109,12 +109,16 @@ class UserController extends Controller
 
         $request->validated();
 
+        $request['password'] = bcrypt($request['password']);
+
         $data->update([
-            'name' => $request->name,
+            'username' => $request->username,
             'email'  => $request->email,
+            'password'  => $request->password,
             'role_id' => $request->role_id,
             'city_id' => $request->city_id
         ]);
+
 
         if ($data['role_id'] == '1') {
             $data->syncRoles('admin');

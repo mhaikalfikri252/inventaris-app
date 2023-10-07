@@ -25,7 +25,7 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
                     <div class="col-md-2">
-                        <a href="{{ route('city.create') }}" class="btn btn-success">Tambah Kota</a>
+                        <a href="{{ route('city.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Create</a>
                     </div>
                     <div class="col mt-4">
                         <div class="card">
@@ -49,10 +49,8 @@
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $data->city_name }}</td>
                                                 <td>
-                                                    <a href="{{ route('city.show', $data->id) }}"
-                                                        class="btn btn-primary">Show</a>
                                                     <a href="{{ route('city.edit', $data->id) }}"
-                                                        class="btn btn-warning">Edit</a>
+                                                        class="btn btn-warning">Update</a>
                                                     <form action="{{ route('city.destroy', $data->id) }}" method="post"
                                                         class="d-inline">
                                                         @method('delete')

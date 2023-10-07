@@ -18,9 +18,9 @@ class InventoryUpdateRequest extends FormRequest
             'facility_id' => 'required',
             'purchase_date' => 'required|date',
             'location' => 'required|max:255',
-            'pic' => 'required|string|max:255',
-            'price' => 'required|numeric|lt:1000000',
-            'information' => 'required|string',
+            'employee_id' => 'required',
+            'price' => 'required|numeric',
+            'information' => 'nullable|string',
             'photo' => 'image|mimes:jpeg,png,jpg|max:2048',
         ];
     }

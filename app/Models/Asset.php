@@ -19,13 +19,23 @@ class Asset extends Model
         return $this->belongsTo(Facility::class);
     }
 
-    public function status()
+    public function status_asset()
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(StatusAsset::class);
     }
 
-    public function lending()
+    public function status_borrow()
     {
-        return $this->hasOne(Lending::class);
+        return $this->belongsTo(StatusBorrow::class);
+    }
+
+    public function borrow()
+    {
+        return $this->hasMany(Borrow::class);
+    }
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
     }
 }

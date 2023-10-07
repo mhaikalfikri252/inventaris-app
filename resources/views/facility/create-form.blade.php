@@ -73,7 +73,7 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success">Create</button>
                             <a href="{{ route('facility.index') }}" class="btn btn-danger">Cancel</a>
                         </div>
                     </div>

@@ -13,7 +13,7 @@ class WriteOffController extends Controller
     {
         $location = auth()->user()->city_id;
         $facility = Facility::where('city_id', $location)->pluck('id');
-        $writeoff = Asset::where('status_id', 2)->whereIn('facility_id', $facility)->with('facility', 'status')->get();
+        $writeoff = Asset::where('status_asset_id', 2)->whereIn('facility_id', $facility)->with('facility', 'status_asset')->get();
 
         return view('writeoff.index', compact('writeoff'));
     }

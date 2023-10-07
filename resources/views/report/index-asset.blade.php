@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">Aset {{ $city->city_name }}</h1>
+                        <h1 class="m-0">Aset</h1>
                     </div>
                     <!-- /.col -->
                 </div><!-- /.row -->
@@ -24,15 +24,10 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
-                    <div class="col-md-2">
-                        <a href="{{ route('city.show', $city->id) }}" class="btn btn-primary"><i
-                                class="fas fa-arrow-circle-left"></i>
-                            Back</a>
-                    </div>
                     <div class="col mt-4">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Data Aset {{ $city->city_name }}</h3>
+                                <h3 class="card-title">Data Aset</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -43,7 +38,7 @@
                                             <th>No FA</th>
                                             <th>Nama</th>
                                             <th>Fasilitas</th>
-                                            <th>Tanggal</th>
+                                            <th>Tanggal Beli</th>
                                             <th>Lokasi</th>
                                             <th>Pic</th>
                                             <th>Harga</th>
@@ -65,7 +60,7 @@
                                                 </td>
                                                 <td>{{ \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') }}</td>
                                                 <td>{{ $data->location }}</td>
-                                                <td>{{ $data->pic }}</td>
+                                                <td>{{ $data->employee->employee_name }}</td>
                                                 <td>{{ rupiah($data->price) }}</td>
                                                 <td>
                                                     <img src="{{ asset('images/' . $data->photo) }}"
@@ -87,14 +82,14 @@
                                                                 ' ' .
                                                                 $data->facility->city->city_name .
                                                                 "\n" .
-                                                                'Tanggal : ' .
+                                                                'Tanggal Beli : ' .
                                                                 \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') .
                                                                 "\n" .
                                                                 'Lokasi : ' .
                                                                 $data->location .
                                                                 "\n" .
                                                                 'Pic : ' .
-                                                                $data->pic .
+                                                                $data->employee->employee_name .
                                                                 "\n" .
                                                                 'Harga : ' .
                                                                 $data->price .
@@ -108,8 +103,6 @@
                                                     ) !!} ">
                                                 </td> --}}
                                                 <td>
-                                                    <a href="{{ route('report.asset.show', $data->id) }}"
-                                                        class="btn btn-primary">Show</a>
                                                     {{-- <a href="{{ route('asset.edit', $data->id) }}"
                                                         class="btn btn-warning">Edit</a> --}}
                                                     <form action="{{ route('report.asset.destroy', $data->id) }}"
@@ -131,7 +124,7 @@
                                             <th>No FA</th>
                                             <th>Nama</th>
                                             <th>Fasilitas</th>
-                                            <th>Tanggal</th>
+                                            <th>Tanggal Beli</th>
                                             <th>Lokasi</th>
                                             <th>Pic</th>
                                             <th>Harga</th>

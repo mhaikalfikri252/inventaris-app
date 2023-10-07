@@ -22,10 +22,10 @@ class AssetUpdateRequest extends FormRequest
             'facility_id' => 'required',
             'purchase_date' => 'required', 'date',
             'location' => 'required', 'max:255',
-            'pic' => 'required', 'string', 'max:255',
+            'employee_id' => 'required',
             'price' => 'required', 'numeric', 'gte:1000000',
-            'status_id' => 'required',
-            'information' => 'required', 'string',
+            'status_asset_id' => 'required',
+            'information' => 'nullable', 'string',
             'photo' => 'image|mimes:jpeg,png,jpg|max:2048',
         ];
     }

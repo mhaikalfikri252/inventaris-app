@@ -18,15 +18,13 @@
 </head>
 
 <body class="font-sans text-gray-900 antialiased">
-    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100">
+    <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100"
+        style="background-image: url('{{ asset('flexstart/assets/img/hero-bg.png') }}');">
         <div>
-            <a href="#">
-                {{-- <x-application-logo class="w-20 h-20 fill-current text-gray-500" /> --}}
-                <div style="text-align: center">
-                    <h1 style="font-size:300%; font-weight: 400">SIANAS</h1>
-                    <h2>(Sistem Informasi Aset Nasional)</h2>
-                </div>
-            </a>
+            <div style="text-align: center">
+                <h1 style="font-size:300%; font-weight: 400">SIANAS</h1>
+                <h2>(Sistem Informasi Aset Nasional)</h2>
+            </div>
         </div>
 
         <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white shadow-md overflow-hidden sm:rounded-lg">

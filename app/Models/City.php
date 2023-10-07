@@ -9,7 +9,7 @@ class City extends Model
 {
     use HasFactory;
 
-    protected $table = 'city';
+    protected $table = 'cities';
 
     protected $fillable = [
         'city_name'
@@ -23,5 +23,10 @@ class City extends Model
     public function user()
     {
         return $this->hasMany(User::class);
+    }
+
+    public function employee()
+    {
+        return $this->hasMany(Employee::class);
     }
 }

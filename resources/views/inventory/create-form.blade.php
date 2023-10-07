@@ -61,7 +61,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="purchase_date">Tanggal</label>
+                                <label for="purchase_date">Tanggal Beli</label>
                                 <input type="text" class="form-control @error('purchase_date') is-invalid @enderror"
                                     id="purchase_date" name="purchase_date" autocomplete="off"
                                     value="{{ old('purchase_date') }}" required>
@@ -82,14 +82,22 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <label for="pic">Pic</label>
-                                <input type="text" class="form-control @error('pic') is-invalid @enderror" id="pic"
-                                    name="pic" value="{{ old('pic') }}" required>
-                                @error('pic')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <label for="employee_id">Pic</label>
+                                <select class="form-control @error('employee_id') is-invalid @enderror" id="employee_id"
+                                    name="employee_id" required>
+                                    <option value="" disabled selected>Pilih Pic</option>
+                                    @foreach ($employee as $data)
+                                        <option value="{{ $data->id }}"
+                                            {{ old('employee_id') == $data->id ? 'selected' : '' }}>
+                                            {{ $data->employee_name }}
+                                        </option>
+                                        @error('employee_id')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="form-group">
                                 <label for="price">Harga</label>
@@ -104,7 +112,7 @@
                             <div class="form-group">
                                 <label for="information">Keterangan</label>
                                 <input type="text" class="form-control @error('information') is-invalid @enderror"
-                                    id="information" name="information" value="{{ old('information') }}" required>
+                                    id="information" name="information" value="{{ old('information') }}">
                                 @error('information')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -115,7 +123,8 @@
                                 <label for="photo">Foto</label>
                                 <input type="file" class="form-control @error('photo') is-invalid @enderror"
                                     id="photo" name="photo" onchange="previewImage()" required>
-                                <img class="photo-preview img-fluid mt-3 col-sm-2">
+                                <img class="photo-preview img-fluid mt-3 col-sm-2"
+                                    style=" max-width:100%; max-height: 100%;">
                                 @error('photo')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -127,7 +136,7 @@
                         <!-- /.card-body -->
 
                         <div class="card-footer">
-                            <button type="submit" class="btn btn-success">Submit</button>
+                            <button type="submit" class="btn btn-success">Create</button>
                             <a href="{{ route('inventory.index') }}" class="btn btn-danger">Cancel</a>
                         </div>
                     </div>

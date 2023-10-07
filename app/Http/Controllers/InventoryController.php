@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\InventoryUpdateRequest;
+use App\Models\Employee;
 use App\Models\Facility;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
@@ -33,8 +34,9 @@ class InventoryController extends Controller
     {
         $location = auth()->user()->city_id;
         $facility = Facility::where('city_id', $location)->get();
+        $employee = Employee::where('city_id', $location)->get();
 
-        return view('inventory.create-form', compact('facility'));
+        return view('inventory.create-form', compact('facility', 'employee'));
     }
 
     /**
@@ -50,9 +52,9 @@ class InventoryController extends Controller
             'facility_id' => 'required',
             'purchase_date' => 'required|date',
             'location' => 'required|max:255',
-            'pic' => 'required|string|max:255',
-            'price' => 'required|numeric|lt:1000000',
-            'information' => 'required|string',
+            'employee_id' => 'required',
+            'price' => 'required|numeric',
+            'information' => 'nullable|string',
             'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -83,9 +85,6 @@ class InventoryController extends Controller
      */
     public function show($id)
     {
-        $inventory = Inventory::with('facility')->findOrFail($id);
-
-        return view('inventory.show-form', compact('inventory'));
     }
 
     /**
@@ -99,8 +98,9 @@ class InventoryController extends Controller
         $inventory = Inventory::with('facility')->findOrFail($id);
         $location = auth()->user()->city_id;
         $facility = Facility::where('city_id', $location)->get();
+        $employee = Employee::where('city_id', $location)->get();
 
-        return view('inventory.edit-form', compact('inventory', 'facility'));
+        return view('inventory.update-form', compact('inventory', 'facility', 'employee'));
     }
 
     /**
@@ -117,7 +117,7 @@ class InventoryController extends Controller
         $data->facility_id = $request->input('facility_id');
         $data->purchase_date = $request->input('purchase_date');
         $data->location = $request->input('location');
-        $data->pic = $request->input('pic');
+        $data->employee_id = $request->input('employee_id');
         $data->price = $request->input('price');
         $data->information = $request->input('information');
 

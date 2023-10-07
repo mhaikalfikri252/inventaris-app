@@ -25,7 +25,7 @@
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
                     <div class="col-md-2">
-                        <a href="{{ route('user.create') }}" class="btn btn-success">Tambah User</a>
+                        <a href="{{ route('user.create') }}" class="btn btn-success"><i class="fas fa-plus"></i> Create</a>
                     </div>
                     <div class="col mt-4">
                         <div class="card">
@@ -38,7 +38,7 @@
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>Username</th>
                                             <th>Email</th>
                                             <th>Role</th>
                                             <th>Kota</th>
@@ -50,13 +50,13 @@
                                         @foreach ($user as $data)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                <td>{{ $data->name }}</td>
+                                                <td>{{ $data->username }}</td>
                                                 <td>{{ $data->email }}</td>
                                                 <td>{{ $data->role->name }}</td>
                                                 <td>{{ $data->city->city_name }}</td>
                                                 <td>
                                                     <a href="{{ route('user.edit', $data->id) }}"
-                                                        class="btn btn-warning">Edit</a>
+                                                        class="btn btn-warning">Update</a>
                                                     <form action="{{ route('user.destroy', $data->id) }}" method="post"
                                                         class="d-inline">
                                                         @method('delete')
@@ -73,7 +73,7 @@
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
-                                            <th>Nama</th>
+                                            <th>Username</th>
                                             <th>Email</th>
                                             <th>Role</th>
                                             <th>Kota</th>

@@ -67,7 +67,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('report.asset.index') }}" class="nav-link">
+                    <a href="{{ route('admin.asset.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-file-alt"></i>
                         <p>
                             Daftar Aset
@@ -75,7 +75,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('report.writeoff.index') }}" class="nav-link">
+                    <a href="{{ route('admin.writeoff.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-tasks"></i>
                         <p>
                             Aset Write Off
@@ -83,7 +83,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('report.inventory.index') }}" class="nav-link">
+                    <a href="{{ route('admin.inventory.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-clipboard-list"></i>
                         <p>
                             Daftar Inventaris
@@ -91,7 +91,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('report.borrow.index') }}" class="nav-link">
+                    <a href="{{ route('admin.borrow.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-handshake"></i>
                         <p>
                             Peminjaman Aset

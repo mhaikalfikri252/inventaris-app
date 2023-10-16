@@ -28,7 +28,7 @@ class CityController extends Controller
      */
     public function create()
     {
-        return view('city.create-form');
+        return view('city2.create');
     }
 
     /**
@@ -58,7 +58,6 @@ class CityController extends Controller
      */
     public function show($id)
     {
-      
     }
 
     /**
@@ -71,7 +70,7 @@ class CityController extends Controller
     {
         $city = City::findOrFail($id);
 
-        return view('city.update-form', compact('city'));
+        return view('city2.update', compact('city'));
     }
 
     /**

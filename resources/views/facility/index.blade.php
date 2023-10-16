@@ -55,14 +55,14 @@
                                                 <td>{{ $data->city->city_name }}</td>
                                                 <td>
                                                     <a href="{{ route('facility.edit', $data->id) }}"
-                                                        class="btn btn-warning">Update</a>
+                                                        class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                                     <form action="{{ route('facility.destroy', $data->id) }}" method="post"
                                                         class="d-inline">
                                                         @method('delete')
                                                         @csrf
                                                         <button class="btn btn-danger"
                                                             onclick="return confirm('Apakah anda yakin ingin menghapus fasilitas?')">
-                                                            Delete
+                                                            <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
                                                 </td>

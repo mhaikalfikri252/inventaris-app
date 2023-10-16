@@ -110,6 +110,8 @@
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
     <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
+    <!-- bs-custom-file-input -->
+    <script src="{{ asset('adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
 
     <!-- Page specific script -->
     <script>
@@ -130,6 +132,11 @@
                 "autoWidth": false,
                 "responsive": true,
             });
+        });
+
+        // Custom File Input
+        $(function() {
+            bsCustomFileInput.init();
         });
 
         // Show Password
@@ -177,12 +184,10 @@
         }
 
         document.getElementById('status_borrow_id').addEventListener("change", function(e) {
-            if (e.target.value == 1) {
+            if (e.target.value == 2) {
                 document.getElementById('uploadletter').style.display = 'block';
-                // document.getElementById('file').required = 'true';
             } else {
                 document.getElementById('uploadletter').style.display = 'none';
-                // document.getElementById('file').required = 'false';
             }
         });
     </script>

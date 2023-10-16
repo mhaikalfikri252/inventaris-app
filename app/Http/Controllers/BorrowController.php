@@ -10,6 +10,7 @@ use App\Models\Employee;
 use App\Models\StatusBorrow;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class BorrowController extends Controller
 {
@@ -23,9 +24,10 @@ class BorrowController extends Controller
         $location = auth()->user()->city_id;
         $facility = Facility::where('city_id', $location)->pluck('id');
         $asset = Asset::whereIn('facility_id', $facility)->pluck('id');
-        $borrow = Borrow::whereIn('asset_id', $asset)->with('status_borrow')->get();
+        $borrow = Borrow::whereIn('asset_id', $asset)
+            ->with('status_borrow')->latest()->get();
 
-        return view('borrow.index', compact('borrow'));
+        return view('borrow2.index', compact('borrow'));
     }
 
     /**
@@ -38,10 +40,16 @@ class BorrowController extends Controller
         $location = auth()->user()->city_id;
         $facility = Facility::where('city_id', $location)->pluck('id');
         $employee = Employee::where('city_id', $location)->get();
-        $asset = Asset::where('status_asset_id', 1)->whereNot('status_borrow_id', 2)->orWhereNull('status_borrow_id')->whereIn('facility_id', $facility)->with('facility')->get();
+        $asset = Asset::where('status_asset_id', 1)
+            ->where(function ($query) {
+                $query->where('status_borrow_id', 2)
+                    ->orWhere('status_borrow_id', null);
+            })
+            ->whereIn('facility_id', $facility)
+            ->with('facility')->latest()->get();
         $status_borrow = StatusBorrow::all();
 
-        return view('borrow.create-form', compact('asset', 'status_borrow', 'employee'));
+        return view('borrow2.modal-create', compact('asset', 'status_borrow', 'employee'));
     }
 
     /**
@@ -61,8 +69,13 @@ class BorrowController extends Controller
             'letter' => 'nullable',
         ]);
 
+        date_default_timezone_set('Asia/Jakarta');
         $data['borrow_date'] = date('Y-m-d H:i:s', strtotime($data['borrow_date']));
         $data['return_date'] = date('Y-m-d H:i:s', strtotime($data['return_date']));
+
+        if ($data['status_borrow_id'] == 2) {
+            $request->validate(['letter' => 'required']);
+        }
 
         if ($request->hasFile('letter')) {
             $file = $request->file('letter');
@@ -72,21 +85,30 @@ class BorrowController extends Controller
             $data['letter'] = $filename;
         }
 
-        if ($data['status_borrow_id'] == 2) {
-            $destination = 'files/' . $data['letter'];
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-            $data['letter'] = null;
-        }
+        // if ($data['status_borrow_id'] == 1) {
+        //     $destination = 'files/' . $data['letter'];
+        //     if (File::exists($destination)) {
+        //         File::delete($destination);
+        //     }
+        //     $data['letter'] = null;
+        // }
+
+        // dd($data['letter']);
 
         if ($borrow =  Borrow::create($data)) {
             $borrow->save();
         }
 
-        toast('Berhasil menambahkan data!', 'success');
+        return response()->json([
+            'success' => true,
+            'message' => 'Data Berhasil Disimpan!',
+            'data'    => $borrow
+        ]);
 
-        return redirect()->route('borrow.index');
+
+        // toast('Berhasil menambahkan data!', 'success');
+
+        // return redirect()->route('borrow.index');
     }
 
     /**
@@ -99,7 +121,7 @@ class BorrowController extends Controller
     {
         $borrow = Borrow::with('asset', 'status_borrow')->findOrFail($id);
 
-        return view('borrow.show-form', compact('borrow'));
+        return view('borrow2.show', compact('borrow'));
     }
 
     /**
@@ -114,10 +136,16 @@ class BorrowController extends Controller
         $location = auth()->user()->city_id;
         $facility = Facility::where('city_id', $location)->pluck('id');
         $employee = Employee::where('city_id', $location)->get();
-        $asset = Asset::where('status_asset_id', 1)->whereNot('status_borrow_id', 2)->orWhereNull('status_borrow_id')->whereIn('facility_id', $facility)->with('facility')->get();
+        $asset = Asset::where('status_asset_id', 1)
+            ->where(function ($query) {
+                $query->where('status_borrow_id', 2)
+                    ->orWhere('status_borrow_id', null);
+            })
+            ->whereIn('facility_id', $facility)
+            ->with('facility')->latest()->get();
         $status_borrow = StatusBorrow::all();
 
-        return view('borrow.update-form', compact('asset', 'status_bo$status_borrow', 'borrow', 'employee'));
+        return view('borrow2.update', compact('asset', 'status_borrow', 'borrow', 'employee'));
     }
 
     /**
@@ -127,17 +155,58 @@ class BorrowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BorrowUpdateRequest $request, $id)
+    // public function update(BorrowUpdateRequest $request, $id)
+    // {
+    //     $data = Borrow::findOrFail($id);
+    //     $data->employee_id = $request->input('employee_id');
+    //     $data->asset_id = $request->input('asset_id');
+    //     $data->borrow_date = $request->input('borrow_date');
+    //     $data->return_date = $request->input('return_date');
+    //     $data->status_borrow_id = $request->input('status_borrow_id');
+
+    //     date_default_timezone_set('Asia/Jakarta');
+    //     $data->borrow_date = date('Y-m-d H:i:s', strtotime($data->borrow_date));
+    //     $data->return_date = date('Y-m-d H:i:s', strtotime($data->return_date));
+
+    //     if ($data->status_borrow_id == 2) {
+    //         $request->validate(['letter' => 'required']);
+    //     }
+
+    //     if ($request->hasFile('letter')) {
+    //         $destination = 'files/' . $data->letter;
+    //         if (File::exists($destination)) {
+    //             File::delete($destination);
+    //         }
+
+    //         $file = $request->file('letter');
+    //         $extension = $file->getClientOriginalExtension();
+    //         $filename = time() . '.' . $extension;
+    //         $file->move(public_path('files'), $filename);
+    //         $data['letter'] = $filename;
+    //     }
+
+    //     if ($data->status_borrow_id == 1) {
+    //         $destination = 'files/' . $data->letter;
+    //         if (File::exists($destination)) {
+    //             File::delete($destination);
+    //         }
+    //         $data->letter = null;
+    //     }
+
+    //     $data->update();
+
+    //     toast('Berhasil mengedit data!', 'success');
+
+    //     return redirect()->route('borrow2.index');
+    // }
+
+    public function update(Request $request, $id)
     {
         $data = Borrow::findOrFail($id);
-        $data->employee_id = $request->input('employee_id');
-        // $data->asset_id = $request->input('asset_id');
-        $data->borrow_date = $request->input('borrow_date');
-        $data->return_date = $request->input('return_date');
-        $data->status_borrow_id = $request->input('status_borrow_id');
 
-        $data->borrow_date = date('Y-m-d H:i:s', strtotime($data->borrow_date));
-        $data->return_date = date('Y-m-d H:i:s', strtotime($data->return_date));
+        $rules = ['letter' => 'required'];
+
+        $request->validate($rules);
 
         if ($request->hasFile('letter')) {
             $destination = 'files/' . $data->letter;
@@ -152,17 +221,11 @@ class BorrowController extends Controller
             $data['letter'] = $filename;
         }
 
-        if ($data->status_borrow_id == 2) {
-            $destination = 'files/' . $data->letter;
-            if (File::exists($destination)) {
-                File::delete($destination);
-            }
-            $data->letter = null;
-        }
+        date_default_timezone_set('Asia/Jakarta');
 
-        $data->update();
+        $data->update($data);
 
-        toast('Berhasil mengedit data!', 'success');
+        toast('Berhasil mengupload surat pinjam!', 'success');
 
         return redirect()->route('borrow.index');
     }
@@ -187,5 +250,12 @@ class BorrowController extends Controller
         toast('Berhasil menghapus data!', 'success');
 
         return redirect()->route('borrow.index');
+    }
+
+    public function print_borrow_letter($id)
+    {
+        $borrow = Borrow::findOrFail($id);
+        $pdf = PDF::loadview('borrow2.letter', compact('borrow'));
+        return $pdf->stream();
     }
 }

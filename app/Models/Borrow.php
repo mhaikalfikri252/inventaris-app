@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Carbon;
 
 class Borrow extends Model
 {
@@ -38,7 +39,8 @@ class Borrow extends Model
 
         static::updated(function ($model) {
             // if ($model->asset_id == Asset::where('id', $model->asset_id)) {
-            Asset::where('id', $model->asset_id)->update(['status_borrow_id' => $model->status_borrow_id]);
+            // Asset::where('id', $model->asset_id)->update(['status_borrow_id' => $model->status_borrow_id]);
+            Asset::where('id', $model->asset_id)->update(['status_borrow_id' => 2]);
             // } else {
             // Asset::where('id', $model->asset_id)->update(['status_borrow_id' => null]);
             // }

@@ -36,7 +36,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-label-form">Nama Peminjam : </label>
                                     <div class="col-sm-10">
-                                        {{ $borrow->person_name }}
+                                        {{ $borrow->employee->employee_name }}
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -66,7 +66,7 @@
                                 <div class="row mb-3">
                                     <label class="col-sm-2 col-label-form">Pic : </label>
                                     <div class="col-sm-10">
-                                        {{ $borrow->asset->pic }}
+                                        {{ $borrow->asset->employee->employee_name }}
                                     </div>
                                 </div>
                                 <div class="row mb-3">
@@ -107,12 +107,14 @@
                                         {{ $borrow->status_borrow->status_name }}
                                     </div>
                                 </div>
-                                @if ($borrow->status_borrow->status_name == 'Sudah Dikembalikan')
+                                @if ($borrow->status_borrow->id == 2)
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-label-form">Surat Pinjam : </label>
-                                        <div class="col-sm-10">
-                                            {{ $borrow->status_borrow->status_name }}
-                                        </div>
+                                        @if ($borrow->letter == !null)
+                                            <div class="col-sm-10">
+                                                <a href="{{ asset('files/' . $borrow->letter) }}">Lihat Upload Surat</a>
+                                            </div>
+                                        @endif
                                     </div>
                                 @endif
                             </div>

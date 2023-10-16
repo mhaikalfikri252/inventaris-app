@@ -46,7 +46,6 @@
                                             <th>Tanggal Write Off</th>
                                             <th>Status</th>
                                             <th>Keterangan</th>
-                                            {{-- <th>QR Code</th> --}}
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -68,52 +67,31 @@
                                                         style="width: 100px; height: 80px;">
                                                 </td>
                                                 <td>{{ \Carbon\Carbon::parse($data->updated_at)->format('d/m/Y') }}</td>
-                                                <td>{{ $data->status_asset->status_name }}</td>
+                                                @if ($data->status_asset->id == 2)
+                                                    <td><small class="badge badge-danger">
+                                                            {{ $data->status_asset->status_name }}
+                                                        </small>
+                                                    </td>
+                                                @else
+                                                    <td><small class="badge badge-success">
+                                                            {{ $data->status_asset->status_name }}
+                                                        </small>
+                                                    </td>
+                                                @endif
+
                                                 <td>{{ $data->information }}</td>
-                                                {{-- <td>
-                                                    <img src="data:image/png;base64, {!! base64_encode(
-                                                        QrCode::format('png')->generate(
-                                                            'No FA : ' .
-                                                                $data->asset_code .
-                                                                "\n" .
-                                                                'Nama : ' .
-                                                                $data->asset_name .
-                                                                "\n" .
-                                                                'Fasilitas : ' .
-                                                                $data->facility->facility_name .
-                                                                ' ' .
-                                                                $data->facility->city->city_name .
-                                                                "\n" .
-                                                                'Tanggal Beli : ' .
-                                                                \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') .
-                                                                "\n" .
-                                                                'Lokasi : ' .
-                                                                $data->location .
-                                                                "\n" .
-                                                                'Pic : ' .
-                                                                $data->employee->employee_name .
-                                                                "\n" .
-                                                                'Harga : ' .
-                                                                $data->price .
-                                                                "\n" .
-                                                                'Status : ' .
-                                                                $data->status->status_name .
-                                                                "\n" .
-                                                                'Keterangan : ' .
-                                                                $data->information,
-                                                        ),
-                                                    ) !!} ">
-                                                </td> --}}
                                                 <td>
+                                                    <a href="{{ route('print.asset.qrcode', $data->id) }}"
+                                                        class="btn btn-info"><i class="fas fa-qrcode"></i></a>
                                                     <a href="{{ route('asset.edit', $data->id) }}"
-                                                        class="btn btn-warning">Update</a>
+                                                        class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                                     <form action="{{ route('asset.destroy', $data->id) }}" method="post"
                                                         class="d-inline">
                                                         @method('delete')
                                                         @csrf
                                                         <button class="btn btn-danger"
                                                             onclick="return confirm('Apakah anda yakin ingin menghapus aset?')">
-                                                            Delete
+                                                            <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
                                                 </td>
@@ -134,7 +112,6 @@
                                             <th>Tanggal Write Off</th>
                                             <th>Status</th>
                                             <th>Keterangan</th>
-                                            {{-- <th>QR Code</th> --}}
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>

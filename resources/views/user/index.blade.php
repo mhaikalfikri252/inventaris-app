@@ -55,15 +55,15 @@
                                                 <td>{{ $data->role->name }}</td>
                                                 <td>{{ $data->city->city_name }}</td>
                                                 <td>
-                                                    <a href="{{ route('user.edit', $data->id) }}"
-                                                        class="btn btn-warning">Update</a>
+                                                    <a href="{{ route('user.edit', $data->id) }}" class="btn btn-warning">
+                                                        <i class="fas fa-edit"></i></a>
                                                     <form action="{{ route('user.destroy', $data->id) }}" method="post"
                                                         class="d-inline">
                                                         @method('delete')
                                                         @csrf
                                                         <button class="btn btn-danger"
                                                             onclick="return confirm('Apakah anda yakin ingin menghapus user?')">
-                                                            Delete
+                                                            <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
                                                 </td>

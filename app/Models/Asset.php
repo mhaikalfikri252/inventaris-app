@@ -29,13 +29,13 @@ class Asset extends Model
         return $this->belongsTo(StatusBorrow::class);
     }
 
-    public function borrow()
-    {
-        return $this->hasMany(Borrow::class);
-    }
-
     public function employee()
     {
         return $this->belongsTo(Employee::class);
+    }
+
+    public function borrow()
+    {
+        return $this->hasMany(Borrow::class);
     }
 }

@@ -112,10 +112,10 @@
                                         @endforeach
                                     </select>
                                 </div>
-                                @if ($borrow->status_borrow_id == 1)
-                                    <div class="form-group" id="fileupload" style="display: block;">
+                                @if ($borrow->status_borrow_id == 2)
+                                    <div class="form-group" id="uploadletter" style="display: block;">
                                     @else
-                                        <div class="form-group" id="fileupload" style="display: none;">
+                                        <div class="form-group" id="uploadletter" style="display: none;">
                                 @endif
                                 <label for="letter">Upload Surat</label>
                                 <input type="file" class="form-control @error('letter') is-invalid @enderror"
@@ -129,8 +129,6 @@
                                     <a href="{{ asset('files/' . $borrow->letter) }}">Lihat Upload Surat</a>
                                 @endif
                             </div>
-
-
 
                     </div>
                     <!-- /.card-body -->

@@ -96,8 +96,7 @@
                                     id="status_borrow_id" name="status_borrow_id" required>
                                     <option value="" disabled selected>Pilih Status</option>
                                     @foreach ($status_borrow as $data)
-                                        <option value="{{ $data->id }}"
-                                            {{ old('status_borrow_id') == $data->id ? 'selected' : '' }}>
+                                        <option value="{{ $data->id }}">
                                             {{ $data->status_name }}
                                         </option>
                                         @error('status_borrow_id')

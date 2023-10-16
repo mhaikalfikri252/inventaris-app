@@ -16,11 +16,11 @@ class StatusBorrowSeeder extends Seeder
     public function run()
     {
         StatusBorrow::create([
-            'status_name' => 'Sedang Dipinjam',
+            'status_name' => 'Dipinjam',
         ]);
 
         StatusBorrow::create([
-            'status_name' => 'Sudah Dikembalikan',
+            'status_name' => 'Dikembalikan',
         ]);
     }
 }

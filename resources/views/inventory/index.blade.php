@@ -24,9 +24,13 @@
             <div class="container-fluid">
                 <!-- Small boxes (Stat box) -->
                 <div class="col">
-                    <div class="col-md-2">
-                        <a href="{{ route('inventory.create') }}" class="btn btn-success"><i class="fas fa-plus"></i>
+                    <div class="row">
+                        <a href="{{ route('inventory.create') }}" class="btn btn-success" style="margin-left: 15px"> <i
+                                class="fas fa-plus"></i>
                             Create</a>
+                        <a href="{{ route('inventory.create') }}" class="btn btn-primary" style="margin-left: 10px">
+                            <i class="fas fa-print"></i>
+                            Print</a>
                     </div>
                     <div class="col mt-4">
                         <div class="card">
@@ -47,7 +51,6 @@
                                             <th>Harga</th>
                                             <th>Foto</th>
                                             <th>Keterangan</th>
-                                            {{-- <th>QR Code</th> --}}
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
@@ -68,44 +71,18 @@
                                                         style="width: 100px; height: 80px;">
                                                 </td>
                                                 <td>{{ $data->information }}</td>
-                                                {{-- <td>
-                                                    <img src="data:image/png;base64, {!! base64_encode(
-                                                        QrCode::format('png')->generate(
-                                                            'Nama : ' .
-                                                                $data->inventory_name .
-                                                                "\n" .
-                                                                'Fasilitas : ' .
-                                                                $data->facility->facility_name .
-                                                                ' ' .
-                                                                $data->facility->city->city_name .
-                                                                "\n" .
-                                                                'Tanggal Beli : ' .
-                                                                \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') .
-                                                                "\n" .
-                                                                'Lokasi : ' .
-                                                                $data->location .
-                                                                "\n" .
-                                                                'Pic : ' .
-                                                                $data->employee->employee_name .
-                                                                "\n" .
-                                                                'Harga : ' .
-                                                                $data->price .
-                                                                "\n" .
-                                                                'Keterangan : ' .
-                                                                $data->information,
-                                                        ),
-                                                    ) !!} ">
-                                                </td> --}}
                                                 <td>
+                                                    <a href="{{ route('print.inventory.qrcode', $data->id) }}"
+                                                        class="btn btn-info"><i class="fas fa-qrcode"></i></a>
                                                     <a href="{{ route('inventory.edit', $data->id) }}"
-                                                        class="btn btn-warning">Update</a>
+                                                        class="btn btn-warning"><i class="fas fa-edit"></i></a>
                                                     <form action="{{ route('inventory.destroy', $data->id) }}"
                                                         method="post" class="d-inline">
                                                         @method('delete')
                                                         @csrf
                                                         <button class="btn btn-danger"
                                                             onclick="return confirm('Apakah anda yakin ingin menghapus inventaris?')">
-                                                            Delete
+                                                            <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
                                                 </td>
@@ -123,7 +100,6 @@
                                             <th>Harga</th>
                                             <th>Foto</th>
                                             <th>Keterangan</th>
-                                            {{-- <th>QR Code</th> --}}
                                             <th>Aksi</th>
                                         </tr>
                                     </tfoot>

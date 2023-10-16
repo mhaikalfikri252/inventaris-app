@@ -19,7 +19,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::with('role', 'city')->get();
+        $user = User::with('role', 'city')->latest()->get();
 
         return view('user.index', compact('user'));
     }
@@ -46,8 +46,8 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'username' => 'required|string|max:255',
-            'email' => 'required|email|max:255|unique:users,email',
+            'username' => 'required|string|max:255|unique:users,username',
+            'email' => 'required|email|max:255',
             'password' => ['required', Password::min(8)->letters()->numbers()],
             'role_id' => 'required',
             'city_id' => 'required'

@@ -13,9 +13,11 @@ class WriteOffController extends Controller
     {
         $location = auth()->user()->city_id;
         $facility = Facility::where('city_id', $location)->pluck('id');
-        $writeoff = Asset::where('status_asset_id', 2)->whereIn('facility_id', $facility)->with('facility', 'status_asset')->get();
+        $writeoff = Asset::where('status_asset_id', 2)
+            ->whereIn('facility_id', $facility)
+            ->with('facility', 'status_asset')->latest()->get();
 
-        return view('writeoff.index', compact('writeoff'));
+        return view('writeoff2.index', compact('writeoff'));
     }
 
     public function destroy(Asset $asset)
@@ -31,6 +33,6 @@ class WriteOffController extends Controller
 
         toast('Berhasil menghapus aset!', 'success');
 
-        return redirect()->route('asset.index');
+        return redirect()->route('writeoff.index');
     }
 }

@@ -54,44 +54,51 @@
                                         @foreach ($borrow as $data)
                                             <tr>
                                                 <td>{{ $no++ }}</td>
-                                                <td>{{ $data->person_name }}</td>
+                                                <td>{{ $data->employee->employee_name }}</td>
                                                 <td>{{ $data->asset->asset_code }}</td>
                                                 <td>{{ $data->asset->asset_name }}</td>
                                                 <td>{{ $data->asset->location }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($data->borrow_date)->format('d/m/Y') }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($data->return_date)->format('d/m/Y') }}</td>
-                                                @if ($data->status_borrow->id == 2 && $data->borrow_date == $data->return_date)
-                                                    <td style="color: red;">
-                                                        {{ $data->status_borrow->status_name }}</td>
-                                                    <td>
-                                                    @elseif ($data->status_borrow->id == 2 && $data->return_date == date('Y-m-d'))
-                                                    <td style="color: red;">
-                                                        {{ $data->status_borrow->status_name }}</td>
-                                                    <td>
-                                                    @elseif ($data->status_borrow->id == 1)
-                                                    <td style="color: green;">
-                                                        {{ $data->status_borrow->status_name }}</td>
-                                                    <td>
-                                                    @else
-                                                    <td style="color: blue;">
-                                                        {{ $data->status_borrow->status_name }}</td>
-                                                    <td>
+                                                @if ($data->status_borrow->id == 1 && $data->borrow_date == $data->return_date)
+                                                    <td><small class="badge badge-danger">
+                                                            {{ $data->status_borrow->status_name }}
+                                                        </small>
+                                                    </td>
+                                                @elseif ($data->status_borrow->id == 1 && $data->return_date == date('Y-m-d'))
+                                                    <td><small class="badge badge-danger">
+                                                            {{ $data->status_borrow->status_name }}
+                                                        </small>
+                                                    </td>
+                                                @elseif ($data->status_borrow->id == 2)
+                                                    <td><small class="badge badge-success">
+                                                            {{ $data->status_borrow->status_name }}
+                                                        </small>
+                                                    </td>
+                                                @else
+                                                    <td><small class="badge badge-primary">
+                                                            {{ $data->status_borrow->status_name }}
+                                                        </small>
+                                                    </td>
                                                 @endif
-
-                                                <a href="#" class="btn btn-info">Print</a>
-                                                <a href="{{ route('borrow.show', $data->id) }}"
-                                                    class="btn btn-primary">Detail</a>
-                                                <a href="{{ route('borrow.edit', $data->id) }}"
-                                                    class="btn btn-warning">Update</a>
-                                                <form action="{{ route('borrow.destroy', $data->id) }}" method="post"
-                                                    class="d-inline">
-                                                    @method('delete')
-                                                    @csrf
-                                                    <button class="btn btn-danger"
-                                                        onclick="return confirm('Apakah anda yakin ingin menghapus aset?')">
-                                                        Delete
-                                                    </button>
-                                                </form>
+                                                <td>
+                                                    <a href="{{ route('print.borrow.letter', $data->id) }}"
+                                                        class="btn btn-info"><i class="fas fa-file-pdf"></i></a>
+                                                    <a href="{{ asset('files/' . $data->letter) }}"
+                                                        class="btn btn-primary"><i class="fas fa-eye"></i></a>
+                                                    {{-- <a href="{{ route('borrow.edit', $data->id) }}"
+                                                        class="btn btn-warning"><i class="fas fa-edit"></i></a> --}}
+                                                    <a href="" class="btn btn-warning" data-toggle="modal"
+                                                        data-target="#modal-default"><i class="fas fa-upload"></i></a>
+                                                    <form action="{{ route('borrow.destroy', $data->id) }}" method="post"
+                                                        class="d-inline">
+                                                        @method('delete')
+                                                        @csrf
+                                                        <button class="btn btn-danger"
+                                                            onclick="return confirm('Apakah anda yakin ingin menghapus aset?')">
+                                                            <i class="fas fa-trash-alt"></i>
+                                                        </button>
+                                                    </form>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -119,6 +126,44 @@
                 </div>
                 <!-- /.row -->
             </div><!-- /.container-fluid -->
+
+            {{-- Modal Upload Letter --}}
+            <div class="modal fade" id="modal-default">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Default Modal</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="{{ route('borrow.update', $borrow->id) }}" method="post"
+                            enctype="multipart/form-data">
+                            @method('put')
+                            @csrf
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="exampleInputFile">File input</label>
+                                    <div class="input-group">
+                                        <div class="custom-file">
+                                            <input type="file" class="custom-file-input" id="exampleInputFile">
+                                            <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            <a href="{{ route('borrow.edit', $data->id) }}" type="button" class="btn btn-primary">Save</a>
+                        </div>
+                    </div>
+                    <!-- /.modal-content -->
+                </div>
+                <!-- /.modal-dialog -->
+            </div>
+            <!-- /.modal -->
+
         </section>
     </div>
 @endsection

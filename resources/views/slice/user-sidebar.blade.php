@@ -13,10 +13,13 @@
         <!-- Sidebar user panel (optional) -->
         <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image">
-                <img src="{{ asset('images/user.png') }}" alt="User Image">
+                <img src="{{ asset('images/user.png') }}" alt="User Image" style="width: 40px; height: 40px;">
             </div>
-            <div class="info">
-                <a class="d-block">{{ auth()->user()->username }}</a>
+            <div class="col">
+                <a style="color: lightgray; font-size: 90%" class="d-block">
+                    {{ auth()->user()->username }}</a>
+                <a style="color: lightgray; font-size: 90%" class="d-block">SOS
+                    {{ auth()->user()->city->city_name }}</a>
             </div>
         </div>
 

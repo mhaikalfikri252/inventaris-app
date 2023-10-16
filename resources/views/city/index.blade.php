@@ -49,15 +49,15 @@
                                                 <td>{{ $no++ }}</td>
                                                 <td>{{ $data->city_name }}</td>
                                                 <td>
-                                                    <a href="{{ route('city.edit', $data->id) }}"
-                                                        class="btn btn-warning">Update</a>
+                                                    <a href="{{ route('city.edit', $data->id) }}" class="btn btn-warning">
+                                                        <i class="fas fa-edit"></i></a>
                                                     <form action="{{ route('city.destroy', $data->id) }}" method="post"
                                                         class="d-inline">
                                                         @method('delete')
                                                         @csrf
                                                         <button class="btn btn-danger"
                                                             onclick="return confirm('Apakah anda yakin ingin menghapus kota?')">
-                                                            Delete
+                                                            <i class="fas fa-trash-alt"></i>
                                                         </button>
                                                     </form>
                                                 </td>

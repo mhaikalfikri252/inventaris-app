@@ -20,7 +20,10 @@ class DashboardController extends Controller
             $city = DB::table('cities')->count();
             $facility = DB::table('facilities')->count();
 
-            return view('layouts.main-dashboard', compact('asset', 'writeoff', 'inventory', 'borrow', 'user', 'employee', 'city', 'facility'));
+            return view(
+                'layouts.main-dashboard',
+                compact('asset', 'writeoff', 'inventory', 'borrow', 'user', 'employee', 'city', 'facility')
+            );
         } else {
             // user
             $location = auth()->user()->city_id;
@@ -30,8 +33,10 @@ class DashboardController extends Controller
 
             $asset = DB::table('assets')
                 ->where('status_asset_id', 1)
-                ->whereNot('status_borrow_id', 2)
-                ->orWhereNull('status_borrow_id')
+                ->where(function ($query) {
+                    $query->where('status_borrow_id', 2)
+                        ->orWhere('status_borrow_id', null);
+                })
                 ->whereIn('facility_id', $facility)
                 ->count();
 
@@ -51,7 +56,10 @@ class DashboardController extends Controller
                 ->whereIn('asset_id', $borrowasset)
                 ->count();
 
-            return view('layouts.main-dashboard', compact('asset', 'writeoff', 'inventory', 'borrow'));
+            $user = DB::table('users')->where('city_id', $location);
+
+            // return view('layouts.main-dashboard', compact('asset', 'writeoff', 'inventory', 'borrow', 'user'));
+            return view('slice2.main-dashboard', compact('asset', 'writeoff', 'inventory', 'borrow', 'user'));
         }
     }
 }

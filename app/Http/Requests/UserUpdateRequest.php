@@ -15,11 +15,11 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $email = $this->request->get("email");
+        $username = $this->request->get("username");
 
         return [
-            'username' => 'required', 'string', 'max:255',
-            'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore($email, 'email')],
+            'username' => ['required', 'string', 'max:255', Rule::unique('users')->ignore($username, 'username')],
+            'email' => 'required', 'email', 'max:255',
             'password' => ['required', Password::min(8)->letters()->numbers()],
             'role_id' => 'required',
             'city_id' => 'required',

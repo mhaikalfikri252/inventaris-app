@@ -8,6 +8,7 @@ use App\Models\Facility;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class InventoryController extends Controller
 {
@@ -20,9 +21,10 @@ class InventoryController extends Controller
     {
         $location = auth()->user()->city_id;
         $facility = Facility::where('city_id', $location)->pluck('id');
-        $inventory = Inventory::whereIn('facility_id', $facility)->with('facility')->get();
+        $inventory = Inventory::whereIn('facility_id', $facility)
+            ->with('facility')->latest()->get();
 
-        return view('inventory.index', compact('inventory'));
+        return view('inventory2.index', compact('inventory'));
     }
 
     /**
@@ -36,7 +38,7 @@ class InventoryController extends Controller
         $facility = Facility::where('city_id', $location)->get();
         $employee = Employee::where('city_id', $location)->get();
 
-        return view('inventory.create-form', compact('facility', 'employee'));
+        return view('inventory2.create', compact('facility', 'employee'));
     }
 
     /**
@@ -58,6 +60,7 @@ class InventoryController extends Controller
             'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        date_default_timezone_set('Asia/Jakarta');
         $data['purchase_date'] = date('Y-m-d H:i:s', strtotime($data['purchase_date']));
 
         if ($request->hasFile('photo')) {
@@ -100,7 +103,7 @@ class InventoryController extends Controller
         $facility = Facility::where('city_id', $location)->get();
         $employee = Employee::where('city_id', $location)->get();
 
-        return view('inventory.update-form', compact('inventory', 'facility', 'employee'));
+        return view('inventory2.update', compact('inventory', 'facility', 'employee'));
     }
 
     /**
@@ -121,6 +124,7 @@ class InventoryController extends Controller
         $data->price = $request->input('price');
         $data->information = $request->input('information');
 
+        date_default_timezone_set('Asia/Jakarta');
         $data->purchase_date = date('Y-m-d H:i:s', strtotime($data->purchase_date));
 
         if ($request->hasFile('photo')) {
@@ -162,6 +166,13 @@ class InventoryController extends Controller
 
         toast('Berhasil menghapus inventaris!', 'success');
 
-        return redirect()->route('inventory.index');
+        return redirect()->route('inventory2.index');
+    }
+
+    public function print_inventory_qrcode($id)
+    {
+        $inventory = Inventory::findOrFail($id);
+        $pdf = PDF::loadview('inventory2.qrcode', compact('inventory'));
+        return $pdf->stream();
     }
 }

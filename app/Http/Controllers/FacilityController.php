@@ -16,9 +16,9 @@ class FacilityController extends Controller
      */
     public function index()
     {
-        $facility = Facility::with('city')->get();
+        $facility = Facility::with('city')->latest()->get();
 
-        return view('facility.index', compact('facility'));
+        return view('facility2.index', compact('facility'));
     }
 
     /**
@@ -30,7 +30,7 @@ class FacilityController extends Controller
     {
         $city = City::all();
 
-        return view('facility.create-form', compact('city'));
+        return view('facility2.create', compact('city'));
     }
 
     /**
@@ -76,7 +76,7 @@ class FacilityController extends Controller
         $facility = Facility::with('city')->findOrFail($id);
         $city = City::all();
 
-        return view('facility.update-form', compact('facility', 'city'));
+        return view('facility2.update', compact('facility', 'city'));
     }
 
     /**

@@ -13,30 +13,30 @@ class ReportController extends Controller
 
     public function index_asset()
     {
-        $asset = Asset::where('status_asset_id', 1)->with('facility', 'status')->get();
+        $asset = Asset::where('status_asset_id', 1)->with('facility', 'status_asset')->get();
 
-        return view('report.index-asset', compact('asset'));
+        return view('admin.index-asset', compact('asset'));
     }
 
     public function index_writeoff()
     {
-        $writeoff = Asset::where('status_asset_id', 2)->with('facility', 'status')->get();
+        $writeoff = Asset::where('status_asset_id', 2)->with('facility', 'status_asset')->get();
 
-        return view('report.index-writeoff', compact('writeoff'));
+        return view('admin.index-writeoff', compact('writeoff'));
     }
 
     public function index_inventory()
     {
         $inventory = Inventory::with('facility')->get();
 
-        return view('report.index-inventory', compact('inventory'));
+        return view('admin.index-inventory', compact('inventory'));
     }
 
     public function index_borrow()
     {
         $borrow = Borrow::with('status_borrow')->get();
 
-        return view('report.index-borrow', compact('borrow'));
+        return view('admin.index-borrow', compact('borrow'));
     }
 
     public function destroy_asset($id)

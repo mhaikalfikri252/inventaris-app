@@ -7,6 +7,7 @@ use App\Models\Asset;
 use App\Models\Employee;
 use App\Models\Facility;
 use App\Models\StatusAsset;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -21,9 +22,16 @@ class AssetController extends Controller
     {
         $location = auth()->user()->city_id;
         $facility = Facility::where('city_id', $location)->pluck('id');
-        $asset = Asset::where('status_asset_id', 1)->whereNot('status_borrow_id', 2)->orWhereNull('status_borrow_id')->whereIn('facility_id', $facility)->with('facility', 'status_asset')->get();
+        $asset = Asset::where('status_asset_id', 1)
+            ->where(function ($query) {
+                $query->where('status_borrow_id', 2)
+                    ->orWhere('status_borrow_id', null);
+            })
+            ->whereIn('facility_id', $facility)
+            ->with('facility', 'status_asset')->latest()->get();
 
-        return view('asset.index', compact('asset'));
+        // return view('asset.index', compact('asset'));
+        return view('asset2.index', compact('asset'));
     }
 
     /**
@@ -38,7 +46,7 @@ class AssetController extends Controller
         $facility = Facility::where('city_id', $location)->get();
         $employee = Employee::where('city_id', $location)->get();
 
-        return view('asset.create-form', compact('facility', 'status_asset', 'employee'));
+        return view('asset2.create', compact('facility', 'status_asset', 'employee'));
     }
 
     /**
@@ -49,7 +57,6 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
-
         $data = $request->validate([
             'asset_code' => 'required|max:255|unique:assets,asset_code',
             'asset_name' => 'required|string|max:255',
@@ -63,6 +70,7 @@ class AssetController extends Controller
             'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
+        date_default_timezone_set('Asia/Jakarta');
         $data['purchase_date'] = date('Y-m-d H:i:s', strtotime($data['purchase_date']));
 
         if ($request->hasFile('photo')) {
@@ -110,7 +118,7 @@ class AssetController extends Controller
         $employee = Employee::where('city_id', $location)->get();
         $status_asset = StatusAsset::all();
 
-        return view('asset.update-form', compact('asset', 'facility', 'status_asset', 'employee'));
+        return view('asset2.update', compact('asset', 'facility', 'status_asset', 'employee'));
     }
 
     /**
@@ -133,6 +141,7 @@ class AssetController extends Controller
         $data->status_asset_id = $request->input('status_asset_id');
         $data->information = $request->input('information');
 
+        date_default_timezone_set('Asia/Jakarta');
         $data->purchase_date = date('Y-m-d H:i:s', strtotime($data->purchase_date));
 
         if ($request->hasFile('photo')) {
@@ -183,5 +192,12 @@ class AssetController extends Controller
         } else if ($asset->status_asset_id == 2) {
             return redirect()->route('writeoff.index');
         }
+    }
+
+    public function print_asset_qrcode($id)
+    {
+        $asset = Asset::findOrFail($id);
+        $pdf = PDF::loadview('asset2.qrcode', compact('asset'));
+        return $pdf->stream();
     }
 }

@@ -20,8 +20,13 @@ class DashboardController extends Controller
             $city = DB::table('cities')->count();
             $facility = DB::table('facilities')->count();
 
+            // return view(
+            //     'layouts.main-dashboard',
+            //     compact('asset', 'writeoff', 'inventory', 'borrow', 'user', 'employee', 'city', 'facility')
+            // );
+
             return view(
-                'layouts.main-dashboard',
+                'slice2.main-dashboard',
                 compact('asset', 'writeoff', 'inventory', 'borrow', 'user', 'employee', 'city', 'facility')
             );
         } else {

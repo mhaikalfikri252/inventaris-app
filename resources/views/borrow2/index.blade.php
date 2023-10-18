@@ -13,9 +13,9 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="ti-write bg-c-brown"></i>
+                                <i class="fa fa-handshake-o bg-c-brown"></i>
                                 <div class="d-inline">
-                                    <h4 class="mt-3">Peminjaman Aset</h4>
+                                    <h4 class="mt-3">Daftar Peminjaman Aset</h4>
                                 </div>
                             </div>
                         </div>
@@ -30,9 +30,8 @@
                             <!-- Zero config.table start -->
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="javascript:void(0)" id="btn-create-post" class="btn btn-success">
+                                    <a href="{{ route('borrow.create') }}" class="btn btn-success">
                                         <i class="fa fa-plus"></i> Create</a>
-                                    @include('borrow2.modal-create')
                                     <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
                                 </div>
                                 <div class="card-block">
@@ -94,14 +93,14 @@
                                                             @endif
                                                             <a href="{{ route('borrow.edit', $data->id) }}"
                                                                 class="btn btn-warning"><i class="fa fa-upload"></i></a>
-                                                            {{-- <a href="{{ route('borrow.edit', $data->id) }}"
-                                                                class="btn btn-warning"><i class="ti-pencil-alt"></i></a> --}}
+                                                            {{-- <a href="{{ route('borrow.show', $data->id) }}"
+                                                                class="btn btn-info"><i class="ti-eye"></i></a> --}}
                                                             <form action="{{ route('borrow.destroy', $data->id) }}"
                                                                 method="POST" class="d-inline">
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button class="btn btn-danger"
-                                                                    onclick="return confirm('Apakah anda yakin ingin menghapus aset?')">
+                                                                    onclick="return confirm('Apakah anda yakin ingin menghapus peminjaman aset?')">
                                                                     <i class="ti-trash"></i>
                                                                 </button>
                                                             </form>

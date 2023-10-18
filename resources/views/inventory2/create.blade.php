@@ -13,7 +13,7 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="ti-archive bg-c-yellow"></i>
+                                <i class="fa fa-paste bg-c-yellow"></i>
                                 <div class="d-inline">
                                     <h4 class="mt-3">Tambah Data Inventaris</h4>
                                 </div>

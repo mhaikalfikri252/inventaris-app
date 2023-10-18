@@ -58,6 +58,9 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('asset', AssetController::class);
         Route::resource('inventory', InventoryController::class);
         Route::resource('borrow', BorrowController::class);
+
+        Route::get('borrow/create/{id}', [BorrowController::class, 'create_byid'])->name('create.borrow.byid');
+        Route::put('upload/letter/{id}', [BorrowController::class, 'upload'])->name('upload.borrow.letter');
     });
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

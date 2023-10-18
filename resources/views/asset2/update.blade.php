@@ -14,14 +14,14 @@
                         <div class="col-lg-8">
                             @if ($asset->status_asset->id == 1)
                                 <div class="page-header-title">
-                                    <i class="ti-package bg-c-pink"></i>
+                                    <i class="fa fa-cube bg-c-pink"></i>
                                     <div class="d-inline">
                                         <h4 class="mt-3">Edit Data Aset</h4>
                                     </div>
                                 </div>
                             @else
                                 <div class="page-header-title">
-                                    <i class="ti-layout-placeholder bg-c-green"></i>
+                                    <i class="fa fa-times-rectangle-o bg-c-green"></i>
                                     <div class="d-inline">
                                         <h4 class="mt-3">Edit Data Aset Write Off</h4>
                                     </div>

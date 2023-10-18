@@ -31,7 +31,7 @@
                             <form method="POST" action="{{ route('logout') }}" id="logout">
                                 @csrf
                                 <a href="{{ route('logout') }}" onclick="return logout(event);">
-                                    <i class="ti-share-alt"></i> Logout
+                                    <i class="ti-arrow-circle-left"></i> Logout
                                 </a>
                             </form>
                         </li>

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\File;
 
 class Borrow extends Model
 {
@@ -35,15 +35,27 @@ class Borrow extends Model
 
         static::created(function ($model) {
             Asset::where('id', $model->asset_id)->update(['status_borrow_id' => $model->status_borrow_id]);
+
+            if (Asset::where('id', $model->asset_id)->where('status_borrow_id', 1)) {
+                Borrow::where('asset_id', $model->asset_id)->where('status_borrow_id', 1)->update(['letter' => null]);
+                $request = Request();
+                if ($request->hasFile($model->letter)) {
+                    $destination = 'files/' . $model->letter;
+                    if (File::exists($destination)) {
+                        File::delete($destination);
+                    }
+                }
+            }
         });
 
         static::updated(function ($model) {
             // if ($model->asset_id == Asset::where('id', $model->asset_id)) {
-            // Asset::where('id', $model->asset_id)->update(['status_borrow_id' => $model->status_borrow_id]);
-            Asset::where('id', $model->asset_id)->update(['status_borrow_id' => 2]);
+            Asset::where('id', $model->asset_id)->update(['status_borrow_id' => $model->status_borrow_id]);
             // } else {
             // Asset::where('id', $model->asset_id)->update(['status_borrow_id' => null]);
             // }
+
+            // Asset::where('id', $model->asset_id)->update(['status_borrow_id' => 2]);
         });
 
         static::deleted(function ($model) {

@@ -13,7 +13,7 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="ti-package bg-c-pink"></i>
+                                <i class="fa fa-cube bg-c-pink"></i>
                                 <div class="d-inline">
                                     <h4 class="mt-3">Tambah Data Aset</h4>
                                 </div>

@@ -96,7 +96,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Tanggal Pinjam</label>
+                                            <label class="col-sm-2 col-form-label">Tanggal Kembali</label>
                                             <div class="col-sm-10">
                                                 <input type="date"
                                                     class="form-control @error('return_date') is-invalid @enderror"
@@ -116,8 +116,7 @@
                                                     id="status_borrow_id" name="status_borrow_id" required>
                                                     <option value="" disabled selected>Pilih Status</option>
                                                     @foreach ($status_borrow as $data)
-                                                        <option value="{{ $data->id }}"
-                                                            {{ old('status_borrow_id') == $data->id ? 'selected' : '' }}>
+                                                        <option value="{{ $data->id }}">
                                                             {{ $data->status_name }}
                                                         </option>
                                                         @error('status_borrow_id')

@@ -13,7 +13,7 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="ti-package bg-c-pink"></i>
+                                <i class="fa fa-cube bg-c-pink"></i>
                                 <div class="d-inline">
                                     <h4 class="mt-3">Daftar Aset</h4>
                                 </div>
@@ -93,8 +93,9 @@
                                                         <td>
                                                             <a href="{{ route('print.asset.qrcode', $data->id) }}"
                                                                 class="btn btn-info"><i class="fa fa-qrcode"></i></a>
-                                                            <a href="{{ route('print.asset.qrcode', $data->id) }}"
-                                                                class="btn btn-secondary"><i class="ti-write"></i></a>
+                                                            <a href="{{ route('create.borrow.byid', $data->id) }}"
+                                                                class="btn btn-secondary"><i
+                                                                    class="fa fa-handshake-o"></i></a>
                                                             <a href="{{ route('asset.edit', $data->id) }}"
                                                                 class="btn btn-warning"><i class="ti-pencil-alt"></i></a>
                                                             <form action="{{ route('asset.destroy', $data->id) }}"

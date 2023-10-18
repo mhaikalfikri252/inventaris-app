@@ -118,9 +118,6 @@
     <script src="{{ asset('guruable/default/assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('guruable/default/assets/js/script.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('guruable/default/assets/js/script.js') }}"></script>
-    {{-- Sweet Alert 2 --}}
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="sweetalert2.all.min.js"></script>
     <!-- sweet alert js -->
     <script type="text/javascript" src="{{ asset('guruable/bower_components/sweetalert/js/sweetalert.min.js') }}"></script>
     <script type="text/javascript" src="{{ asset('guruable/default/assets/js/modal.js') }}"></script>
@@ -199,7 +196,7 @@
         // Upload Surat
         document.getElementById('status_borrow_id').addEventListener("change", function(e) {
             if (e.target.value == 2) {
-                document.getElementById('uploadletter').style.display = 'block';
+                document.getElementById('uploadletter').style.display = 'flex';
             } else {
                 document.getElementById('uploadletter').style.display = 'none';
             }

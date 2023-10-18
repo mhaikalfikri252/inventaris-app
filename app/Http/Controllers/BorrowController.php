@@ -49,7 +49,25 @@ class BorrowController extends Controller
             ->with('facility')->latest()->get();
         $status_borrow = StatusBorrow::all();
 
-        return view('borrow2.modal-create', compact('asset', 'status_borrow', 'employee'));
+        return view('borrow2.create', compact('asset', 'status_borrow', 'employee'));
+    }
+
+    public function create_byid($id)
+    {
+        $assetById = Asset::findOrFail($id);
+        $location = auth()->user()->city_id;
+        $facility = Facility::where('city_id', $location)->pluck('id');
+        $employee = Employee::where('city_id', $location)->get();
+        $asset = Asset::where('status_asset_id', 1)
+            ->where(function ($query) {
+                $query->where('status_borrow_id', 2)
+                    ->orWhere('status_borrow_id', null);
+            })
+            ->whereIn('facility_id', $facility)
+            ->with('facility')->latest()->get();
+        $status_borrow = StatusBorrow::all();
+
+        return view('borrow2.create-byid', compact('asset', 'status_borrow', 'employee', 'assetById'));
     }
 
     /**
@@ -93,22 +111,13 @@ class BorrowController extends Controller
         //     $data['letter'] = null;
         // }
 
-        // dd($data['letter']);
-
         if ($borrow =  Borrow::create($data)) {
             $borrow->save();
         }
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Data Berhasil Disimpan!',
-            'data'    => $borrow
-        ]);
+        toast('Berhasil menambahkan data!', 'success');
 
-
-        // toast('Berhasil menambahkan data!', 'success');
-
-        // return redirect()->route('borrow.index');
+        return redirect()->route('borrow.index');
     }
 
     /**
@@ -145,7 +154,7 @@ class BorrowController extends Controller
             ->with('facility')->latest()->get();
         $status_borrow = StatusBorrow::all();
 
-        return view('borrow2.update', compact('asset', 'status_borrow', 'borrow', 'employee'));
+        return view('borrow2.upload', compact('asset', 'status_borrow', 'borrow', 'employee'));
     }
 
     /**
@@ -155,54 +164,58 @@ class BorrowController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    // public function update(BorrowUpdateRequest $request, $id)
-    // {
-    //     $data = Borrow::findOrFail($id);
-    //     $data->employee_id = $request->input('employee_id');
-    //     $data->asset_id = $request->input('asset_id');
-    //     $data->borrow_date = $request->input('borrow_date');
-    //     $data->return_date = $request->input('return_date');
-    //     $data->status_borrow_id = $request->input('status_borrow_id');
-
-    //     date_default_timezone_set('Asia/Jakarta');
-    //     $data->borrow_date = date('Y-m-d H:i:s', strtotime($data->borrow_date));
-    //     $data->return_date = date('Y-m-d H:i:s', strtotime($data->return_date));
-
-    //     if ($data->status_borrow_id == 2) {
-    //         $request->validate(['letter' => 'required']);
-    //     }
-
-    //     if ($request->hasFile('letter')) {
-    //         $destination = 'files/' . $data->letter;
-    //         if (File::exists($destination)) {
-    //             File::delete($destination);
-    //         }
-
-    //         $file = $request->file('letter');
-    //         $extension = $file->getClientOriginalExtension();
-    //         $filename = time() . '.' . $extension;
-    //         $file->move(public_path('files'), $filename);
-    //         $data['letter'] = $filename;
-    //     }
-
-    //     if ($data->status_borrow_id == 1) {
-    //         $destination = 'files/' . $data->letter;
-    //         if (File::exists($destination)) {
-    //             File::delete($destination);
-    //         }
-    //         $data->letter = null;
-    //     }
-
-    //     $data->update();
-
-    //     toast('Berhasil mengedit data!', 'success');
-
-    //     return redirect()->route('borrow2.index');
-    // }
-
-    public function update(Request $request, $id)
+    public function update(BorrowUpdateRequest $request, $id)
     {
         $data = Borrow::findOrFail($id);
+        $data->employee_id = $request->input('employee_id');
+        $data->asset_id = $request->input('asset_id');
+        $data->borrow_date = $request->input('borrow_date');
+        $data->return_date = $request->input('return_date');
+        $data->status_borrow_id = $request->input('status_borrow_id');
+
+        date_default_timezone_set('Asia/Jakarta');
+        $data->borrow_date = date('Y-m-d H:i:s', strtotime($data->borrow_date));
+        $data->return_date = date('Y-m-d H:i:s', strtotime($data->return_date));
+
+        if ($data->status_borrow_id == 2) {
+            $request->validate(['letter' => 'required']);
+        }
+
+        if ($request->hasFile('letter')) {
+            $destination = 'files/' . $data->letter;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+
+            $file = $request->file('letter');
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $extension;
+            $file->move(public_path('files'), $filename);
+            $data['letter'] = $filename;
+        }
+
+        if ($data->status_borrow_id == 1) {
+            $destination = 'files/' . $data->letter;
+            if (File::exists($destination)) {
+                File::delete($destination);
+            }
+            $data->letter = null;
+        }
+
+        $data->update();
+
+        toast('Berhasil mengedit data!', 'success');
+
+        return redirect()->route('borrow2.index');
+    }
+
+    public function upload(Request $request, $id)
+    {
+        $data = Borrow::findOrFail($id);
+
+        $data->status_borrow_id = 2;
+
+        date_default_timezone_set('Asia/Jakarta');
 
         $rules = ['letter' => 'required'];
 
@@ -221,11 +234,9 @@ class BorrowController extends Controller
             $data['letter'] = $filename;
         }
 
-        date_default_timezone_set('Asia/Jakarta');
+        $data->save();
 
-        $data->update($data);
-
-        toast('Berhasil mengupload surat pinjam!', 'success');
+        toast('Berhasil mengupload surat peminjaman aset!', 'success');
 
         return redirect()->route('borrow.index');
     }

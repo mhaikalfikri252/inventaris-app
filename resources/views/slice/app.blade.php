@@ -45,7 +45,7 @@
 
         @include('slice.navbar')
 
-        @if (auth()->user()->role_id == '1')
+        @if (auth()->user()->role_id == 1)
             @include('slice.admin-sidebar')
         @else
             @include('slice.user-sidebar')

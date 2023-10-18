@@ -13,7 +13,7 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="ti-archive bg-c-yellow"></i>
+                                <i class="fa fa-paste bg-c-yellow"></i>
                                 <div class="d-inline">
                                     <h4 class="mt-3">Edit Data Inventaris</h4>
                                 </div>
@@ -41,7 +41,7 @@
                                 <div class="card-block">
                                     <form action="{{ route('inventory.update', $inventory->id) }}" method="POST"
                                         enctype="multipart/form-data">
-                                        @method('PUT')
+                                        @method('put')
                                         @csrf
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">Nama Inventaris</label>

@@ -13,7 +13,7 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="ti-archive bg-c-yellow"></i>
+                                <i class="fa fa-paste bg-c-yellow"></i>
                                 <div class="d-inline">
                                     <h4 class="mt-3">Daftar Inventaris</h4>
                                 </div>
@@ -86,7 +86,7 @@
                                                                 @method('delete')
                                                                 @csrf
                                                                 <button class="btn btn-danger"
-                                                                    onclick="return confirm('Apakah anda yakin ingin menghapus aset?')">
+                                                                    onclick="return confirm('Apakah anda yakin ingin menghapus inventaris?')">
                                                                     <i class="ti-trash"></i>
                                                                 </button>
                                                             </form>

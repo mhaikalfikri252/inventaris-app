@@ -13,7 +13,11 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="fa fa-paste bg-c-yellow"></i>
+                                @if (auth()->user()->role_id == 1)
+                                    <i class="fa fa-paste bg-c-red"></i>
+                                @else
+                                    <i class="fa fa-paste bg-c-yellow"></i>
+                                @endif
                                 <div class="d-inline">
                                     <h4 class="mt-3">Edit Data Inventaris</h4>
                                 </div>
@@ -32,11 +36,9 @@
                                 <div class="card-header">
                                     <h5>Form Edit Data Inventaris</h5>
                                     <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
-
                                     <div class="card-header-right">
                                         <i class="icofont icofont-spinner-alt-5"></i>
                                     </div>
-
                                 </div>
                                 <div class="card-block">
                                     <form action="{{ route('inventory.update', $inventory->id) }}" method="POST"
@@ -67,7 +69,11 @@
                                                     @foreach ($facility as $data)
                                                         <option value="{{ $data->id }}"
                                                             {{ $data->id == $inventory->facility_id ? 'selected' : '' }}>
-                                                            {{ $data->facility_name }}
+                                                            @if (auth()->user()->role_id == 1)
+                                                                {{ $data->facility_name . ' ' . $data->city->city_name }}
+                                                            @else
+                                                                {{ $data->facility_name }}
+                                                            @endif
                                                         </option>
                                                         @error('facility_id')
                                                             <div class="invalid-feedback">
@@ -115,7 +121,12 @@
                                                     @foreach ($employee as $data)
                                                         <option value="{{ $data->id }}"
                                                             {{ $data->id == $inventory->employee_id ? 'selected' : '' }}>
-                                                            {{ $data->employee_name }}</option>
+                                                            @if (auth()->user()->role_id == 1)
+                                                                {{ $data->employee_name . ' (' . $data->city->city_name . ')' }}
+                                                            @else
+                                                                {{ $data->employee_name }}
+                                                            @endif
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -165,7 +176,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-
                                         <br>
                                         <div class="row">
                                             <button type="submit" class="btn btn-success"

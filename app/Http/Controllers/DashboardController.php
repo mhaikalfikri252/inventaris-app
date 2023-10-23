@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
@@ -19,11 +18,6 @@ class DashboardController extends Controller
             $employee = DB::table('employees')->count();
             $city = DB::table('cities')->count();
             $facility = DB::table('facilities')->count();
-
-            // return view(
-            //     'layouts.main-dashboard',
-            //     compact('asset', 'writeoff', 'inventory', 'borrow', 'user', 'employee', 'city', 'facility')
-            // );
 
             return view(
                 'slice2.main-dashboard',
@@ -63,7 +57,6 @@ class DashboardController extends Controller
 
             $user = DB::table('users')->where('city_id', $location);
 
-            // return view('layouts.main-dashboard', compact('asset', 'writeoff', 'inventory', 'borrow', 'user'));
             return view('slice2.main-dashboard', compact('asset', 'writeoff', 'inventory', 'borrow', 'user'));
         }
     }

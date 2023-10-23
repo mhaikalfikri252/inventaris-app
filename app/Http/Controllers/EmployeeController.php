@@ -14,7 +14,9 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        //
+        $employee = Employee::with('city')->latest()->get();
+
+        return view('employee.index', compact('employee'));
     }
 
     /**

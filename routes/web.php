@@ -7,9 +7,9 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FacilityController;
 use App\Http\Controllers\BorrowController;
 use App\Http\Controllers\InventoryController;
-use App\Http\Controllers\ReportController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WriteOffController;
+use App\Http\Controllers\EmployeeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -37,40 +37,29 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 Route::middleware(['auth'])->group(function () {
 
     Route::middleware(['role:Admin'])->group(function () {
-
-        Route::get('/admin/asset', [ReportController::class, 'index_asset'])->name('admin.asset.index');
-        Route::get('/admin/writeoff', [ReportController::class, 'index_writeoff'])->name('admin.writeoff.index');
-        Route::get('/admin/inventory', [ReportController::class, 'index_inventory'])->name('admin.inventory.index');
-        Route::get('/admin/borrow', [ReportController::class, 'index_borrow'])->name('admin.borrow.index');
-
-        Route::delete('/admin/asset/{id}', [ReportController::class, 'destroy_asset'])->name('admin.asset.destroy');
-        Route::delete('/admin/inventory/{id}', [ReportController::class, 'destroy_inventory'])->name('admin.inventory.destroy');
-        Route::delete('/admin/borrow/{id}', [ReportController::class, 'destroy_borrow'])->name('admin.borrow.destroy');
-
         Route::resource('city', CityController::class);
         Route::resource('facility', FacilityController::class);
         Route::resource('user', UserController::class);
+        Route::resource('employee', EmployeeController::class);
     });
 
-    Route::middleware(['role:User'])->group(function () {
-        Route::get('/writeoff', [WriteOffController::class, 'index'])->name('writeoff.index');
+    Route::get('/writeoff', [WriteOffController::class, 'index'])->name('writeoff.index');
 
-        Route::resource('asset', AssetController::class);
-        Route::resource('inventory', InventoryController::class);
-        Route::resource('borrow', BorrowController::class);
+    Route::resource('asset', AssetController::class);
+    Route::resource('inventory', InventoryController::class);
+    Route::resource('borrow', BorrowController::class);
 
-        Route::get('borrow/create/{id}', [BorrowController::class, 'create_byid'])->name('create.borrow.byid');
-        Route::put('upload/letter/{id}', [BorrowController::class, 'upload'])->name('upload.borrow.letter');
-    });
+    Route::get('borrow/create/{id}', [BorrowController::class, 'create_byid'])->name('create.borrow.byid');
+    Route::put('upload/letter/{id}', [BorrowController::class, 'upload'])->name('upload.borrow.letter');
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
 
-Route::get('print/asset/qrcode/{id}', [AssetController::class, 'print_asset_qrcode'])->name('print.asset.qrcode');
-Route::get('print/inventory/qrcode/{id}', [InventoryController::class, 'print_inventory_qrcode'])->name('print.inventory.qrcode');
-Route::get('print/borrow/letter/{id}', [BorrowController::class, 'print_borrow_letter'])->name('print.borrow.letter');
+    Route::get('print/asset/qrcode/{id}', [AssetController::class, 'print_asset_qrcode'])->name('print.asset.qrcode');
+    Route::get('print/inventory/qrcode/{id}', [InventoryController::class, 'print_inventory_qrcode'])->name('print.inventory.qrcode');
+    Route::get('print/borrow/letter/{id}', [BorrowController::class, 'print_borrow_letter'])->name('print.borrow.letter');
+});
 
 //log-viewers
 Route::get('log-viewers', [\Rap2hpoutre\LaravelLogViewer\LogViewerController::class, 'index']);

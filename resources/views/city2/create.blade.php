@@ -1,7 +1,7 @@
 @extends('slice2.app')
 
 @section('title')
-    Peminjaman Aset
+    Kota
 @endsection
 
 @section('content')
@@ -13,13 +13,9 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                @if (auth()->user()->role_id == 1)
-                                    <i class="fa fa-handshake-o bg-c-light-blue"></i>
-                                @else
-                                    <i class="fa fa-handshake-o bg-c-brown"></i>
-                                @endif
+                                <i class="fa fa-map-marker bg-c-yellow"></i>
                                 <div class="d-inline">
-                                    <h4 class="mt-3">Upload Surat Peminjaman Aset</h4>
+                                    <h4 class="mt-3">Tambah Data Kota</h4>
                                 </div>
                             </div>
                         </div>
@@ -34,23 +30,22 @@
                             <!-- Basic Form Inputs card start -->
                             <div class="card">
                                 <div class="card-header">
+                                    <h5>Form Tambah Data Kota</h5>
                                     <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
                                     <div class="card-header-right">
                                         <i class="icofont icofont-spinner-alt-5"></i>
                                     </div>
                                 </div>
                                 <div class="card-block">
-                                    <form action="{{ route('upload.borrow.letter', $borrow->id) }}" method="POST"
-                                        enctype="multipart/form-data">
-                                        @method('put')
+                                    <form action="{{ route('city.store') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Upload Surat</label>
+                                            <label class="col-sm-2 col-form-label">Nama Kota</label>
                                             <div class="col-sm-10">
-                                                <input type="file"
-                                                    class="form-control @error('letter') is-invalid @enderror"
-                                                    id="letter" name="letter">
-                                                @error('letter')
+                                                <input type="text"
+                                                    class="form-control @error('city_name') is-invalid @enderror"
+                                                    id="city_name" name="city_name" value="{{ old('city_name') }}" required>
+                                                @error('city_name')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -61,7 +56,7 @@
                                         <div class="row">
                                             <button type="submit" class="btn btn-success"
                                                 style="margin-left: 15px">Save</button>
-                                            <a href="{{ route('borrow.index') }}" class="btn btn-danger"
+                                            <a href="{{ route('city.index') }}" class="btn btn-danger"
                                                 style="margin-left: 10px">Cancel</a>
                                         </div>
                                     </form>

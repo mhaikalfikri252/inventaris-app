@@ -19,10 +19,14 @@ class InventoryController extends Controller
      */
     public function index()
     {
-        $location = auth()->user()->city_id;
-        $facility = Facility::where('city_id', $location)->pluck('id');
-        $inventory = Inventory::whereIn('facility_id', $facility)
-            ->with('facility')->latest()->get();
+        if (auth()->user()->role_id == 1) {
+            $inventory = Inventory::with('facility')->latest()->get();
+        } else {
+            $location = auth()->user()->city_id;
+            $facility = Facility::where('city_id', $location)->pluck('id');
+            $inventory = Inventory::whereIn('facility_id', $facility)
+                ->with('facility')->latest()->get();
+        }
 
         return view('inventory2.index', compact('inventory'));
     }
@@ -34,9 +38,14 @@ class InventoryController extends Controller
      */
     public function create()
     {
-        $location = auth()->user()->city_id;
-        $facility = Facility::where('city_id', $location)->get();
-        $employee = Employee::where('city_id', $location)->get();
+        if (auth()->user()->role_id == 1) {
+            $facility = Facility::all();
+            $employee = Employee::all();
+        } else {
+            $location = auth()->user()->city_id;
+            $facility = Facility::where('city_id', $location)->get();
+            $employee = Employee::where('city_id', $location)->get();
+        }
 
         return view('inventory2.create', compact('facility', 'employee'));
     }
@@ -98,10 +107,16 @@ class InventoryController extends Controller
      */
     public function edit($id)
     {
-        $inventory = Inventory::with('facility')->findOrFail($id);
-        $location = auth()->user()->city_id;
-        $facility = Facility::where('city_id', $location)->get();
-        $employee = Employee::where('city_id', $location)->get();
+        if (auth()->user()->role_id == 1) {
+            $inventory = Inventory::with('facility')->findOrFail($id);
+            $facility = Facility::all();
+            $employee = Employee::all();
+        } else {
+            $inventory = Inventory::with('facility')->findOrFail($id);
+            $location = auth()->user()->city_id;
+            $facility = Facility::where('city_id', $location)->get();
+            $employee = Employee::where('city_id', $location)->get();
+        }
 
         return view('inventory2.update', compact('inventory', 'facility', 'employee'));
     }

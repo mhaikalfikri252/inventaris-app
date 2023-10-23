@@ -20,17 +20,25 @@ class AssetController extends Controller
      */
     public function index()
     {
-        $location = auth()->user()->city_id;
-        $facility = Facility::where('city_id', $location)->pluck('id');
-        $asset = Asset::where('status_asset_id', 1)
-            ->where(function ($query) {
-                $query->where('status_borrow_id', 2)
-                    ->orWhere('status_borrow_id', null);
-            })
-            ->whereIn('facility_id', $facility)
-            ->with('facility', 'status_asset')->latest()->get();
+        if (auth()->user()->role_id == 1) {
+            $asset = Asset::where('status_asset_id', 1)
+                ->where(function ($query) {
+                    $query->where('status_borrow_id', 2)
+                        ->orWhere('status_borrow_id', null);
+                })
+                ->with('facility', 'status_asset')->latest()->get();
+        } else {
+            $location = auth()->user()->city_id;
+            $facility = Facility::where('city_id', $location)->pluck('id');
+            $asset = Asset::where('status_asset_id', 1)
+                ->where(function ($query) {
+                    $query->where('status_borrow_id', 2)
+                        ->orWhere('status_borrow_id', null);
+                })
+                ->whereIn('facility_id', $facility)
+                ->with('facility', 'status_asset')->latest()->get();
+        }
 
-        // return view('asset.index', compact('asset'));
         return view('asset2.index', compact('asset'));
     }
 
@@ -41,10 +49,16 @@ class AssetController extends Controller
      */
     public function create()
     {
-        $status_asset = StatusAsset::all();
-        $location = auth()->user()->city_id;
-        $facility = Facility::where('city_id', $location)->get();
-        $employee = Employee::where('city_id', $location)->get();
+        if (auth()->user()->role_id == 1) {
+            $status_asset = StatusAsset::all();
+            $facility = Facility::all();
+            $employee = Employee::all();
+        } else {
+            $status_asset = StatusAsset::all();
+            $location = auth()->user()->city_id;
+            $facility = Facility::where('city_id', $location)->get();
+            $employee = Employee::where('city_id', $location)->get();
+        }
 
         return view('asset2.create', compact('facility', 'status_asset', 'employee'));
     }
@@ -112,11 +126,18 @@ class AssetController extends Controller
      */
     public function edit($id)
     {
-        $asset = Asset::with('facility', 'status_asset')->findOrFail($id);
-        $location = auth()->user()->city_id;
-        $facility = Facility::where('city_id', $location)->get();
-        $employee = Employee::where('city_id', $location)->get();
-        $status_asset = StatusAsset::all();
+        if (auth()->user()->role_id == 1) {
+            $asset = Asset::with('facility', 'status_asset')->findOrFail($id);
+            $facility = Facility::all();
+            $employee = Employee::all();
+            $status_asset = StatusAsset::all();
+        } else {
+            $asset = Asset::with('facility', 'status_asset')->findOrFail($id);
+            $location = auth()->user()->city_id;
+            $facility = Facility::where('city_id', $location)->get();
+            $employee = Employee::where('city_id', $location)->get();
+            $status_asset = StatusAsset::all();
+        }
 
         return view('asset2.update', compact('asset', 'facility', 'status_asset', 'employee'));
     }
@@ -198,6 +219,13 @@ class AssetController extends Controller
     {
         $asset = Asset::findOrFail($id);
         $pdf = PDF::loadview('asset2.qrcode', compact('asset'));
+        return $pdf->stream();
+    }
+
+    public function print_all_qrcode()
+    {
+        $asset = Asset::all();
+        $pdf = PDF::loadview('asset2.print', compact('asset'));
         return $pdf->stream();
     }
 }

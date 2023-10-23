@@ -13,7 +13,11 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="fa fa-handshake-o bg-c-brown"></i>
+                                @if (auth()->user()->role_id == 1)
+                                    <i class="fa fa-handshake-o bg-c-light-blue"></i>
+                                @else
+                                    <i class="fa fa-handshake-o bg-c-brown"></i>
+                                @endif
                                 <div class="d-inline">
                                     <h4 class="mt-3">Edit Data Peminjaman Aset</h4>
                                 </div>
@@ -32,11 +36,9 @@
                                 <div class="card-header">
                                     <h5>Form Edit Data Peminjaman Aset</h5>
                                     <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
-
                                     <div class="card-header-right">
                                         <i class="icofont icofont-spinner-alt-5"></i>
                                     </div>
-
                                 </div>
                                 <div class="card-block">
                                     <form action="{{ route('borrow.update', $borrow->id) }}" method="POST"
@@ -52,7 +54,11 @@
                                                     @foreach ($employee as $data)
                                                         <option value="{{ $data->id }}"
                                                             {{ $data->id == $borrow->employee_id ? 'selected' : '' }}>
-                                                            {{ $data->employee_name }}
+                                                            @if (auth()->user()->role_id == 1)
+                                                                {{ $data->employee_name . ' (' . $data->city->city_name . ')' }}
+                                                            @else
+                                                                {{ $data->employee_name }}
+                                                            @endif
                                                         </option>
                                                         @error('employee_id')
                                                             <div class="invalid-feedback">
@@ -69,7 +75,11 @@
                                                 <select class="form-control @error('asset_id') is-invalid @enderror"
                                                     id="asset_id" name="asset_id">
                                                     <option value="" disabled selected>
-                                                        {{ $borrow->asset->asset_code . ' ' . $borrow->asset->asset_name }}
+                                                        @if (auth()->user()->role_id == 1)
+                                                            {{ $borrow->asset->asset_code . ' ' . $borrow->asset->asset_name . ' (' . $borrow->asset->facility->city->city_name . ')' }}
+                                                        @else
+                                                            {{ $borrow->asset->asset_code . ' ' . $borrow->asset->asset_name }}
+                                                        @endif
                                                     </option>
                                                     {{-- @foreach ($asset as $data)
                                                         <option value="{{ $data->id }}"
@@ -100,7 +110,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Tanggal Pinjam</label>
+                                            <label class="col-sm-2 col-form-label">Tanggal Kembali</label>
                                             <div class="col-sm-10">
                                                 <input type="date"
                                                     class="form-control @error('return_date') is-invalid @enderror"

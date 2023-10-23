@@ -4,18 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Asset;
 use App\Models\Facility;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 class WriteOffController extends Controller
 {
     public function index()
     {
-        $location = auth()->user()->city_id;
-        $facility = Facility::where('city_id', $location)->pluck('id');
-        $writeoff = Asset::where('status_asset_id', 2)
-            ->whereIn('facility_id', $facility)
-            ->with('facility', 'status_asset')->latest()->get();
+        if (auth()->user()->role_id == 1) {
+            $writeoff = Asset::where('status_asset_id', 2)
+                ->with('facility', 'status_asset')->latest()->get();
+        } else {
+            $location = auth()->user()->city_id;
+            $facility = Facility::where('city_id', $location)->pluck('id');
+            $writeoff = Asset::where('status_asset_id', 2)
+                ->whereIn('facility_id', $facility)
+                ->with('facility', 'status_asset')->latest()->get();
+        }
 
         return view('writeoff2.index', compact('writeoff'));
     }

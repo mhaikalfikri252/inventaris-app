@@ -110,6 +110,7 @@
     <script type="text/javascript" src="{{ asset('guruable/bower_components/jquery-i18next/js/jquery-i18next.min.js') }}">
     </script>
     <!-- Custom js -->
+    {{-- <script src="{{ asset('guruable/default/assets/pages/data-table/js/data-table-custom.js') }}"></script> --}}
     <script type="text/javascript" src="{{ asset('guruable/default/assets/pages/dashboard/custom-dashboard.min.js') }}">
     </script>
     <script type="text/javascript" src="{{ asset('guruable/default/assets/js/SmoothScroll.js') }}"></script>
@@ -161,6 +162,50 @@
         //         "responsive": true,
         //     });
         // });
+
+        // Setup - add a text input to each footer cell
+        $('#asset-search tfoot th').each(function() {
+            var title = $(this).text();
+            $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+        });
+
+        // DataTable Asset
+        var table = $('#asset-search').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "responsive": true,
+            "autoWidth": true,
+            "lengthChange": true,
+            dom: 'Bfrtip',
+            buttons: [{
+                    extend: 'excelHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10]
+                    }
+                },
+            ]
+        });
+
+        // Apply the search footer
+        table.columns().every(function() {
+            var that = this;
+
+            $('input', this.footer()).on('keyup change', function() {
+                if (that.search() !== this.value) {
+                    that
+                        .search(this.value)
+                        .draw();
+                }
+            });
+        });
 
         // Show Password
         $(document).ready(function() {

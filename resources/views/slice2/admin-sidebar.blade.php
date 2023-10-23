@@ -7,28 +7,28 @@
         </a>
     </li>
     <li class="">
-        <a href="#">
+        <a href="{{ route('user.index') }}">
             <span class="pcoded-micon"><i class="fa fa-user"></i><b>N</b></span>
             <span class="pcoded-mtext">User</span>
             <span class="pcoded-mcaret"></span>
         </a>
     </li>
     <li class="">
-        <a href="#">
+        <a href="{{ route('employee.index') }}">
             <span class="pcoded-micon"><i class="fa fa-group"></i><b>N</b></span>
             <span class="pcoded-mtext">Karyawan</span>
             <span class="pcoded-mcaret"></span>
         </a>
     </li>
     <li class="">
-        <a href="#">
+        <a href="{{ route('city.index') }}">
             <span class="pcoded-micon"><i class="fa fa-map-marker"></i><b>N</b></span>
             <span class="pcoded-mtext">Kota</span>
             <span class="pcoded-mcaret"></span>
         </a>
     </li>
     <li class="">
-        <a href="#">
+        <a href="{{ route('facility.index') }}">
             <span class="pcoded-micon"><i class="fa fa-book"></i><b>N</b></span>
             <span class="pcoded-mtext">Fasilitas</span>
             <span class="pcoded-mcaret"></span>

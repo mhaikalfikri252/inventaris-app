@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CityUpdateRequest;
-use App\Models\Asset;
 use App\Models\City;
 use Illuminate\Http\Request;
 
@@ -18,7 +17,7 @@ class CityController extends Controller
     {
         $city = City::all();
 
-        return view('city.index', compact('city'));
+        return view('city2.index', compact('city'));
     }
 
     /**

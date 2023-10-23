@@ -13,7 +13,11 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="fa fa-times-rectangle-o bg-c-green"></i>
+                                @if (auth()->user()->role_id == 1)
+                                    <i class="fa fa-times-rectangle-o bg-c-purple"></i>
+                                @else
+                                    <i class="fa fa-times-rectangle-o bg-c-green"></i>
+                                @endif
                                 <div class="d-inline">
                                     <h4 class="mt-3">Daftar Aset Write Off</h4>
                                 </div>

@@ -21,11 +21,15 @@ class BorrowController extends Controller
      */
     public function index()
     {
-        $location = auth()->user()->city_id;
-        $facility = Facility::where('city_id', $location)->pluck('id');
-        $asset = Asset::whereIn('facility_id', $facility)->pluck('id');
-        $borrow = Borrow::whereIn('asset_id', $asset)
-            ->with('status_borrow')->latest()->get();
+        if (auth()->user()->role_id == 1) {
+            $borrow = Borrow::with('status_borrow')->latest()->get();
+        } else {
+            $location = auth()->user()->city_id;
+            $facility = Facility::where('city_id', $location)->pluck('id');
+            $asset = Asset::whereIn('facility_id', $facility)->pluck('id');
+            $borrow = Borrow::whereIn('asset_id', $asset)
+                ->with('status_borrow')->latest()->get();
+        }
 
         return view('borrow2.index', compact('borrow'));
     }
@@ -37,35 +41,56 @@ class BorrowController extends Controller
      */
     public function create()
     {
-        $location = auth()->user()->city_id;
-        $facility = Facility::where('city_id', $location)->pluck('id');
-        $employee = Employee::where('city_id', $location)->get();
-        $asset = Asset::where('status_asset_id', 1)
-            ->where(function ($query) {
-                $query->where('status_borrow_id', 2)
-                    ->orWhere('status_borrow_id', null);
-            })
-            ->whereIn('facility_id', $facility)
-            ->with('facility')->latest()->get();
-        $status_borrow = StatusBorrow::all();
+        if (auth()->user()->role_id == 1) {
+            $employee = Employee::all();
+            $status_borrow = StatusBorrow::all();
+            $asset = Asset::where('status_asset_id', 1)
+                ->where(function ($query) {
+                    $query->where('status_borrow_id', 2)
+                        ->orWhere('status_borrow_id', null);
+                })->with('facility')->latest()->get();
+        } else {
+            $location = auth()->user()->city_id;
+            $facility = Facility::where('city_id', $location)->pluck('id');
+            $employee = Employee::where('city_id', $location)->get();
+            $asset = Asset::where('status_asset_id', 1)
+                ->where(function ($query) {
+                    $query->where('status_borrow_id', 2)
+                        ->orWhere('status_borrow_id', null);
+                })->whereIn('facility_id', $facility)
+                ->with('facility')->latest()->get();
+            $status_borrow = StatusBorrow::all();
+        }
 
         return view('borrow2.create', compact('asset', 'status_borrow', 'employee'));
     }
 
     public function create_byid($id)
     {
-        $assetById = Asset::findOrFail($id);
-        $location = auth()->user()->city_id;
-        $facility = Facility::where('city_id', $location)->pluck('id');
-        $employee = Employee::where('city_id', $location)->get();
-        $asset = Asset::where('status_asset_id', 1)
-            ->where(function ($query) {
-                $query->where('status_borrow_id', 2)
-                    ->orWhere('status_borrow_id', null);
-            })
-            ->whereIn('facility_id', $facility)
-            ->with('facility')->latest()->get();
-        $status_borrow = StatusBorrow::all();
+        if (auth()->user()->role_id == 1) {
+            $assetById = Asset::findOrFail($id);
+            $employee = Employee::all();
+            $asset = Asset::where('status_asset_id', 1)
+                ->where(function ($query) {
+                    $query->where('status_borrow_id', 2)
+                        ->orWhere('status_borrow_id', null);
+                })->with('facility')->latest()->get();
+            $status_borrow = StatusBorrow::all();
+        } else {
+            $assetById = Asset::findOrFail($id);
+            $location = auth()->user()->city_id;
+            $facility = Facility::where('city_id', $location)->pluck('id');
+            $employee = Employee::where('city_id', $location)->get();
+            $asset = Asset::where('status_asset_id', 1)
+                ->where(function ($query) {
+                    $query->where('status_borrow_id', 2)
+                        ->orWhere('status_borrow_id', null);
+                })
+                ->whereIn('facility_id', $facility)
+                ->with('facility')->latest()->get();
+            $status_borrow = StatusBorrow::all();
+        }
+
 
         return view('borrow2.create-byid', compact('asset', 'status_borrow', 'employee', 'assetById'));
     }
@@ -141,18 +166,30 @@ class BorrowController extends Controller
      */
     public function edit($id)
     {
-        $borrow = Borrow::with('asset', 'status_borrow')->findOrFail($id);
-        $location = auth()->user()->city_id;
-        $facility = Facility::where('city_id', $location)->pluck('id');
-        $employee = Employee::where('city_id', $location)->get();
-        $asset = Asset::where('status_asset_id', 1)
-            ->where(function ($query) {
-                $query->where('status_borrow_id', 2)
-                    ->orWhere('status_borrow_id', null);
-            })
-            ->whereIn('facility_id', $facility)
-            ->with('facility')->latest()->get();
-        $status_borrow = StatusBorrow::all();
+        if (auth()->user()->role_id == 1) {
+            $borrow = Borrow::with('asset', 'status_borrow')->findOrFail($id);
+            $employee = Employee::all();
+            $asset = Asset::where('status_asset_id', 1)
+                ->where(function ($query) {
+                    $query->where('status_borrow_id', 2)
+                        ->orWhere('status_borrow_id', null);
+                })->with('facility')->latest()->get();
+            $status_borrow = StatusBorrow::all();
+        } else {
+            $borrow = Borrow::with('asset', 'status_borrow')->findOrFail($id);
+            $location = auth()->user()->city_id;
+            $facility = Facility::where('city_id', $location)->pluck('id');
+            $employee = Employee::where('city_id', $location)->get();
+            $asset = Asset::where('status_asset_id', 1)
+                ->where(function ($query) {
+                    $query->where('status_borrow_id', 2)
+                        ->orWhere('status_borrow_id', null);
+                })
+                ->whereIn('facility_id', $facility)
+                ->with('facility')->latest()->get();
+            $status_borrow = StatusBorrow::all();
+        }
+
 
         return view('borrow2.upload', compact('asset', 'status_borrow', 'borrow', 'employee'));
     }

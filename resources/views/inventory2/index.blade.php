@@ -13,7 +13,11 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="fa fa-paste bg-c-yellow"></i>
+                                @if (auth()->user()->role_id == 1)
+                                    <i class="fa fa-paste bg-c-red"></i>
+                                @else
+                                    <i class="fa fa-paste bg-c-yellow"></i>
+                                @endif
                                 <div class="d-inline">
                                     <h4 class="mt-3">Daftar Inventaris</h4>
                                 </div>

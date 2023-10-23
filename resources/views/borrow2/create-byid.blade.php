@@ -13,7 +13,11 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="fa fa-handshake-o bg-c-brown"></i>
+                                @if (auth()->user()->role_id == 1)
+                                    <i class="fa fa-handshake-o bg-c-light-blue"></i>
+                                @else
+                                    <i class="fa fa-handshake-o bg-c-brown"></i>
+                                @endif
                                 <div class="d-inline">
                                     <h4 class="mt-3">Tambah Data Peminjaman Aset</h4>
                                 </div>
@@ -32,11 +36,9 @@
                                 <div class="card-header">
                                     <h5>Form Tambah Data Peminjaman Aset</h5>
                                     <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
-
                                     <div class="card-header-right">
                                         <i class="icofont icofont-spinner-alt-5"></i>
                                     </div>
-
                                 </div>
                                 <div class="card-block">
                                     <form action="{{ route('borrow.store') }}" method="POST" enctype="multipart/form-data">
@@ -50,7 +52,11 @@
                                                     @foreach ($employee as $data)
                                                         <option value="{{ $data->id }}"
                                                             {{ old('employee_id') == $data->id ? 'selected' : '' }}>
-                                                            {{ $data->employee_name }}
+                                                            @if (auth()->user()->role_id == 1)
+                                                                {{ $data->employee_name . ' (' . $data->city->city_name . ')' }}
+                                                            @else
+                                                                {{ $data->employee_name }}
+                                                            @endif
                                                         </option>
                                                         @error('employee_id')
                                                             <div class="invalid-feedback">
@@ -70,7 +76,11 @@
                                                     @foreach ($asset as $data)
                                                         <option value="{{ $data->id }}"
                                                             {{ $assetById->id == $data->id ? 'selected' : '' }}>
-                                                            {{ $data->asset_code . ' ' . $data->asset_name }}
+                                                            @if (auth()->user()->role_id == 1)
+                                                                {{ $data->asset_code . ' ' . $data->asset_name . ' (' . $data->facility->city->city_name . ')' }}
+                                                            @else
+                                                                {{ $data->asset_code . ' ' . $data->asset_name }}
+                                                            @endif
                                                         </option>
                                                         @error('asset_id')
                                                             <div class="invalid-feedback">

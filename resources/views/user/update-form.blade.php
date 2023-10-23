@@ -94,7 +94,8 @@
                                         @foreach ($city as $data)
                                             <option value="{{ $data->id }}"
                                                 {{ $data->id == $user->city_id ? 'selected' : '' }}>
-                                                {{ $data->city_name }}</option>
+                                                {{ $data->city_name }}
+                                            </option>
                                         @endforeach
                                     </select>
                                 </div>

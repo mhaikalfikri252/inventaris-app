@@ -13,7 +13,11 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="fa fa-handshake-o bg-c-brown"></i>
+                                @if (auth()->user()->role_id == 1)
+                                    <i class="fa fa-handshake-o bg-c-light-blue"></i>
+                                @else
+                                    <i class="fa fa-handshake-o bg-c-brown"></i>
+                                @endif
                                 <div class="d-inline">
                                     <h4 class="mt-3">Daftar Peminjaman Aset</h4>
                                 </div>
@@ -44,6 +48,9 @@
                                                     <th>No FA</th>
                                                     <th>Barang</th>
                                                     <th>Lokasi</th>
+                                                    @if (auth()->user()->role_id == 1)
+                                                        <th>Kota</th>
+                                                    @endif
                                                     <th>Tanggal Pinjam</th>
                                                     <th>Tanggal Kembali</th>
                                                     <th>Status</th>
@@ -59,6 +66,9 @@
                                                         <td>{{ $data->asset->asset_code }}</td>
                                                         <td>{{ $data->asset->asset_name }}</td>
                                                         <td>{{ $data->asset->location }}</td>
+                                                        @if (auth()->user()->role_id == 1)
+                                                            <td>{{ $data->asset->facility->city->city_name }}</td>
+                                                        @endif
                                                         <td>{{ \Carbon\Carbon::parse($data->borrow_date)->format('d/m/Y') }}
                                                         </td>
                                                         <td>{{ \Carbon\Carbon::parse($data->return_date)->format('d/m/Y') }}
@@ -115,6 +125,9 @@
                                                     <th>No FA</th>
                                                     <th>Barang</th>
                                                     <th>Lokasi</th>
+                                                    @if (auth()->user()->role_id == 1)
+                                                        <th>Kota</th>
+                                                    @endif
                                                     <th>Tanggal Pinjam</th>
                                                     <th>Tanggal Kembali</th>
                                                     <th>Status</th>

@@ -14,14 +14,22 @@
                         <div class="col-lg-8">
                             @if ($asset->status_asset->id == 1)
                                 <div class="page-header-title">
-                                    <i class="fa fa-cube bg-c-pink"></i>
+                                    @if (auth()->user()->role_id == 1)
+                                        <i class="fa fa-cube bg-c-tosca"></i>
+                                    @else
+                                        <i class="fa fa-cube bg-c-pink"></i>
+                                    @endif
                                     <div class="d-inline">
                                         <h4 class="mt-3">Edit Data Aset</h4>
                                     </div>
                                 </div>
                             @else
                                 <div class="page-header-title">
-                                    <i class="fa fa-times-rectangle-o bg-c-green"></i>
+                                    @if (auth()->user()->role_id == 1)
+                                        <i class="fa fa-times-rectangle-o bg-c-purple"></i>
+                                    @else
+                                        <i class="fa fa-times-rectangle-o bg-c-green"></i>
+                                    @endif
                                     <div class="d-inline">
                                         <h4 class="mt-3">Edit Data Aset Write Off</h4>
                                     </div>
@@ -41,16 +49,14 @@
                                 <div class="card-header">
                                     <h5>Form Edit Data Aset</h5>
                                     <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
-
                                     <div class="card-header-right">
                                         <i class="icofont icofont-spinner-alt-5"></i>
                                     </div>
-
                                 </div>
                                 <div class="card-block">
                                     <form action="{{ route('asset.update', $asset->id) }}" method="POST"
                                         enctype="multipart/form-data">
-                                        @method('PUT')
+                                        @method('put')
                                         @csrf
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">No FA</label>
@@ -90,7 +96,11 @@
                                                     @foreach ($facility as $data)
                                                         <option value="{{ $data->id }}"
                                                             {{ $data->id == $asset->facility_id ? 'selected' : '' }}>
-                                                            {{ $data->facility_name }}
+                                                            @if (auth()->user()->role_id == 1)
+                                                                {{ $data->facility_name . ' ' . $data->city->city_name }}
+                                                            @else
+                                                                {{ $data->facility_name }}
+                                                            @endif
                                                         </option>
                                                         @error('facility_id')
                                                             <div class="invalid-feedback">
@@ -138,7 +148,12 @@
                                                     @foreach ($employee as $data)
                                                         <option value="{{ $data->id }}"
                                                             {{ $data->id == $asset->employee_id ? 'selected' : '' }}>
-                                                            {{ $data->employee_name }}</option>
+                                                            @if (auth()->user()->role_id == 1)
+                                                                {{ $data->employee_name . ' (' . $data->city->city_name . ')' }}
+                                                            @else
+                                                                {{ $data->employee_name }}
+                                                            @endif
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -202,7 +217,6 @@
                                                 @enderror
                                             </div>
                                         </div>
-
                                         <br>
                                         <div class="row">
                                             <button type="submit" class="btn btn-success"

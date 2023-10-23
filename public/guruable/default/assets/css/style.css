@@ -19238,6 +19238,38 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
     color: #000;
 }
 
+.bg-c-tosca {
+    background-color: #39adb5;
+}
+
+.text-c-tosca {
+    color: #39adb5;
+}
+
+.bg-c-purple {
+    background-color: #7c4dff;
+}
+
+.text-c-purple {
+    color: #7c4dff;
+}
+
+.bg-c-red {
+    background-color: #ff5370;
+}
+
+.text-c-red {
+    color: #ff5370;
+}
+
+.bg-c-light-blue {
+    background-color: #4680ff;
+}
+
+.text-c-light-blue {
+    color: #4680ff;
+}
+
 .bg-c-brown {
     background-color: #ab7967;
 }

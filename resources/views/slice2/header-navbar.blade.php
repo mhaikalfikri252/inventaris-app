@@ -1,10 +1,8 @@
 <nav class="navbar header-navbar pcoded-header">
     <div class="navbar-wrapper">
-
         <div class="navbar-logo">
             <img class="img-fluid" src="{{ asset('images/sos2.png') }}" alt="Theme-Logo" />
         </div>
-
         <div class="navbar-container container-fluid">
             <ul class="nav-left">
                 <li>
@@ -12,13 +10,11 @@
                     </div>
                 </li>
             </ul>
-
             <ul class="nav-right">
                 <li class="user-profile header-notification">
                     <a href="#">
-                        <img src="{{ asset('images/user.png') }}" class="img-radius" alt="User-Profile-Image"
-                            style="width: 15%; height: 15%;">
-                        <span>{{ auth()->user()->username }}</span>
+                        {{-- <img src="{{ asset('images/conf.png') }}" class="img-radius" alt="User-Profile-Image"> --}}
+                        <small>Account</small>
                         <i class="ti-angle-down"></i>
                     </a>
                     <ul class="show-notification profile-notification">
@@ -38,7 +34,6 @@
                     </ul>
                 </li>
             </ul>
-
         </div>
     </div>
 </nav>

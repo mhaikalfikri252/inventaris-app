@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,9 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        //
+        $city = City::all();
+
+        return view('employee.create', compact('city'));
     }
 
     /**
@@ -37,7 +40,19 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'employee_name' => 'required|string',
+            'city_id' => 'required',
+            'address' => 'required|string|max:255',
+            'phone' => 'required',
+            'position' => 'required|string',
+        ]);
+
+        Employee::create($data);
+
+        toast('Berhasil menambahkan karyawan!', 'success');
+
+        return redirect()->route('employee.index');
     }
 
     /**
@@ -57,9 +72,12 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function edit(Employee $employee)
+    public function edit($id)
     {
-        //
+        $employee = Employee::with('city')->findOrFail($id);
+        $city = City::all();
+
+        return view('employee.update', compact('employee', 'city'));
     }
 
     /**
@@ -69,9 +87,23 @@ class EmployeeController extends Controller
      * @param  \App\Models\Employee  $employee
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, $id)
     {
-        //
+        $rules = [
+            'employee_name' => 'required|string',
+            'city_id' => 'required',
+            'address' => 'required|string|max:255',
+            'phone' => 'required',
+            'position' => 'required|string',
+        ];
+
+        $data = $request->validate($rules);
+
+        Employee::findOrFail($id)->update($data);
+
+        toast('Berhasil mengedit karyawan!', 'success');
+
+        return redirect()->route('employee.index');
     }
 
     /**
@@ -82,6 +114,8 @@ class EmployeeController extends Controller
      */
     public function destroy(Employee $employee)
     {
-        //
+        Employee::destroy($employee->id);
+
+        return redirect()->route('employee.index');
     }
 }

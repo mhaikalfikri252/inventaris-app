@@ -63,7 +63,7 @@
                                                     @foreach ($city as $data)
                                                         <option value="{{ $data->id }}"
                                                             {{ old('city_id') == $data->id ? 'selected' : '' }}>
-                                                            {{ $data->name }}
+                                                            {{ $data->city_name }}
                                                         </option>
                                                         @error('city_id')
                                                             <div class="invalid-feedback">

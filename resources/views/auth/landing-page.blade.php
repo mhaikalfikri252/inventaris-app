@@ -52,7 +52,7 @@
                     <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
                     <li><a class="nav-link scrollto" href="#about">About</a></li>
                     <li><a class="nav-link scrollto" href="#visimisi">Visi & Misi</a></li>
-                    <li><a class="getstarted scrollto" href="{{ route('login') }}">Get Started</a></li>
+                    <li><a class="getstarted scrollto" href="{{ route('login') }}">Login</a></li>
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -66,7 +66,7 @@
                 <div class="col-lg-6 d-flex flex-column justify-content-center">
                     <h1 data-aos="fade-up">SIANAS</h1>
                     <h2 data-aos="fade-up" data-aos-delay="400">Sistem Informasi Aset Nasional</h2>
-                    <div data-aos="fade-up" data-aos-delay="600">
+                    {{-- <div data-aos="fade-up" data-aos-delay="600">
                         <div class="text-center text-lg-start">
                             <a href="{{ route('login') }}"
                                 class="btn-get-started scrollto d-inline-flex align-items-center justify-content-center align-self-center">
@@ -74,7 +74,7 @@
                                 <i class="bi bi-arrow-right"></i>
                             </a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="col-lg-6 hero-img" data-aos="zoom-out" data-aos-delay="200">
                     <img src="{{ asset('flexstart/assets/img/hero-img.png') }}" class="img-fluid" alt="">

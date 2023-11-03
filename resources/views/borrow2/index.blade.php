@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
-                                        <table id="simpletable" class="table table-striped table-bordered nowrap">
+                                        <table id="table-default" class="table table-striped table-bordered nowrap">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -96,10 +96,12 @@
                                                         @endif
                                                         <td>
                                                             <a href="{{ route('print.borrow.letter', $data->id) }}"
-                                                                class="btn btn-info"><i class="fa fa-file-pdf-o"></i></a>
+                                                                class="btn btn-info" target="_blank">
+                                                                <i class="fa fa-file-pdf-o"></i></a>
                                                             @if ($data->letter != null)
                                                                 <a href="{{ asset('files/' . $data->letter) }}"
-                                                                    class="btn btn-secondary"><i class="ti-eye"></i></a>
+                                                                    class="btn btn-secondary" target="_blank">
+                                                                    <i class="ti-eye"></i></a>
                                                             @endif
                                                             <a href="{{ route('borrow.edit', $data->id) }}"
                                                                 class="btn btn-warning"><i class="fa fa-upload"></i></a>

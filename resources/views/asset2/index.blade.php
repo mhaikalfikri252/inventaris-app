@@ -38,39 +38,41 @@
                                         <a href="{{ route('asset.create') }}" class="btn btn-success"
                                             style="margin-left: 15px"> <i class="fa fa-plus"></i>
                                             Create</a>
-                                        <a href="#" class="btn btn-primary"
-                                            style="margin-left: 10px" onclick="printAssetQR()">
+                                        <a href="#" class="btn btn-primary" style="margin-left: 10px"
+                                            @if (auth()->user()->role_id == 1) onclick="printAllAssetQR()"
+                                        @else
+                                         onclick="printAllAssetQRUser()" @endif>
                                             <i class="fa fa-print"></i>
                                             Print</a>
                                     </div>
                                     <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
                                 </div>
                                 <div class="card-block">
-                                    {{-- <div class="dt-responsive table-responsive">
-                                        <table class="m-b-20">
-                                            <tbody>
-                                                <tr>
-                                                    <td>Kota:</td>
-                                                    <td>
-                                                        <input class="form-control" type="text" id="searchcity"
-                                                            name="searchcity">
-                                                    </td>
-                                                </tr> --}}
-                                    {{-- <tr>
-                                                    <td>Maximal Tahun:</td>
-                                                    <td>
-                                                        <input class="form-control" type="text" id="max"
-                                                            name="max">
-                                                    </td>
-                                                </tr> --}}
-                                    {{-- </tbody>
-                                        </table>
-                                    </div> --}}
+                                    @if (auth()->user()->role_id == 1)
+                                        <div class="dt-responsive table-responsive">
+                                            <table class="m-b-20">
+                                                <tbody>
+                                                    <tr>
+                                                        <td>Kota:</td>
+                                                        <td>
+                                                            <input rel="3" type="text" class="search">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Tahun:</td>
+                                                        <td>
+                                                            <input rel="4" type="text" class="search">
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    @endif
                                     <div class="dt-responsive table-responsive">
                                         @if (auth()->user()->role_id == 1)
-                                            <table id="asset-search" class="table table-striped table-bordered nowrap">
+                                            <table id="table-asset" class="table table-striped table-bordered nowrap">
                                             @else
-                                                <table id="simpletable" class="table table-striped table-bordered nowrap">
+                                                <table id="table-default" class="table table-striped table-bordered nowrap">
                                         @endif
                                         <thead>
                                             <tr>
@@ -120,7 +122,8 @@
                                                     <td>{{ $data->information }}</td>
                                                     <td>
                                                         <a href="{{ route('print.asset.qrcode', $data->id) }}"
-                                                            class="btn btn-info"><i class="fa fa-qrcode"></i></a>
+                                                            class="btn btn-info" target="_blank">
+                                                            <i class="fa fa-qrcode"></i></a>
                                                         <a href="{{ route('create.borrow.byid', $data->id) }}"
                                                             class="btn btn-secondary"><i class="fa fa-handshake-o"></i></a>
                                                         <a href="{{ route('asset.edit', $data->id) }}"

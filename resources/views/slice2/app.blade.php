@@ -132,8 +132,26 @@
 
     <!-- Page specific script -->
     <script>
-        // Data Table
-        $("#simpletable").DataTable({
+        // Setup - add a text input to each footer cell asset
+        // $('#asset-search tfoot th').each(function() {
+        //     var title = $(this).text();
+        //     $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+        // });
+
+        // Apply the search footer in asset
+        // table.columns().every(function() {
+        //     var that = this;
+        //     $('input', this.footer()).on('keyup change', function() {
+        //         if (that.search() !== this.value) {
+        //             that
+        //                 .search(this.value)
+        //                 .draw();
+        //         }
+        //     });
+        // });
+
+        // DataTable Default
+        var tableDefault = $("#table-default").DataTable({
             "paging": true,
             "searching": true,
             "ordering": true,
@@ -143,34 +161,8 @@
             "lengthChange": true,
         });
 
-        // Multiple Data Table
-        // $(function() {
-        //     $("#example1").DataTable({
-        //         "responsive": true,
-        //         "lengthChange": false,
-        //         "autoWidth": false,
-        //         "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        // }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        //     });
-        //     $('#example2').DataTable({
-        //         "paging": true,
-        //         "lengthChange": false,
-        //         "searching": false,
-        //         "ordering": true,
-        //         "info": true,
-        //         "autoWidth": false,
-        //         "responsive": true,
-        //     });
-        // });
-
-        // Setup - add a text input to each footer cell
-        $('#asset-search tfoot th').each(function() {
-            var title = $(this).text();
-            $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
-        });
-
         // DataTable Asset
-        var table = $('#asset-search').DataTable({
+        var tableAsset = $('#table-asset').DataTable({
             "paging": true,
             "searching": true,
             "ordering": true,
@@ -181,12 +173,14 @@
             dom: 'Bfrtip',
             buttons: [{
                     extend: 'excelHtml5',
+                    title: 'Data Aset',
                     exportOptions: {
                         columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10]
                     }
                 },
                 {
                     extend: 'pdfHtml5',
+                    title: 'Data Aset',
                     exportOptions: {
                         columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10]
                     }
@@ -194,23 +188,45 @@
             ]
         });
 
-        // Apply the search footer
-        table.columns().every(function() {
-            var that = this;
-
-            $('input', this.footer()).on('keyup change', function() {
-                if (that.search() !== this.value) {
-                    that
-                        .search(this.value)
-                        .draw();
-                }
-            });
+        // Asset -> Search Kota dan Tahun
+        $('input.search').on('keyup change', function() {
+            var rel = $(this).attr("rel");
+            tableAsset.columns(rel).search(this.value).draw();
         });
 
-        const printAssetQR = function() {
-            let assets = table.rows({"filter": "applied"}).data();
+        // Inventory -> Search Kota dan Tahun
+        $('input.search').on('keyup change', function() {
+            var rel = $(this).attr("rel");
+            tableDefault.columns(rel).search(this.value).draw();
+        });
+
+        // Print All Asset
+        const printAllAssetQR = function() {
+            let assets = tableAsset.rows({
+                "filter": "applied"
+            }).data();
             let url = 'print/asset/all-qrcode';
-            if(assets.length > 0) url += '?acodes=' + assets.map(a=>a[1]).join();
+            if (assets.length > 0) url += '?acodes=' + assets.map(a => a[1]).join();
+            window.open(url, 'blank');
+        }
+
+        // Print All Asset & Asset Write Off in User
+        const printAllAssetQRUser = function() {
+            let assets = tableDefault.rows({
+                "filter": "applied"
+            }).data();
+            let url = 'print/asset/all-qrcode';
+            if (assets.length > 0) url += '?acodes=' + assets.map(a => a[1]).join();
+            window.open(url, 'blank');
+        }
+
+        // Print All Inventory
+        const printAllInventoryQR = function() {
+            let inventory = tableDefault.rows({
+                "filter": "applied"
+            }).data();
+            let url = 'print/inventory/all-qrcode';
+            if (inventory.length > 0) url += '?acodes=' + inventory.map(a => a[1]).join();
             window.open(url, 'blank');
         }
 

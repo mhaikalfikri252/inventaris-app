@@ -38,7 +38,7 @@
                                         <a href="{{ route('inventory.create') }}" class="btn btn-success"
                                             style="margin-left: 15px"> <i class="fa fa-plus"></i>
                                             Create</a>
-                                        <a href="{{ route('inventory.create') }}" class="btn btn-primary"
+                                        <a href="#" class="btn btn-primary" onclick="printAllInventoryQR()"
                                             style="margin-left: 10px">
                                             <i class="fa fa-print"></i>
                                             Print</a>
@@ -47,10 +47,11 @@
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
-                                        <table id="simpletable" class="table table-striped table-bordered nowrap">
+                                        <table id="table-default" class="table table-striped table-bordered nowrap">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
+                                                    <th>ID</th>
                                                     <th>Nama</th>
                                                     <th>Fasilitas</th>
                                                     <th>Tanggal Beli</th>
@@ -67,6 +68,7 @@
                                                 @foreach ($inventory as $data)
                                                     <tr>
                                                         <td>{{ $no++ }}</td>
+                                                        <td>{{ $data->id }}</td>
                                                         <td>{{ $data->inventory_name }}</td>
                                                         <td>{{ $data->facility->facility_name . ' ' . $data->facility->city->city_name }}
                                                         </td>
@@ -82,7 +84,8 @@
                                                         <td>{{ $data->information }}</td>
                                                         <td>
                                                             <a href="{{ route('print.inventory.qrcode', $data->id) }}"
-                                                                class="btn btn-info"><i class="fa fa-qrcode"></i></a>
+                                                                class="btn btn-info" target="_blank">
+                                                                <i class="fa fa-qrcode"></i></a>
                                                             <a href="{{ route('inventory.edit', $data->id) }}"
                                                                 class="btn btn-warning"><i class="ti-pencil-alt"></i></a>
                                                             <form action="{{ route('inventory.destroy', $data->id) }}"
@@ -101,6 +104,7 @@
                                             <tfoot>
                                                 <tr>
                                                     <th>No</th>
+                                                    <th>ID</th>
                                                     <th>Nama</th>
                                                     <th>Fasilitas</th>
                                                     <th>Tanggal Beli</th>

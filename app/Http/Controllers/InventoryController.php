@@ -190,4 +190,14 @@ class InventoryController extends Controller
         $pdf = PDF::loadview('inventory2.qrcode', compact('inventory'));
         return $pdf->stream();
     }
+
+    public function print_all_qrcode()
+    {
+        $acodes = request()->get('acodes');
+        if (!empty($acodes)) $inventory = Inventory::whereIn('id', explode(',', $acodes))->get();
+        else $inventory = Inventory::all();
+        $pdf = PDF::setPaper('A4', 'portrait')->loadview('inventory2.print', compact('inventory'));
+        return $pdf->stream();
+        // return view('inventory2.print', compact('inventory'));
+    }
 }

@@ -12,7 +12,7 @@
             <br>
             <div>
                 <img src="data:image/png;base64, {!! base64_encode(
-                    QrCode::size(150)->format('png')->generate(
+                    QrCode::size(150)->format('png')->merge(public_path('images\logo.png'), 0.3, true)->errorCorrection('H')->generate(
                             'Nama : ' .
                                 $inventory->inventory_name .
                                 "\n" .

@@ -224,8 +224,11 @@ class AssetController extends Controller
 
     public function print_all_qrcode()
     {
-        $asset = Asset::all();
-        $pdf = PDF::loadview('asset2.print', compact('asset'));
+        $acodes = request()->get('acodes');
+        if(!empty($acodes)) $asset = Asset::whereIn('asset_code', explode(',', $acodes))->get();
+        else $asset = Asset::all();
+        // return view('asset2.print', compact('asset'));
+        $pdf = PDF::setPaper('A4', 'portrait')->loadview('asset2.print', compact('asset'));
         return $pdf->stream();
     }
 }

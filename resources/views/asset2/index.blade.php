@@ -38,8 +38,8 @@
                                         <a href="{{ route('asset.create') }}" class="btn btn-success"
                                             style="margin-left: 15px"> <i class="fa fa-plus"></i>
                                             Create</a>
-                                        <a href="{{ route('asset.create') }}" class="btn btn-primary"
-                                            style="margin-left: 10px">
+                                        <a href="#" class="btn btn-primary"
+                                            style="margin-left: 10px" onclick="printAssetQR()">
                                             <i class="fa fa-print"></i>
                                             Print</a>
                                     </div>

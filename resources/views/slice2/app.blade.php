@@ -207,6 +207,13 @@
             });
         });
 
+        const printAssetQR = function() {
+            let assets = table.rows({"filter": "applied"}).data();
+            let url = 'print/asset/all-qrcode';
+            if(assets.length > 0) url += '?acodes=' + assets.map(a=>a[1]).join();
+            window.open(url, 'blank');
+        }
+
         // Show Password
         $(document).ready(function() {
             $('#checkbox').on('change', function() {

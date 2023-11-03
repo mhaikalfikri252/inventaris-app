@@ -3,68 +3,57 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Print QR Code</title>
+    <title>Assets QR Code</title>
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-        <div class="content-wrapper">
-
-            <!-- Main content -->
-            <section class="content">
-                <div class="container-fluid">
-                    <!-- Small boxes (Stat box) -->
-                    <div class="col">
-                        <div class="row mb-3" style="text-align: center; border:1px solid #000; width:30%">
-                            <br>
-                            <div>
-                                <img src="data:image/png;base64, {!! base64_encode(
-                                    QrCode::size(150)->format('png')->generate(
-                                            'No FA : ' .
-                                                $asset->asset_code .
-                                                "\n" .
-                                                'Nama : ' .
-                                                $asset->asset_name .
-                                                "\n" .
-                                                'Fasilitas : ' .
-                                                $asset->facility->facility_name .
-                                                ' ' .
-                                                $asset->facility->city->city_name .
-                                                "\n" .
-                                                'Tanggal : ' .
-                                                \Carbon\Carbon::parse($asset->purchase_date)->format('d/m/Y') .
-                                                "\n" .
-                                                'Lokasi : ' .
-                                                $asset->location .
-                                                "\n" .
-                                                'Pic : ' .
-                                                $asset->employee->employee_name .
-                                                "\n" .
-                                                'Harga : ' .
-                                                $asset->price .
-                                                "\n" .
-                                                'Status : ' .
-                                                $asset->status_asset->status_name .
-                                                "\n" .
-                                                'Keterangan : ' .
-                                                $asset->information,
-                                        ),
-                                ) !!} ">
-                            </div>
-                            <br>
-                            <div> {{ $asset->asset_code }} </div>
-                            <div> {{ $asset->asset_name }} </div>
-                            <div> {{ $asset->location }} </div>
-                            <br>
-                        </div>
-                    </div>
-                    <!-- /.row -->
-                </div><!-- /.container-fluid -->
-            </section>
+<body>
+@foreach($asset->chunk(3) as $chunk)
+<div style="width: 60em; height: 20em;">
+    @foreach($chunk as $data)
+        <div style="text-align: center; border:1px solid #000; width: 12em; float: left; margin: 1em;">
+            <br>
+            <div>
+                <img src="data:image/png;base64, {!! base64_encode(
+                    QrCode::size(150)->format('png')->generate(
+                            'No FA : ' .
+                                $data->asset_code .
+                                "\n" .
+                                'Nama : ' .
+                                $data->asset_name .
+                                "\n" .
+                                'Fasilitas : ' .
+                                $data->facility->facility_name .
+                                ' ' .
+                                $data->facility->city->city_name .
+                                "\n" .
+                                'Tanggal : ' .
+                                \Carbon\Carbon::parse($data->purchase_date)->format('d/m/Y') .
+                                "\n" .
+                                'Lokasi : ' .
+                                $data->location .
+                                "\n" .
+                                'Pic : ' .
+                                $data->employee->employee_name .
+                                "\n" .
+                                'Harga : ' .
+                                $data->price .
+                                "\n" .
+                                'Status : ' .
+                                $data->status_asset->status_name .
+                                "\n" .
+                                'Keterangan : ' .
+                                $data->information,
+                        ),
+                ) !!} ">
+            </div>
+            <br>
+            <div> {{ $data->asset_code }} </div>
+            <div> {{ $data->asset_name }} </div>
+            <div> {{ $data->location }} </div>
+            <br>
         </div>
-    </div>
-
+    @endforeach
+</div>
+@endforeach
 </body>
-
 </html>

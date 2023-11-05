@@ -34,8 +34,8 @@
                             <!-- Zero config.table start -->
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="#" class="btn btn-primary" onclick="printAllAssetQRUser()">
-                                        <i class="fa fa-print"></i> Print </a>
+                                    <a href="#" class="btn btn-primary btn-style" onclick="printAllAssetQRUser()">
+                                        <i class="fa fa-print"></i> Print</a>
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">

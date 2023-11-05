@@ -175,7 +175,7 @@
                                                 <i class="fa fa-save"></i> Save</button>
                                             <a href="{{ route('inventory.index') }}"
                                                 class="btn btn-danger btn-printcancel">
-                                                <i class="fa fa-times"></i> Cancel</a>
+                                                <i class="fa fa-times"></i>Cancel</a>
                                         </div>
                                     </form>
                                 </div>

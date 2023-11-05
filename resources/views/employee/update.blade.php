@@ -115,9 +115,9 @@
                                         <br>
                                         <div class="row">
                                             <button type="submit" class="btn btn-success btn-addsave">
-                                                <i class="fa fa-save"></i>Save</button>
+                                                <i class="fa fa-save"></i> Save</button>
                                             <a href="{{ route('employee.index') }}" class="btn btn-danger btn-printcancel">
-                                                <i class="fa fa-times"></i> Cancel</a>
+                                                <i class="fa fa-times"></i>Cancel</a>
                                         </div>
                                     </form>
                                 </div>

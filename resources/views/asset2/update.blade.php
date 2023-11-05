@@ -217,10 +217,10 @@
                                         <br>
                                         <div class="row">
                                             <button type="submit" class="btn btn-success btn-addsave">
-                                                <i class="fa fa-save"></i>Save</button>
+                                                <i class="fa fa-save"></i> Save</button>
                                             <a href="{{ $asset->status_asset->id == 1 ? route('asset.index') : route('writeoff.index') }}"
                                                 class="btn btn-danger btn-printcancel">
-                                                <i class="fa fa-times"></i> Cancel</a>
+                                                <i class="fa fa-times"></i>Cancel</a>
                                         </div>
                                     </form>
                                 </div>

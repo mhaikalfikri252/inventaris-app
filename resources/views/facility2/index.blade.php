@@ -30,7 +30,7 @@
                             <!-- Zero config.table start -->
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="{{ route('facility.create') }}" class="btn btn-success">
+                                    <a href="{{ route('facility.create') }}" class="btn btn-success btn-style">
                                         <i class="fa fa-plus"></i> Tambah</a>
                                 </div>
                                 <div class="card-block">

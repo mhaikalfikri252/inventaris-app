@@ -34,9 +34,8 @@
                             <!-- Zero config.table start -->
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="{{ route('borrow.create') }}" class="btn btn-success">
-                                        <i class="fa fa-plus"></i> Create</a>
-                                    <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
+                                    <a href="{{ route('borrow.create') }}" class="btn btn-success btn-addsave">
+                                        <i class="fa fa-plus"></i> Tambah</a>
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
@@ -96,22 +95,24 @@
                                                         @endif
                                                         <td>
                                                             <a href="{{ route('print.borrow.letter', $data->id) }}"
-                                                                class="btn btn-info" target="_blank">
-                                                                <i class="fa fa-file-pdf-o"></i></a>
+                                                                class="btn btn-info btn-style" target="_blank">
+                                                                <i class="fa fa-file-pdf-o"></i>
+                                                            </a>
                                                             @if ($data->letter != null)
                                                                 <a href="{{ asset('files/' . $data->letter) }}"
-                                                                    class="btn btn-secondary" target="_blank">
+                                                                    class="btn btn-secondary btn-style" target="_blank">
                                                                     <i class="ti-eye"></i></a>
                                                             @endif
                                                             <a href="{{ route('borrow.edit', $data->id) }}"
-                                                                class="btn btn-warning"><i class="fa fa-upload"></i></a>
+                                                                class="btn btn-warning btn-style">
+                                                                <i class="fa fa-upload"></i></a>
                                                             {{-- <a href="{{ route('borrow.show', $data->id) }}"
                                                                 class="btn btn-info"><i class="ti-eye"></i></a> --}}
                                                             <form action="{{ route('borrow.destroy', $data->id) }}"
                                                                 method="POST" class="d-inline">
                                                                 @method('delete')
                                                                 @csrf
-                                                                <button class="btn btn-danger"
+                                                                <button class="btn btn-danger btn-style"
                                                                     onclick="return confirm('Apakah anda yakin ingin menghapus peminjaman aset?')">
                                                                     <i class="ti-trash"></i>
                                                                 </button>

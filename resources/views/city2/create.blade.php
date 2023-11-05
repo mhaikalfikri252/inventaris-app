@@ -31,10 +31,6 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h5>Form Tambah Data Kota</h5>
-                                    <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
-                                    <div class="card-header-right">
-                                        <i class="icofont icofont-spinner-alt-5"></i>
-                                    </div>
                                 </div>
                                 <div class="card-block">
                                     <form action="{{ route('city.store') }}" method="POST" enctype="multipart/form-data">
@@ -54,10 +50,10 @@
                                         </div>
                                         <br>
                                         <div class="row">
-                                            <button type="submit" class="btn btn-success"
-                                                style="margin-left: 15px">Save</button>
-                                            <a href="{{ route('city.index') }}" class="btn btn-danger"
-                                                style="margin-left: 10px">Cancel</a>
+                                            <button type="submit" class="btn btn-success btn-addsave">
+                                                <i class="fa fa-save"></i> Save</button>
+                                            <a href="{{ route('city.index') }}" class="btn btn-danger btn-printcancel">
+                                                <i class="fa fa-times"></i> Cancel</a>
                                         </div>
                                     </form>
                                 </div>

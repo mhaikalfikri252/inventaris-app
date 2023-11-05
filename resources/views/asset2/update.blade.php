@@ -48,10 +48,6 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h5>Form Edit Data Aset</h5>
-                                    <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
-                                    <div class="card-header-right">
-                                        <i class="icofont icofont-spinner-alt-5"></i>
-                                    </div>
                                 </div>
                                 <div class="card-block">
                                     <form action="{{ route('asset.update', $asset->id) }}" method="POST"
@@ -180,7 +176,8 @@
                                                     @foreach ($status_asset as $data)
                                                         <option value="{{ $data->id }}"
                                                             {{ $data->id == $asset->status_asset_id ? 'selected' : '' }}>
-                                                            {{ $data->status_name }}</option>
+                                                            {{ $data->status_name }}
+                                                        </option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -219,10 +216,11 @@
                                         </div>
                                         <br>
                                         <div class="row">
-                                            <button type="submit" class="btn btn-success"
-                                                style="margin-left: 15px">Save</button>
+                                            <button type="submit" class="btn btn-success btn-addsave">
+                                                <i class="fa fa-save"></i>Save</button>
                                             <a href="{{ $asset->status_asset->id == 1 ? route('asset.index') : route('writeoff.index') }}"
-                                                class="btn btn-danger" style="margin-left: 10px">Cancel</a>
+                                                class="btn btn-danger btn-printcancel">
+                                                <i class="fa fa-times"></i> Cancel</a>
                                         </div>
                                     </form>
                                 </div>

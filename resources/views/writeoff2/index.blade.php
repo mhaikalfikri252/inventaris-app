@@ -35,9 +35,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <a href="#" class="btn btn-primary" onclick="printAllAssetQRUser()">
-                                        <i class="fa fa-print"></i>
-                                        Print</a>
-                                    <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
+                                        <i class="fa fa-print"></i> Print </a>
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
@@ -93,15 +91,16 @@
                                                         <td>{{ $data->information }}</td>
                                                         <td>
                                                             <a href="{{ route('print.asset.qrcode', $data->id) }}"
-                                                                class="btn btn-info" target="_blank">
+                                                                class="btn btn-info btn-style" target="_blank">
                                                                 <i class="fa fa-qrcode"></i></a>
                                                             <a href="{{ route('asset.edit', $data->id) }}"
-                                                                class="btn btn-warning"><i class="ti-pencil-alt"></i></a>
+                                                                class="btn btn-warning btn-style"><i
+                                                                    class="ti-pencil-alt"></i></a>
                                                             <form action="{{ route('asset.destroy', $data->id) }}"
                                                                 method="POST" class="d-inline">
                                                                 @method('delete')
                                                                 @csrf
-                                                                <button class="btn btn-danger"
+                                                                <button class="btn btn-danger btn-style"
                                                                     onclick="return confirm('Apakah anda yakin ingin menghapus aset?')">
                                                                     <i class="ti-trash"></i>
                                                                 </button>

@@ -19166,6 +19166,23 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
     left: 15px;
 }
 
+.btn-style {
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.btn-addsave {
+    padding: 10px;
+    border-radius: 4px;
+    margin-left: 15px;
+}
+
+.btn-printcancel {
+    padding: 10px;
+    border-radius: 4px;
+    margin-left: 10px;
+}
+
 .bg-facebook {
     background-color: #3b5997;
 }

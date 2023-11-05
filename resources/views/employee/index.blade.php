@@ -30,9 +30,8 @@
                             <!-- Zero config.table start -->
                             <div class="card">
                                 <div class="card-header">
-                                    <a href="{{ route('employee.create') }}" class="btn btn-success">
-                                        <i class="fa fa-plus"></i> Create</a>
-                                    <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
+                                    <a href="{{ route('employee.create') }}" class="btn btn-success btn-addsave">
+                                        <i class="fa fa-plus"></i> Tambah</a>
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
@@ -60,12 +59,14 @@
                                                         <td>{{ $data->position }}</td>
                                                         <td>
                                                             <a href="{{ route('employee.edit', $data->id) }}"
-                                                                class="btn btn-warning"><i class="ti-pencil-alt"></i></a>
+                                                                class="btn btn-warning btn-style">
+                                                                <i class="ti-pencil-alt"></i>
+                                                            </a>
                                                             <form action="{{ route('employee.destroy', $data->id) }}"
                                                                 method="POST" class="d-inline">
                                                                 @method('delete')
                                                                 @csrf
-                                                                <button class="btn btn-danger"
+                                                                <button class="btn btn-danger btn-style"
                                                                     onclick="return confirm('Apakah anda yakin ingin menghapus karyawan?')">
                                                                     <i class="ti-trash"></i>
                                                                 </button>

@@ -35,15 +35,12 @@
                             <div class="card">
                                 <div class="card-header">
                                     <div class="row">
-                                        <a href="{{ route('inventory.create') }}" class="btn btn-success"
-                                            style="margin-left: 15px"> <i class="fa fa-plus"></i>
-                                            Create</a>
-                                        <a href="#" class="btn btn-primary" onclick="printAllInventoryQR()"
-                                            style="margin-left: 10px">
-                                            <i class="fa fa-print"></i>
-                                            Print</a>
+                                        <a href="{{ route('inventory.create') }}" class="btn btn-success btn-addsave">
+                                            <i class="fa fa-plus"></i> Tambah</a>
+                                        <a href="#" class="btn btn-primary btn-printcancel"
+                                            onclick="printAllInventoryQR()">
+                                            <i class="fa fa-print"></i> Print</a>
                                     </div>
-                                    <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
                                 </div>
                                 <div class="card-block">
                                     <div class="dt-responsive table-responsive">
@@ -84,15 +81,18 @@
                                                         <td>{{ $data->information }}</td>
                                                         <td>
                                                             <a href="{{ route('print.inventory.qrcode', $data->id) }}"
-                                                                class="btn btn-info" target="_blank">
-                                                                <i class="fa fa-qrcode"></i></a>
+                                                                class="btn btn-info btn-style" target="_blank">
+                                                                <i class="fa fa-qrcode"></i>
+                                                            </a>
                                                             <a href="{{ route('inventory.edit', $data->id) }}"
-                                                                class="btn btn-warning"><i class="ti-pencil-alt"></i></a>
+                                                                class="btn btn-warning btn-style"><i
+                                                                    class="ti-pencil-alt"></i>
+                                                            </a>
                                                             <form action="{{ route('inventory.destroy', $data->id) }}"
                                                                 method="POST" class="d-inline">
                                                                 @method('delete')
                                                                 @csrf
-                                                                <button class="btn btn-danger"
+                                                                <button class="btn btn-danger btn-style"
                                                                     onclick="return confirm('Apakah anda yakin ingin menghapus inventaris?')">
                                                                     <i class="ti-trash"></i>
                                                                 </button>

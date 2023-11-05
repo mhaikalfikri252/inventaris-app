@@ -229,6 +229,5 @@ class AssetController extends Controller
         else $asset = Asset::all();
         $pdf = PDF::setPaper('A4', 'portrait')->loadview('asset2.print', compact('asset'));
         return $pdf->stream();
-        // return view('asset2.print', compact('asset'));
     }
 }

@@ -35,15 +35,9 @@
                             <div class="card">
                                 <div class="card-header">
                                     {{-- <h5>Data Peminjaman Aset</h5> --}}
-                                    <a href="{{ route('borrow.index') }}" class="btn btn-danger">
+                                    <a href="{{ route('borrow.index') }}" class="btn btn-danger btn-style">
                                         <i class="fa fa-arrow-left"></i> Back</a>
-                                    <div class="card-header-right"><i class="icofont icofont-spinner-alt-5"></i></div>
-                                    <div class="card-header-right">
-                                        <i class="icofont icofont-spinner-alt-5"></i>
-                                    </div>
                                 </div>
-
-
                                 <div class="card-block">
                                     <div class="row mb-3">
                                         <label class="col-sm-2 col-label-form">Nama Peminjam : </label>

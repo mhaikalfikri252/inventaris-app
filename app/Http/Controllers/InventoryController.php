@@ -198,6 +198,5 @@ class InventoryController extends Controller
         else $inventory = Inventory::all();
         $pdf = PDF::setPaper('A4', 'portrait')->loadview('inventory2.print', compact('inventory'));
         return $pdf->stream();
-        // return view('inventory2.print', compact('inventory'));
     }
 }

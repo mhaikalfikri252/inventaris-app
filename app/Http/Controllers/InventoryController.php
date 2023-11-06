@@ -28,7 +28,7 @@ class InventoryController extends Controller
                 ->with('facility')->latest()->get();
         }
 
-        return view('inventory2.index', compact('inventory'));
+        return view('inventory.index', compact('inventory'));
     }
 
     /**
@@ -47,7 +47,7 @@ class InventoryController extends Controller
             $employee = Employee::where('city_id', $location)->get();
         }
 
-        return view('inventory2.create', compact('facility', 'employee'));
+        return view('inventory.create', compact('facility', 'employee'));
     }
 
     /**
@@ -118,7 +118,7 @@ class InventoryController extends Controller
             $employee = Employee::where('city_id', $location)->get();
         }
 
-        return view('inventory2.update', compact('inventory', 'facility', 'employee'));
+        return view('inventory.update', compact('inventory', 'facility', 'employee'));
     }
 
     /**
@@ -181,13 +181,13 @@ class InventoryController extends Controller
 
         toast('Berhasil menghapus inventaris!', 'success');
 
-        return redirect()->route('inventory2.index');
+        return redirect()->route('inventory.index');
     }
 
     public function print_inventory_qrcode($id)
     {
         $inventory = Inventory::findOrFail($id);
-        $pdf = PDF::loadview('inventory2.qrcode', compact('inventory'));
+        $pdf = PDF::loadview('inventory.qrcode', compact('inventory'));
         return $pdf->stream();
     }
 
@@ -196,7 +196,7 @@ class InventoryController extends Controller
         $acodes = request()->get('acodes');
         if (!empty($acodes)) $inventory = Inventory::whereIn('id', explode(',', $acodes))->get();
         else $inventory = Inventory::all();
-        $pdf = PDF::setPaper('A4', 'portrait')->loadview('inventory2.print', compact('inventory'));
+        $pdf = PDF::setPaper('A4', 'portrait')->loadview('inventory.print', compact('inventory'));
         return $pdf->stream();
     }
 }

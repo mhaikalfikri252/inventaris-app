@@ -20,7 +20,7 @@ class DashboardController extends Controller
             $facility = DB::table('facilities')->count();
 
             return view(
-                'slice2.main-dashboard',
+                'slice.main-dashboard',
                 compact('asset', 'writeoff', 'inventory', 'borrow', 'user', 'employee', 'city', 'facility')
             );
         } else {
@@ -57,7 +57,7 @@ class DashboardController extends Controller
 
             $user = DB::table('users')->where('city_id', $location);
 
-            return view('slice2.main-dashboard', compact('asset', 'writeoff', 'inventory', 'borrow', 'user'));
+            return view('slice.main-dashboard', compact('asset', 'writeoff', 'inventory', 'borrow', 'user'));
         }
     }
 }

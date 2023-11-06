@@ -39,7 +39,7 @@ class AssetController extends Controller
                 ->with('facility', 'status_asset')->latest()->get();
         }
 
-        return view('asset2.index', compact('asset'));
+        return view('asset.index', compact('asset'));
     }
 
     /**
@@ -60,7 +60,7 @@ class AssetController extends Controller
             $employee = Employee::where('city_id', $location)->get();
         }
 
-        return view('asset2.create', compact('facility', 'status_asset', 'employee'));
+        return view('asset.create', compact('facility', 'status_asset', 'employee'));
     }
 
     /**
@@ -139,7 +139,7 @@ class AssetController extends Controller
             $status_asset = StatusAsset::all();
         }
 
-        return view('asset2.update', compact('asset', 'facility', 'status_asset', 'employee'));
+        return view('asset.update', compact('asset', 'facility', 'status_asset', 'employee'));
     }
 
     /**

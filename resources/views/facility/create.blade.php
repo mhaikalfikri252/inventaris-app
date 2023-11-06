@@ -1,7 +1,7 @@
 @extends('slice.app')
 
 @section('title')
-    Karyawan
+    Fasilitas
 @endsection
 
 @section('content')
@@ -13,9 +13,9 @@
                     <div class="row align-items-end">
                         <div class="col-lg-8">
                             <div class="page-header-title">
-                                <i class="fa fa-group bg-c-green"></i>
+                                <i class="fa fa-book bg-c-brown"></i>
                                 <div class="d-inline">
-                                    <h4 class="mt-3">Tambah Data Karyawan</h4>
+                                    <h4 class="mt-3">Tambah Data Fasilitas</h4>
                                 </div>
                             </div>
                         </div>
@@ -30,20 +30,34 @@
                             <!-- Basic Form Inputs card start -->
                             <div class="card">
                                 <div class="card-header">
-                                    <h5>Form Tambah Data Karyawan</h5>
+                                    <h5>Form Tambah Data Fasilitas</h5>
                                 </div>
                                 <div class="card-block">
-                                    <form action="{{ route('employee.store') }}" method="POST"
+                                    <form action="{{ route('facility.store') }}" method="POST"
                                         enctype="multipart/form-data">
                                         @csrf
                                         <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Nama Karyawan</label>
+                                            <label class="col-sm-2 col-form-label">Kode Fasilitas</label>
                                             <div class="col-sm-10">
                                                 <input type="text"
-                                                    class="form-control @error('employee_name') is-invalid @enderror"
-                                                    id="employee_name" name="employee_name"
-                                                    value="{{ old('employee_name') }}" required>
-                                                @error('employee_name')
+                                                    class="form-control @error('facility_code') is-invalid @enderror"
+                                                    id="facility_code" name="facility_code"
+                                                    value="{{ old('facility_code') }}" required>
+                                                @error('facility_code')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label">Nama Fasilitas</label>
+                                            <div class="col-sm-10">
+                                                <input type="text"
+                                                    class="form-control @error('facility_name') is-invalid @enderror"
+                                                    id="facility_name" name="facility_name"
+                                                    value="{{ old('facility_name') }}" required>
+                                                @error('facility_name')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
@@ -59,7 +73,7 @@
                                                     @foreach ($city as $data)
                                                         <option value="{{ $data->id }}"
                                                             {{ old('city_id') == $data->id ? 'selected' : '' }}>
-                                                            {{ $data->city_name }}
+                                                            {{ $data->name }}
                                                         </option>
                                                         @error('city_id')
                                                             <div class="invalid-feedback">
@@ -70,50 +84,11 @@
                                                 </select>
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Alamat</label>
-                                            <div class="col-sm-10">
-                                                <input type="text"
-                                                    class="form-control @error('address') is-invalid @enderror"
-                                                    id="address" name="address" value="{{ old('address') }}" required>
-                                                @error('address')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">No Hp</label>
-                                            <div class="col-sm-10">
-                                                <input type="number"
-                                                    class="form-control @error('phone') is-invalid @enderror" id="phone"
-                                                    name="phone" value="{{ old('phone') }}" required>
-                                                @error('phone')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <label class="col-sm-2 col-form-label">Jabatan</label>
-                                            <div class="col-sm-10">
-                                                <input type="text"
-                                                    class="form-control @error('position') is-invalid @enderror"
-                                                    id="position" name="position" value="{{ old('position') }}" required>
-                                                @error('position')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
                                         <br>
                                         <div class="row">
                                             <button type="submit" class="btn btn-success btn-addsave">
                                                 <i class="fa fa-save"></i> Save</button>
-                                            <a href="{{ route('employee.index') }}" class="btn btn-danger btn-printcancel">
+                                            <a href="{{ route('facility.index') }}" class="btn btn-danger btn-printcancel">
                                                 <i class="fa fa-times"></i>Cancel</a>
                                         </div>
                                     </form>

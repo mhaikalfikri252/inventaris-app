@@ -1,4 +1,4 @@
-@extends('slice2.app')
+@extends('slice.app')
 
 @section('title')
     Karyawan

@@ -2,142 +2,289 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SIANAS | @yield('title')</title>
-
-    <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet"
-        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Meta -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="#">
+    <meta name="keywords"
+        content="Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
+    <meta name="author" content="#">
+    <!-- Favicon icon -->
+    <link rel="icon" href="{{ asset('guruable/default/assets/images/favicon.ico') }}" type="image/x-icon">
+    <!-- Google font-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
+    <!-- Required Fremwork -->
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('guruable/bower_components/bootstrap/css/bootstrap.min.css') }}">
+    <!-- themify-icons line icon -->
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('guruable/default/assets/icon/themify-icons/themify-icons.css') }}">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
-    <!-- Tempusdominus Bootstrap 4 -->
-    <link rel="stylesheet"
-        href="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}">
-    <!-- iCheck -->
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
-    <!-- JQVMap -->
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/jqvmap/jqvmap.min.css') }}">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css') }}">
-    <!-- overlayScrollbars -->
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') }}">
-    <!-- Daterange picker -->
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.css') }}">
-    <!-- summernote -->
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.css') }}">
-    <!-- DataTables -->
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
-    <link rel="stylesheet"
-        href="{{ asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
-    {{-- Date Picker --}}
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">
-
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('guruable/default/assets/icon/font-awesome/css/font-awesome.min.css') }}">
+    <!-- ico font -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('guruable/default/assets/icon/icofont/css/icofont.css') }}">
+    <!-- flag icon framework css -->
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('guruable/default/assets/pages/flag-icon/flag-icon.min.css') }}">
+    <!-- Menu-Search css -->
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('guruable/default/assets/pages/menu-search/css/component.css') }}">
+    <!-- Data Table Css -->
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('guruable/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('guruable/default/assets/pages/data-table/css/buttons.dataTables.min.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('guruable/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
+    <!-- Style.css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('guruable/default/assets/css/style.css') }}">
+    <link rel="stylesheet" type="text/css"
+        href="{{ asset('guruable/default/assets/css/jquery.mCustomScrollbar.css') }}">
+    <!-- animation nifty modal window effects css -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('guruable/default/assets/css/component.css') }}">
 </head>
 
-<body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
 
-        @include('sweetalert::alert')
+<body>
 
-        @include('slice.navbar')
+    <div id="pcoded" class="pcoded">
+        <div class="pcoded-overlay-box"></div>
+        <div class="pcoded-container navbar-wrapper">
 
-        @if (auth()->user()->role_id == 1)
-            @include('slice.admin-sidebar')
-        @else
-            @include('slice.user-sidebar')
-        @endif
+            @include('sweetalert::alert')
 
-        @yield('content')
+            @include('slice.header-navbar')
 
-        @include('slice.footer')
+            <div class="pcoded-main-container">
+                <div class="pcoded-wrapper">
 
+                    @include('slice.navbar')
+
+                    <div class="pcoded-content">
+                        <div class="pcoded-inner-content">
+
+                            @yield('content')
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <!-- ./wrapper -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    {{-- Date Picker --}}
-    <script src="//code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    {{-- Sweet Alert 2 --}}
-    <script src="sweetalert2.all.min.js"></script>
-    <!-- jQuery -->
-    <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js') }}"></script>
-    <!-- jQuery UI 1.11.4 -->
-    <script src="{{ asset('adminlte/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
-    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
-    <script>
-        $.widget.bridge('uibutton', $.ui.button)
+    <!-- Warning Section Ends -->
+    <!-- Required Jquery -->
+    <script type="text/javascript" src="{{ asset('guruable/bower_components/jquery/js/jquery.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('guruable/bower_components/jquery-ui/js/jquery-ui.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('guruable/bower_components/popper.js/js/popper.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('guruable/bower_components/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- jquery slimscroll js -->
+    <script type="text/javascript"
+        src="{{ asset('guruable/bower_components/jquery-slimscroll/js/jquery.slimscroll.js') }}"></script>
+    <!-- modernizr js -->
+    <script type="text/javascript" src="{{ asset('guruable/bower_components/modernizr/js/modernizr.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('guruable/bower_components/modernizr/js/css-scrollbars.js') }}"></script>
+    <!-- data-table js -->
+    <script src="{{ asset('guruable/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('guruable/bower_components/datatables.net-buttons/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('guruable/default/assets/pages/data-table/js/jszip.min.js') }}"></script>
+    <script src="{{ asset('guruable/default/assets/pages/data-table/js/pdfmake.min.js') }}"></script>
+    <script src="{{ asset('guruable/default/assets/pages/data-table/js/vfs_fonts.js') }}"></script>
+    <script src="{{ asset('guruable/bower_components/datatables.net-buttons/js/buttons.print.min.js') }}"></script>
+    <script src="{{ asset('guruable/bower_components/datatables.net-buttons/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('guruable/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('guruable/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js') }}">
     </script>
-    <!-- Bootstrap 4 -->
-    <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-    <!-- ChartJS -->
-    <script src="{{ asset('adminlte/plugins/chart.js/Chart.min.js') }}"></script>
-    <!-- Sparkline -->
-    <script src="{{ asset('adminlte/plugins/sparklines/sparkline.js') }}"></script>
-    <!-- JQVMap -->
-    <script src="{{ asset('adminlte/plugins/jqvmap/jquery.vmap.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/jqvmap/maps/jquery.vmap.usa.js') }}"></script>
-    <!-- jQuery Knob Chart -->
-    <script src="{{ asset('adminlte/plugins/jquery-knob/jquery.knob.min.js') }}"></script>
-    <!-- daterangepicker -->
-    <script src="{{ asset('adminlte/plugins/moment/moment.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/daterangepicker/daterangepicker.js') }}"></script>
-    <!-- Tempusdominus Bootstrap 4 -->
-    <script src="{{ asset('adminlte/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js') }}"></script>
-    <!-- Summernote -->
-    <script src="{{ asset('adminlte/plugins/summernote/summernote-bs4.min.js') }}"></script>
-    <!-- overlayScrollbars -->
-    <script src="{{ asset('adminlte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js') }}"></script>
-    <!-- AdminLTE App -->
-    <script src="{{ asset('adminlte/dist/js/adminlte.js') }}"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{{ asset('adminlte/dist/js/pages/dashboard.js') }}"></script>
-    <!-- DataTables  & Plugins -->
-    <script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/jszip/jszip.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/pdfmake/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/pdfmake/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
-    <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
-    <!-- bs-custom-file-input -->
-    <script src="{{ asset('adminlte/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
+    <script src="{{ asset('guruable/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js') }}">
+    </script>
+    <!-- i18next.min.js -->
+    <script type="text/javascript" src="{{ asset('guruable/bower_components/i18next/js/i18next.min.js') }}"></script>
+    <script type="text/javascript"
+        src="{{ asset('guruable/bower_components/i18next-xhr-backend/js/i18nextXHRBackend.min.js') }}"></script>
+    <script type="text/javascript"
+        src="{{ asset('guruable/bower_components/i18next-browser-languagedetector/js/i18nextBrowserLanguageDetector.min.js') }}">
+    </script>
+    <script type="text/javascript" src="{{ asset('guruable/bower_components/jquery-i18next/js/jquery-i18next.min.js') }}">
+    </script>
+    <!-- Custom js -->
+    {{-- <script src="{{ asset('guruable/default/assets/pages/data-table/js/data-table-custom.js') }}"></script> --}}
+    <script type="text/javascript" src="{{ asset('guruable/default/assets/pages/dashboard/custom-dashboard.min.js') }}">
+    </script>
+    <script type="text/javascript" src="{{ asset('guruable/default/assets/js/SmoothScroll.js') }}"></script>
+    <script src="{{ asset('guruable/default/assets/js/pcoded.min.js') }}"></script>
+    <script src="{{ asset('guruable/default/assets/js/demo-12.js') }}"></script>
+    <script src="{{ asset('guruable/default/assets/js/jquery.mCustomScrollbar.concat.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('guruable/default/assets/js/script.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('guruable/default/assets/js/script.js') }}"></script>
+    <!-- sweet alert js -->
+    <script type="text/javascript" src="{{ asset('guruable/bower_components/sweetalert/js/sweetalert.min.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('guruable/default/assets/js/modal.js') }}"></script>
+    <!-- sweet alert modal.js intialize js -->
+    <!-- modalEffects js nifty modal window effects -->
+    <script type="text/javascript" src="{{ asset('guruable/default/assets/js/modalEffects.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('guruable/default/assets/js/classie.js') }}"></script>
+
+
+
 
     <!-- Page specific script -->
     <script>
-        // Data Table
-        $(function() {
-            $("#example1").DataTable({
-                "responsive": true,
-                "lengthChange": false,
-                "autoWidth": false,
-                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-            $('#example2').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": false,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-            });
+        // Setup - add a text input to each footer cell asset
+        // $('#asset-search tfoot th').each(function() {
+        //     var title = $(this).text();
+        //     $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
+        // });
+
+        // Apply the search footer in asset
+        // table.columns().every(function() {
+        //     var that = this;
+        //     $('input', this.footer()).on('keyup change', function() {
+        //         if (that.search() !== this.value) {
+        //             that
+        //                 .search(this.value)
+        //                 .draw();
+        //         }
+        //     });
+        // });
+
+        // DataTable Default
+        var tableDefault = $("#table-default").DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "responsive": true,
+            "autoWidth": true,
+            "lengthChange": true,
         });
 
-        // Custom File Input
-        $(function() {
-            bsCustomFileInput.init();
+        // DataTable Asset
+        var tableAsset = $('#table-asset').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "responsive": true,
+            "autoWidth": true,
+            "lengthChange": true,
+            dom: 'lBfrtip',
+            buttons: [{
+                    extend: 'excelHtml5',
+                    title: 'Data Aset',
+                    className: 'btn btn-primary mt-2',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    title: 'Data Aset',
+                    className: 'btn btn-primary mt-2',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10]
+                    }
+                },
+            ]
         });
+
+        // DataTable Inventory
+        var tableInventory = $('#table-inventory').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "responsive": true,
+            "autoWidth": true,
+            "lengthChange": true,
+            dom: 'lBfrtip',
+            buttons: [{
+                    extend: 'excelHtml5',
+                    title: 'Data Aset',
+                    className: 'btn btn-primary mt-2',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    title: 'Data Aset',
+                    className: 'btn btn-primary mt-2',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10]
+                    }
+                },
+            ]
+        });
+
+        // DataTable Borrow
+        var tableBorrow = $('#table-borrow').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "responsive": true,
+            "autoWidth": true,
+            "lengthChange": true,
+            dom: 'lBfrtip',
+            buttons: [{
+                    extend: 'excelHtml5',
+                    title: 'Data Aset',
+                    className: 'btn btn-primary mt-2',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    title: 'Data Aset',
+                    className: 'btn btn-primary mt-2',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                    }
+                },
+            ]
+        });
+
+        // Asset/Asset Write Off -> Search City and Year
+        $('input.search').on('keyup change', function() {
+            var rel = $(this).attr("rel");
+            tableAsset.columns(rel).search(this.value).draw();
+        });
+
+        // Inventory -> Search City and Year
+        $('input.search').on('keyup change', function() {
+            var rel = $(this).attr("rel");
+            tableInventory.columns(rel).search(this.value).draw();
+        });
+
+        // Borrow -> Search City and Year
+        $('input.search').on('keyup change', function() {
+            var rel = $(this).attr("rel");
+            tableBorrow.columns(rel).search(this.value).draw();
+        });
+
+        // Print All Asset/Asset Write Off QR
+        const printAllAssetQR = function() {
+            let assets = tableDOM.rows({
+                "filter": "applied"
+            }).data();
+            let url = 'print/asset/all-qrcode';
+            if (assets.length > 0) url += '?acodes=' + assets.map(a => a[1]).join();
+            window.open(url, 'blank');
+        }
+
+        // Print All Inventory QR
+        const printAllInventoryQR = function() {
+            let inventory = tableDOM.rows({
+                "filter": "applied"
+            }).data();
+            let url = 'print/inventory/all-qrcode';
+            if (inventory.length > 0) url += '?acodes=' + inventory.map(a => a[1]).join();
+            window.open(url, 'blank');
+        }
 
         // Show Password
         $(document).ready(function() {
@@ -155,19 +302,6 @@
             }
         }
 
-        // Date Picker
-        $("#purchase_date").datepicker({
-            dateFormat: "dd-mm-yy"
-        });
-
-        $("#borrow_date").datepicker({
-            dateFormat: "dd-mm-yy"
-        });
-
-        $("#return_date").datepicker({
-            dateFormat: "dd-mm-yy"
-        });
-
         // Preview Image
         function previewImage() {
             const photo = document.querySelector('#photo');
@@ -183,15 +317,15 @@
             }
         }
 
+        // Upload Surat
         document.getElementById('status_borrow_id').addEventListener("change", function(e) {
             if (e.target.value == 2) {
-                document.getElementById('uploadletter').style.display = 'block';
+                document.getElementById('uploadletter').style.display = 'flex';
             } else {
                 document.getElementById('uploadletter').style.display = 'none';
             }
         });
     </script>
-
 </body>
 
 </html>

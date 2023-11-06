@@ -21,7 +21,7 @@ class UserController extends Controller
     {
         $user = User::with('role', 'city')->latest()->get();
 
-        return view('user2.index', compact('user'));
+        return view('user.index', compact('user'));
     }
 
     /**
@@ -34,7 +34,7 @@ class UserController extends Controller
         $role = ModelsRole::all();
         $city = City::all();
 
-        return view('user2.create', compact('role', 'city'));
+        return view('user.create', compact('role', 'city'));
     }
 
     /**
@@ -91,7 +91,7 @@ class UserController extends Controller
         $role = ModelsRole::all();
         $city = City::all();
 
-        return view('user2.update', compact('user', 'role', 'city'));
+        return view('user.update', compact('user', 'role', 'city'));
     }
 
     /**

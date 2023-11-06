@@ -31,7 +31,7 @@ class BorrowController extends Controller
                 ->with('status_borrow')->latest()->get();
         }
 
-        return view('borrow2.index', compact('borrow'));
+        return view('borrow.index', compact('borrow'));
     }
 
     /**
@@ -62,7 +62,7 @@ class BorrowController extends Controller
             $status_borrow = StatusBorrow::all();
         }
 
-        return view('borrow2.create', compact('asset', 'status_borrow', 'employee'));
+        return view('borrow.create', compact('asset', 'status_borrow', 'employee'));
     }
 
     public function create_byid($id)
@@ -92,7 +92,7 @@ class BorrowController extends Controller
         }
 
 
-        return view('borrow2.create-byid', compact('asset', 'status_borrow', 'employee', 'assetById'));
+        return view('borrow.create-byid', compact('asset', 'status_borrow', 'employee', 'assetById'));
     }
 
     /**
@@ -155,7 +155,7 @@ class BorrowController extends Controller
     {
         $borrow = Borrow::with('asset', 'status_borrow')->findOrFail($id);
 
-        return view('borrow2.show', compact('borrow'));
+        return view('borrow.show', compact('borrow'));
     }
 
     /**
@@ -191,7 +191,7 @@ class BorrowController extends Controller
         }
 
 
-        return view('borrow2.upload', compact('asset', 'status_borrow', 'borrow', 'employee'));
+        return view('borrow.upload', compact('asset', 'status_borrow', 'borrow', 'employee'));
     }
 
     /**

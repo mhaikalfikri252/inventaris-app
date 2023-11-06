@@ -21,7 +21,7 @@ class WriteOffController extends Controller
                 ->with('facility', 'status_asset')->latest()->get();
         }
 
-        return view('writeoff2.index', compact('writeoff'));
+        return view('writeoff.index', compact('writeoff'));
     }
 
     public function destroy(Asset $asset)

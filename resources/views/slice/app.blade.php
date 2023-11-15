@@ -132,24 +132,6 @@
 
     <!-- Page specific script -->
     <script>
-        // Setup - add a text input to each footer cell asset
-        // $('#asset-search tfoot th').each(function() {
-        //     var title = $(this).text();
-        //     $(this).html('<input type="text" class="form-control" placeholder="Search ' + title + '" />');
-        // });
-
-        // Apply the search footer in asset
-        // table.columns().every(function() {
-        //     var that = this;
-        //     $('input', this.footer()).on('keyup change', function() {
-        //         if (that.search() !== this.value) {
-        //             that
-        //                 .search(this.value)
-        //                 .draw();
-        //         }
-        //     });
-        // });
-
         // DataTable Default
         var tableDefault = $("#table-default").DataTable({
             "paging": true,
@@ -190,6 +172,35 @@
             ]
         });
 
+        // DataTable Asset Write Off
+        var tableWriteOff = $('#table-writeoff').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "responsive": true,
+            "autoWidth": true,
+            "lengthChange": true,
+            dom: 'lBfrtip',
+            buttons: [{
+                    extend: 'excelHtml5',
+                    title: 'Data Aset Write Off',
+                    className: 'btn btn-primary mt-2',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    title: 'Data Aset Write Off',
+                    className: 'btn btn-primary mt-2',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11]
+                    }
+                },
+            ]
+        });
+
         // DataTable Inventory
         var tableInventory = $('#table-inventory').DataTable({
             "paging": true,
@@ -202,18 +213,18 @@
             dom: 'lBfrtip',
             buttons: [{
                     extend: 'excelHtml5',
-                    title: 'Data Aset',
+                    title: 'Data Inventaris',
                     className: 'btn btn-primary mt-2',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10]
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 9]
                     }
                 },
                 {
                     extend: 'pdfHtml5',
-                    title: 'Data Aset',
+                    title: 'Data Inventaris',
                     className: 'btn btn-primary mt-2',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10]
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 9]
                     }
                 },
             ]
@@ -231,27 +242,62 @@
             dom: 'lBfrtip',
             buttons: [{
                     extend: 'excelHtml5',
-                    title: 'Data Aset',
+                    title: 'Data Peminjaman Aset',
                     className: 'btn btn-primary mt-2',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                        columns: [0, 1, 2, 3, 4, 6, 7, 8]
                     }
                 },
                 {
                     extend: 'pdfHtml5',
-                    title: 'Data Aset',
+                    title: 'Data Peminjaman Aset',
                     className: 'btn btn-primary mt-2',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5, 6, 7, 8]
+                        columns: [0, 1, 2, 3, 4, 6, 7, 8]
                     }
                 },
             ]
         });
 
-        // Asset/Asset Write Off -> Search City and Year
+        // DataTable Borrow User
+        var tableBorrowUser = $('#table-borrow-user').DataTable({
+            "paging": true,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "responsive": true,
+            "autoWidth": true,
+            "lengthChange": true,
+            dom: 'lBfrtip',
+            buttons: [{
+                    extend: 'excelHtml5',
+                    title: 'Data Peminjaman Aset',
+                    className: 'btn btn-primary mt-2',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                    }
+                },
+                {
+                    extend: 'pdfHtml5',
+                    title: 'Data Peminjaman Aset',
+                    className: 'btn btn-primary mt-2',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                    }
+                },
+            ]
+        });
+
+        // Asset -> Search City and Year
         $('input.search').on('keyup change', function() {
             var rel = $(this).attr("rel");
             tableAsset.columns(rel).search(this.value).draw();
+        });
+
+        // Asset Write Off -> Search City and Year
+        $('input.search').on('keyup change', function() {
+            var rel = $(this).attr("rel");
+            tableWriteOff.columns(rel).search(this.value).draw();
         });
 
         // Inventory -> Search City and Year
@@ -266,9 +312,9 @@
             tableBorrow.columns(rel).search(this.value).draw();
         });
 
-        // Print All Asset/Asset Write Off QR
+        // Print All Asset QR
         const printAllAssetQR = function() {
-            let assets = tableDOM.rows({
+            let assets = tableAsset.rows({
                 "filter": "applied"
             }).data();
             let url = 'print/asset/all-qrcode';
@@ -276,9 +322,19 @@
             window.open(url, 'blank');
         }
 
+        // Print All Asset Write Off QR
+        const printAllWriteOffQR = function() {
+            let writeOff = tableWriteOff.rows({
+                "filter": "applied"
+            }).data();
+            let url = 'print/writeoff/all-qrcode';
+            if (writeOff.length > 0) url += '?acodes=' + writeOff.map(a => a[1]).join();
+            window.open(url, 'blank');
+        }
+
         // Print All Inventory QR
         const printAllInventoryQR = function() {
-            let inventory = tableDOM.rows({
+            let inventory = tableInventory.rows({
                 "filter": "applied"
             }).data();
             let url = 'print/inventory/all-qrcode';

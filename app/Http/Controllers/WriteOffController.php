@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Asset;
 use App\Models\Facility;
 use Illuminate\Support\Facades\File;
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 
 class WriteOffController extends Controller
 {
@@ -38,5 +39,21 @@ class WriteOffController extends Controller
         toast('Berhasil menghapus aset!', 'success');
 
         return redirect()->route('writeoff.index');
+    }
+
+    public function print_writeoff_qrcode($id)
+    {
+        $writeoff = Asset::findOrFail($id);
+        $pdf = PDF::loadview('writeoff.qrcode', compact('writeoff'));
+        return $pdf->stream();
+    }
+
+    public function print_all_qrcode_writeoff()
+    {
+        $acodes = request()->get('acodes');
+        if (!empty($acodes)) $writeoff = Asset::whereIn('asset_code', explode(',', $acodes))->get();
+        else $writeoff = Asset::all();
+        $pdf = PDF::setPaper('A4', 'portrait')->loadview('writeoff.print', compact('writeoff'));
+        return $pdf->stream();
     }
 }

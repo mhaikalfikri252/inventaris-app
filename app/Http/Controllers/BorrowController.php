@@ -128,19 +128,11 @@ class BorrowController extends Controller
             $data['letter'] = $filename;
         }
 
-        // if ($data['status_borrow_id'] == 1) {
-        //     $destination = 'files/' . $data['letter'];
-        //     if (File::exists($destination)) {
-        //         File::delete($destination);
-        //     }
-        //     $data['letter'] = null;
-        // }
-
         if ($borrow =  Borrow::create($data)) {
             $borrow->save();
         }
 
-        toast('Berhasil menambahkan data!', 'success');
+        toast('Berhasil menambahkan peminjaman aset!', 'success');
 
         return redirect()->route('borrow.index');
     }
@@ -241,9 +233,9 @@ class BorrowController extends Controller
 
         $data->update();
 
-        toast('Berhasil mengedit data!', 'success');
+        toast('Berhasil mengedit peminjaman aset!', 'success');
 
-        return redirect()->route('borrow2.index');
+        return redirect()->route('borrow.index');
     }
 
     public function upload(Request $request, $id)
@@ -295,7 +287,7 @@ class BorrowController extends Controller
 
         Borrow::destroy($borrow->id);
 
-        toast('Berhasil menghapus data!', 'success');
+        toast('Berhasil menghapus peminjaman aset!', 'success');
 
         return redirect()->route('borrow.index');
     }
@@ -303,7 +295,7 @@ class BorrowController extends Controller
     public function print_borrow_letter($id)
     {
         $borrow = Borrow::findOrFail($id);
-        $pdf = PDF::loadview('borrow2.letter', compact('borrow'));
+        $pdf = PDF::loadview('borrow.letter', compact('borrow'));
         return $pdf->stream();
     }
 }

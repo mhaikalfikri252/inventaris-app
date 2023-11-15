@@ -33,24 +33,35 @@
                         <div class="col-sm-12">
                             <!-- Zero config.table start -->
                             <div class="card">
-                                <div class="card-block">
-                                    <div class="">
+                                @if (auth()->user()->role_id == 2)
+                                    <div class="card-header">
                                         <div class="row">
-                                            <div class="">
-                                                <a href="#" class="btn btn-primary btn-addsave"
-                                                    onclick="printAllAssetQR()">
-                                                    <i class="fa fa-print"></i> Print</a>
-                                            </div>
-                                            <div class="ml-auto" style="padding-right: 16px">
-                                                <input rel="3" type="text" class="search form-control input-sm"
-                                                    placeholder="Search Kota">
-                                                <input rel="4" type="text"
-                                                    class="search form-control input-sm mt-2" placeholder="Search Tahun">
-                                            </div>
+                                            <a href="#" class="btn btn-primary btn-addsave"
+                                                onclick="printAllWriteOffQR()"><i class="fa fa-print"></i> Print</a>
                                         </div>
                                     </div>
+                                @endif
+                                <div class="card-block">
+                                    @if (auth()->user()->role_id == 1)
+                                        <div class="">
+                                            <div class="row">
+                                                <div class="">
+                                                    <a href="#" class="btn btn-primary btn-addsave"
+                                                        onclick="printAllWriteOffQR()">
+                                                        <i class="fa fa-print"></i> Print</a>
+                                                </div>
+                                                <div class="ml-auto" style="padding-right: 16px">
+                                                    <input rel="3" type="text"
+                                                        class="search form-control input-sm" placeholder="Search Kota">
+                                                    <input rel="4" type="text"
+                                                        class="search form-control input-sm mt-2"
+                                                        placeholder="Search Tahun">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endif
                                     <div class="dt-responsive table-responsive">
-                                        <table id="table-asset" class="table table-striped table-bordered nowrap">
+                                        <table id="table-writeoff" class="table table-striped table-bordered nowrap">
                                             <thead>
                                                 <tr>
                                                     <th>No</th>
@@ -101,7 +112,7 @@
                                                         </td>
                                                         <td>{{ $data->information }}</td>
                                                         <td>
-                                                            <a href="{{ route('print.asset.qrcode', $data->id) }}"
+                                                            <a href="{{ route('print.writeoff.qrcode', $data->id) }}"
                                                                 class="btn btn-info btn-style" target="_blank">
                                                                 <i class="fa fa-qrcode"></i></a>
                                                             <a href="{{ route('asset.edit', $data->id) }}"

@@ -57,7 +57,10 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::get('print/asset/qrcode/{id}', [AssetController::class, 'print_asset_qrcode'])->name('print.asset.qrcode');
-    Route::get('print/asset/all-qrcode', [AssetController::class, 'print_all_qrcode'])->name('print.asset.allqrcode');
+    Route::get('print/asset/all-qrcode', [AssetController::class, 'print_all_qrcode_asset'])->name('print.asset.allqrcode');
+
+    Route::get('print/writeoff/qrcode/{id}', [WriteOffController::class, 'print_writeoff_qrcode'])->name('print.writeoff.qrcode');
+    Route::get('print/writeoff/all-qrcode', [WriteOffController::class, 'print_all_qrcode_writeoff'])->name('print.writeoff.allqrcode');
 
     Route::get('print/inventory/qrcode/{id}', [InventoryController::class, 'print_inventory_qrcode'])->name('print.inventory.qrcode');
     Route::get('print/inventory/all-qrcode', [InventoryController::class, 'print_all_qrcode'])->name('print.inventory.allqrcode');

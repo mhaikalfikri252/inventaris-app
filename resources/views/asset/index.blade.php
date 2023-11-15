@@ -39,7 +39,7 @@
                                             <a href="{{ route('asset.create') }}" class="btn btn-success btn-addsave">
                                                 <i class="fa fa-plus"></i> Tambah</a>
                                             <a href="#" class="btn btn-primary btn-printcancel"
-                                                onclick="printAllAssetQR()"> <i class="fa fa-print"></i> Print</a>
+                                                onclick="printAllAssetQR()"><i class="fa fa-print"></i> Print</a>
                                         </div>
                                     </div>
                                 @endif

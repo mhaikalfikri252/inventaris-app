@@ -99,11 +99,11 @@ class AssetController extends Controller
             $aset->save();
         }
 
-        toast('Berhasil menambahkan aset!', 'success');
-
         if ($data['status_asset_id'] == 1) {
+            toast('Berhasil menambahkan aset!', 'success');
             return redirect()->route('asset.index');
         } else if ($data['status_asset_id'] == 2) {
+            toast('Berhasil menambahkan aset writeoff!', 'success');
             return redirect()->route('writeoff.index');
         }
     }
@@ -180,11 +180,11 @@ class AssetController extends Controller
 
         $data->update();
 
-        toast('Berhasil mengedit aset!', 'success');
-
         if ($data['status_asset_id'] == 1) {
+            toast('Berhasil mengedit aset!', 'success');
             return redirect()->route('asset.index');
         } else if ($data['status_asset_id'] == 2) {
+            toast('Berhasil mengedit aset write off!', 'success');
             return redirect()->route('writeoff.index');
         }
     }
@@ -206,11 +206,11 @@ class AssetController extends Controller
 
         Asset::destroy($asset->id);
 
-        toast('Berhasil menghapus aset!', 'success');
-
         if ($asset->status_asset_id == 1) {
+            toast('Berhasil menghapus aset!', 'success');
             return redirect()->route('asset.index');
         } else if ($asset->status_asset_id == 2) {
+            toast('Berhasil menghapus aset write off!', 'success');
             return redirect()->route('writeoff.index');
         }
     }
@@ -218,16 +218,16 @@ class AssetController extends Controller
     public function print_asset_qrcode($id)
     {
         $asset = Asset::findOrFail($id);
-        $pdf = PDF::loadview('asset2.qrcode', compact('asset'));
+        $pdf = PDF::loadview('asset.qrcode', compact('asset'));
         return $pdf->stream();
     }
 
-    public function print_all_qrcode()
+    public function print_all_qrcode_asset()
     {
         $acodes = request()->get('acodes');
         if (!empty($acodes)) $asset = Asset::whereIn('asset_code', explode(',', $acodes))->get();
         else $asset = Asset::all();
-        $pdf = PDF::setPaper('A4', 'portrait')->loadview('asset2.print', compact('asset'));
+        $pdf = PDF::setPaper('A4', 'portrait')->loadview('asset.print', compact('asset'));
         return $pdf->stream();
     }
 }

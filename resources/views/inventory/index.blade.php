@@ -110,15 +110,17 @@
                                                                 class="btn btn-warning btn-style"><i
                                                                     class="ti-pencil-alt"></i>
                                                             </a>
-                                                            <form action="{{ route('inventory.destroy', $data->id) }}"
-                                                                method="POST" class="d-inline">
-                                                                @method('delete')
-                                                                @csrf
-                                                                <button class="btn btn-danger btn-style"
-                                                                    onclick="return confirm('Apakah anda yakin ingin menghapus inventaris?')">
-                                                                    <i class="ti-trash"></i>
-                                                                </button>
-                                                            </form>
+                                                            @if (auth()->user()->role_id == 1)
+                                                                <form action="{{ route('inventory.destroy', $data->id) }}"
+                                                                    method="POST" class="d-inline">
+                                                                    @method('delete')
+                                                                    @csrf
+                                                                    <button class="btn btn-danger btn-style"
+                                                                        onclick="return confirm('Apakah anda yakin ingin menghapus inventaris?')">
+                                                                        <i class="ti-trash"></i>
+                                                                    </button>
+                                                                </form>
+                                                            @endif
                                                         </td>
                                                     </tr>
                                                 @endforeach

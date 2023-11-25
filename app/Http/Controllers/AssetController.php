@@ -218,7 +218,7 @@ class AssetController extends Controller
     public function print_asset_qrcode($id)
     {
         $asset = Asset::findOrFail($id);
-        $pdf = PDF::loadview('asset.qrcode', compact('asset'));
+        $pdf = PDF::setPaper('A4', 'portrait')->loadview('asset.qrcode', compact('asset'));
         return $pdf->stream();
     }
 

@@ -133,15 +133,17 @@
                                                             <i class="fa fa-upload"></i></a>
                                                         {{-- <a href="{{ route('borrow.show', $data->id) }}"
                                                                 class="btn btn-info"><i class="ti-eye"></i></a> --}}
-                                                        <form action="{{ route('borrow.destroy', $data->id) }}"
-                                                            method="POST" class="d-inline">
-                                                            @method('delete')
-                                                            @csrf
-                                                            <button class="btn btn-danger btn-style"
-                                                                onclick="return confirm('Apakah anda yakin ingin menghapus peminjaman aset?')">
-                                                                <i class="ti-trash"></i>
-                                                            </button>
-                                                        </form>
+                                                        @if (auth()->user()->role_id == 1)
+                                                            <form action="{{ route('borrow.destroy', $data->id) }}"
+                                                                method="POST" class="d-inline">
+                                                                @method('delete')
+                                                                @csrf
+                                                                <button class="btn btn-danger btn-style"
+                                                                    onclick="return confirm('Apakah anda yakin ingin menghapus peminjaman aset?')">
+                                                                    <i class="ti-trash"></i>
+                                                                </button>
+                                                            </form>
+                                                        @endif
                                                     </td>
                                                 </tr>
                                             @endforeach

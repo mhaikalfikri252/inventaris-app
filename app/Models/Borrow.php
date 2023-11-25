@@ -49,13 +49,7 @@ class Borrow extends Model
         });
 
         static::updated(function ($model) {
-            // if ($model->asset_id == Asset::where('id', $model->asset_id)) {
             Asset::where('id', $model->asset_id)->update(['status_borrow_id' => $model->status_borrow_id]);
-            // } else {
-            // Asset::where('id', $model->asset_id)->update(['status_borrow_id' => null]);
-            // }
-
-            // Asset::where('id', $model->asset_id)->update(['status_borrow_id' => 2]);
         });
 
         static::deleted(function ($model) {

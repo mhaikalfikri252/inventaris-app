@@ -187,7 +187,7 @@ class InventoryController extends Controller
     public function print_inventory_qrcode($id)
     {
         $inventory = Inventory::findOrFail($id);
-        $pdf = PDF::loadview('inventory.qrcode', compact('inventory'));
+        $pdf = PDF::setPaper('A4', 'portrait')->loadview('inventory.qrcode', compact('inventory'));
         return $pdf->stream();
     }
 

@@ -32,7 +32,7 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        toast('Berhasil mengupdate profile!', 'success');
+        toast('Berhasil mengedit profile!', 'success');
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }

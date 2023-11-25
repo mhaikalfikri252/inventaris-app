@@ -295,7 +295,7 @@ class BorrowController extends Controller
     public function print_borrow_letter($id)
     {
         $borrow = Borrow::findOrFail($id);
-        $pdf = PDF::loadview('borrow.letter', compact('borrow'));
+        $pdf = PDF::setPaper('A4', 'portrait')->loadview('borrow.letter', compact('borrow'));
         return $pdf->stream();
     }
 }

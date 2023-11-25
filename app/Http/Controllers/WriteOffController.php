@@ -44,7 +44,7 @@ class WriteOffController extends Controller
     public function print_writeoff_qrcode($id)
     {
         $writeoff = Asset::findOrFail($id);
-        $pdf = PDF::loadview('writeoff.qrcode', compact('writeoff'));
+        $pdf = PDF::setPaper('A4', 'portrait')->loadview('writeoff.qrcode', compact('writeoff'));
         return $pdf->stream();
     }
 

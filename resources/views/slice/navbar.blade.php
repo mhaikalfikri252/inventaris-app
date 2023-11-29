@@ -6,10 +6,10 @@
                 <img src="{{ asset('images/user.png') }}" alt="User-Profile-Image" style="width: 20%; height: 20%;">
                 <div class="user-details">
                     @if (auth()->user()->role_id == 1)
-                        <span>{{ auth()->user()->username }}</span>
+                        <span id="username">{{ auth()->user()->username }}</span>
                         <span>{{ auth()->user()->role->name }}</span>
                     @else
-                        <span>{{ auth()->user()->username }}</span>
+                        <span id="username">{{ auth()->user()->username }}</span>
                         <span>SOS {{ auth()->user()->city->city_name }}</span>
                     @endif
                 </div>

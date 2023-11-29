@@ -132,6 +132,11 @@
 
     <!-- Page specific script -->
     <script>
+        // Date Format
+        let d = new Date();
+        let formattedDate = ("0" + d.getDate()).slice(-2) + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + d
+            .getFullYear();
+
         // DataTable Default
         var tableDefault = $("#table-default").DataTable({
             "paging": true,
@@ -167,6 +172,18 @@
                     className: 'btn btn-primary mt-2',
                     exportOptions: {
                         columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10]
+                    },
+                    customize: function(doc) {
+                        var cols = [];
+                        cols[0] = {
+                            text: 'Name: ' + $("#username").text() + '\n' + 'Date: ' +
+                                formattedDate.toString(),
+                            alignment: 'left',
+                            margin: [20, 0]
+                        };
+                        var objFooter = {};
+                        objFooter['columns'] = cols;
+                        doc['footer'] = objFooter;
                     }
                 },
             ]
@@ -196,6 +213,18 @@
                     className: 'btn btn-primary mt-2',
                     exportOptions: {
                         columns: [0, 1, 2, 3, 4, 5, 6, 7, 9, 10, 11]
+                    },
+                    customize: function(doc) {
+                        var cols = [];
+                        cols[0] = {
+                            text: 'Name: ' + $("#username").text() + '\n' + 'Date: ' +
+                                formattedDate.toString(),
+                            alignment: 'left',
+                            margin: [20, 0]
+                        };
+                        var objFooter = {};
+                        objFooter['columns'] = cols;
+                        doc['footer'] = objFooter;
                     }
                 },
             ]
@@ -225,6 +254,18 @@
                     className: 'btn btn-primary mt-2',
                     exportOptions: {
                         columns: [0, 1, 2, 3, 4, 5, 6, 7, 9]
+                    },
+                    customize: function(doc) {
+                        var cols = [];
+                        cols[0] = {
+                            text: 'Name: ' + $("#username").text() + '\n' + 'Date: ' +
+                                formattedDate.toString(),
+                            alignment: 'left',
+                            margin: [20, 0]
+                        };
+                        var objFooter = {};
+                        objFooter['columns'] = cols;
+                        doc['footer'] = objFooter;
                     }
                 },
             ]
@@ -254,6 +295,18 @@
                     className: 'btn btn-primary mt-2',
                     exportOptions: {
                         columns: [0, 1, 2, 3, 4, 6, 7, 8]
+                    },
+                    customize: function(doc) {
+                        var cols = [];
+                        cols[0] = {
+                            text: 'Name: ' + $("#username").text() + '\n' + 'Date: ' +
+                                formattedDate.toString(),
+                            alignment: 'left',
+                            margin: [20, 0]
+                        };
+                        var objFooter = {};
+                        objFooter['columns'] = cols;
+                        doc['footer'] = objFooter;
                     }
                 },
             ]
@@ -283,6 +336,18 @@
                     className: 'btn btn-primary mt-2',
                     exportOptions: {
                         columns: [0, 1, 2, 3, 4, 5, 6, 7]
+                    },
+                    customize: function(doc) {
+                        var cols = [];
+                        cols[0] = {
+                            text: 'Name: ' + $("#username").text() + '\n' + 'Date: ' +
+                                formattedDate.toString(),
+                            alignment: 'left',
+                            margin: [20, 0]
+                        };
+                        var objFooter = {};
+                        objFooter['columns'] = cols;
+                        doc['footer'] = objFooter;
                     }
                 },
             ]

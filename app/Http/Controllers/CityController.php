@@ -39,7 +39,7 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'city_name' => 'required|string|max:255|unique:city,city_name'
+            'city_name' => 'required|string|max:255|unique:cities,city_name'
         ]);
 
         City::create($data);

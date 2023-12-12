@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\AssetUpdateRequest;
 use App\Models\Asset;
+use App\Models\City;
 use App\Models\Employee;
 use App\Models\Facility;
 use App\Models\StatusAsset;
@@ -59,8 +60,9 @@ class AssetController extends Controller
             $facility = Facility::where('city_id', $location)->get();
             $employee = Employee::where('city_id', $location)->get();
         }
+        $cities = City::all();
 
-        return view('asset.create', compact('facility', 'status_asset', 'employee'));
+        return view('asset.create', compact('facility', 'status_asset', 'employee', 'cities'));
     }
 
     /**

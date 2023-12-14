@@ -54,6 +54,28 @@
                                         enctype="multipart/form-data">
                                         @method('put')
                                         @csrf
+                                        {{-- @if (auth()->user()->role_id == 1)
+                                            <div class="form-group row">
+                                                <label class="col-sm-2 col-form-label">Kota</label>
+                                                <div class="col-sm-10">
+                                                    <select class="form-control @error('city_id') is-invalid @enderror"
+                                                        id="city_id" name="city_id" required onchange="setKota(this)">
+                                                        <option value="" disabled selected>Pilih Kota</option>
+                                                        @foreach ($city as $data)
+                                                            <option value="{{ $data->id }}"
+                                                                {{ old('city_id') == $data->id ? 'selected' : '' }}>
+                                                                {{ $data->city_name }}
+                                                            </option>
+                                                            @error('city_id')
+                                                                <div class="invalid-feedback">
+                                                                    {{ $message }}
+                                                                </div>
+                                                            @enderror
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        @endif --}}
                                         <div class="form-group row">
                                             <label class="col-sm-2 col-form-label">No FA</label>
                                             <div class="col-sm-10">

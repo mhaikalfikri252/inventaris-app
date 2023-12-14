@@ -446,6 +446,21 @@
                 document.getElementById('uploadletter').style.display = 'none';
             }
         });
+
+        // Select Kota Admin
+        function setKota(sel) {
+            let namakota = sel.selectedOptions[0].text.toLowerCase();
+            $('#facility_id').val('');
+            $('#facility_id option').each(function(i, o) {
+                if (o.text.toLowerCase().indexOf(namakota) < 0) $(o).hide();
+                else $(o).show();
+            });
+            $('#employee_id').val('');
+            $('#employee_id option').each(function(i, o) {
+                if (o.text.toLowerCase().indexOf(namakota) < 0) $(o).hide();
+                else $(o).show();
+            });
+        }
     </script>
 </body>
 

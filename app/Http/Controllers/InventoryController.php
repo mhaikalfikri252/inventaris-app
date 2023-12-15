@@ -193,8 +193,8 @@ class InventoryController extends Controller
 
     public function print_all_qrcode()
     {
-        $acodes = request()->get('acodes');
-        if (!empty($acodes)) $inventory = Inventory::whereIn('id', explode(',', $acodes))->get();
+        $icodes = request()->get('icodes');
+        if (!empty($icodes)) $inventory = Inventory::whereIn('id', explode(',', $icodes))->get();
         else $inventory = Inventory::all();
         $pdf = PDF::setPaper('A4', 'portrait')->loadview('inventory.print', compact('inventory'));
         return $pdf->stream();

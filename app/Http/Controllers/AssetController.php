@@ -54,13 +54,14 @@ class AssetController extends Controller
             $status_asset = StatusAsset::all();
             $facility = Facility::all();
             $employee = Employee::all();
-            $city = City::all();
         } else {
             $status_asset = StatusAsset::all();
             $location = auth()->user()->city_id;
             $facility = Facility::where('city_id', $location)->get();
             $employee = Employee::where('city_id', $location)->get();
         }
+
+        $city = City::all();
 
         return view('asset.create', compact('facility', 'status_asset', 'employee', 'city'));
     }
@@ -133,7 +134,6 @@ class AssetController extends Controller
             $facility = Facility::all();
             $employee = Employee::all();
             $status_asset = StatusAsset::all();
-            $city = City::all();
         } else {
             $asset = Asset::with('facility', 'status_asset')->findOrFail($id);
             $location = auth()->user()->city_id;
@@ -141,6 +141,8 @@ class AssetController extends Controller
             $employee = Employee::where('city_id', $location)->get();
             $status_asset = StatusAsset::all();
         }
+
+        $city = City::all();
 
         return view('asset.update', compact('asset', 'facility', 'status_asset', 'employee', 'city'));
     }

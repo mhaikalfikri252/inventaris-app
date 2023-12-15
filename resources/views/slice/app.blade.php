@@ -403,7 +403,7 @@
                 "filter": "applied"
             }).data();
             let url = 'print/inventory/all-qrcode';
-            if (inventory.length > 0) url += '?acodes=' + inventory.map(a => a[1]).join();
+            if (inventory.length > 0) url += '?icodes=' + inventory.map(a => a[1]).join();
             window.open(url, 'blank');
         }
 
@@ -447,7 +447,7 @@
             }
         });
 
-        // Select Kota Admin
+        // Admin Select Kota
         function setKota(sel) {
             let namakota = sel.selectedOptions[0].text.toLowerCase();
             $('#facility_id').val('');
